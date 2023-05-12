@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize');
 
 module.exports=(dbConnection)=>{
-    dbConnection.define('Requerimeinto',{
+    dbConnection.define('Requerimiento',{
         idRequerimiento:{
             type: DataTypes.INTEGER,
             autoIncrement:true,
@@ -17,12 +17,14 @@ module.exports=(dbConnection)=>{
         estado:{
             type:DataTypes.ENUM,
             values:['Activo','Anulado'],
-            allowNull:false
+            allowNull:false,
+            defaultValue:'Activo'
         },
         
         unidad_medida:{
             type:DataTypes.ENUM,
             values:['Bien','Servicio'],
+            defaultValue:'Servicio',
             allowNull:false
         },
         cantidad:{
