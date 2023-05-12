@@ -12,6 +12,12 @@ const createRequerimiento = ({descripcion,detalle,unidad_medida,cantidad,precio_
     return newRequerimiento;
 }
 
+const getAllRequirements = ()=>{
+    const allRequirements = Requerimiento.findAll({attributes:['descripcion','detalle','unidad_medida','cantidad','precio_unitario','total']});
+    return allRequirements;
+}
+
 module.exports={
     createRequerimiento,
+    getAllRequirements
 }
