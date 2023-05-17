@@ -21,6 +21,7 @@ const Requerimiento = ({ requerimiento, onEdit, onDelete, onClickStatus }) => {
 
   return (
     <ListItem
+      divider={true}
       secondaryAction={
         <>
           <Chip
@@ -41,6 +42,8 @@ const Requerimiento = ({ requerimiento, onEdit, onDelete, onClickStatus }) => {
       }
     >
       <ListItemText primary={requerimiento.descripcion} secondary={requerimiento.detalle} />
+    <ListItemText primary={`Precio Unitario: ${requerimiento.precio_unitario}`} secondary={`cantidad: ${requerimiento.cantidad}`}/>
+    <ListItemText primary={`Unidad de medida: ${requerimiento.unidad_medida}`} secondary={`Total: ${requerimiento.total}`}/>
     </ListItem>
   );
 };

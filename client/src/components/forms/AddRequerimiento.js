@@ -1,28 +1,37 @@
 import React from 'react'
 import { useState } from 'react'
 import validation from '../../utils/validation';
-import { Button, TextField } from '@mui/material';
-
+import { Button, TextField,Box, InputAdornment, MenuItem } from '@mui/material';
+const services = [
+  {
+    value: 'Servicio',
+    label: 'Servicio',
+  },
+  {
+    value: 'Bien',
+    label: 'Bien',
+  }]
 export default function AddRequerimiento({ requerimiento, onCreate, onUpdate, onClose }) {
 const [inputs,setInputs] = useState({
-    descripcion:"",
-    detalle:"",
-    precioUnitario:"",
-    cantidad:"",
+  descripcion:"",
+  detalle:"",
+  unidad_medida:"",
+  cantidad:"",
+  precio_unitario:"",
+
 });
 const [errors,setErrors] = useState({});    
 const handleChange =(event)=>{
     const {name,value} = event.target;
     setInputs({...inputs,[name]:value});
-    setErrors(validation({...inputs,[name]:value}));
+    //setErrors(validation({...inputs,[name]:value}));
 }
 const handleSubmit =(event)=>{
     event.preventDefault();
     if (requerimiento) {
         if (onUpdate)
           onUpdate({
-            ...task,
-            ...state
+            
           });
   
         if (onClose) onClose();
@@ -30,7 +39,7 @@ const handleSubmit =(event)=>{
         return;
       }
   
-      if (onCreate) onCreate(state);
+      if (onCreate) onCreate(inputs);
   
       if (onClose) onClose();
         
@@ -47,28 +56,75 @@ const handleSubmit =(event)=>{
         {errors.password && errors.password.map(err=><span>{err}</span>)}
         <br />
         <button>Submit</button> */}
-        <TextField 
-            name='descripcion'
-            onChange={handleChange}
-            value={inputs.descripcion}
-        />
-        <TextField 
-            name='detalle'
-            onChange={handleChange}
-            value={inputs.detalle}
-        />
-        <TextField 
-            name='cantidad'
-            onChange={handleChange}
-            value={inputs.cantidad}
-        />
-        <TextField 
-            name='precioUnitario'
-            onChange={handleChange}
-            value={inputs.precioUnitario}
-        />
+        <Box
+         
+        >
+          <TextField 
+              label='Descripcion'
+              name='descripcion'
+              onChange={handleChange}
+              value={inputs.descripcion}
+              multiline
+              rows={3}
+              fullWidth
+          />
+          <TextField 
+              label='Detalle'
+              name='detalle'
+              onChange={handleChange}
+              value={inputs.detalle}
+              multiline
+              rows={3}
+              fullWidth
+              
+          />
+          <TextField 
+              label='Unidad de Medida'
+              name='unidad_medida'
+              onChange={handleChange}
+              value={inputs.unidad_medida}
+              select
+              defaultValue={services[0].value}
+              sx={{
+                width:"33%"
+              }}
+              >
+                 {services.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                   {option.label}
+                </MenuItem>
+          ))}
+          </TextField>
+          
+          <TextField 
+              label='Cantidad'
+              name='cantidad'
+              onChange={handleChange}
+              value={inputs.cantidad}
+              type='number'
+              sx={{
+                width:"20%"
+              }}
+          />
+          <TextField 
+              label='Precio Unitario'
+              name='precio_unitario'
+              onChange={handleChange}
+              value={inputs.precio_unitario}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">S/.</InputAdornment>,
+              }}
+              sx={{
+                width:"37%"
+              }}
+          />
+        </Box>
 
-        <Button type='submit'>Guardar</Button> 
+        <Button 
+          type='submit'
+          variant='contained'
+        
+        >Guardar</Button> 
       </form>
     </div>
   )

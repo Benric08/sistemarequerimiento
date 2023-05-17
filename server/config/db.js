@@ -6,7 +6,7 @@ const ordenServicio = require('../models/Orden_Servicio');
 const {DB_HOST,DB_PASSWORD,DB_DATABASE_NAME,DB_USER_NAME} = process.env;
 const dbConnection = new Sequelize(`postgres://${DB_USER_NAME}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE_NAME}`,{logging:false});
 
-requerimiento(dbConnection);
+requerimiento(dbConnection); 
 ordenServicio(dbConnection);
 
 console.log(dbConnection.models);
