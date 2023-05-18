@@ -1,4 +1,4 @@
-import {ADD_REQUERIMIENTO,REMOVE_REQUERIMIENTO,UPDATE_REQUERIMIENTO,ORDER,FILTER} from './action-types';
+import {ADD_REQUERIMIENTO,REMOVE_REQUERIMIENTO,UPDATE_REQUERIMIENTO,ORDER,FILTER, GETALL_REQUERIMIENTOS} from './action-types';
 
 import axios from "axios";
 
@@ -19,17 +19,37 @@ export const addReq=(requerimiento)=>{
       }
    };
 }
-export const updateReq=(id)=>{
-    
+export const updateReq=(requerimiento)=>{
+   console.log(`requerimineto que recibe el update del front ${requerimiento}`);
+    const {idRequerimiento} = requerimiento;
    return async (dispatch) => {
-      await axios.put(endpoint+"/"+id, requerimiento)
-      .then(({ data }) => {
+      await axios.put(endpoint+"/"+idRequerimiento, requerimiento)
+      .then(async( {data} ) => {
+         console.log(`vemos que devuelve data del put  de update` , data);
+         let reqUpdated={};
+         if(data[0]) {
+            reqUpdated = await axios.get(endpoint+"/"+idRequerimiento)
+            .then(({data})=>data);
+            
+         }
          return dispatch({
             type: UPDATE_REQUERIMIENTO,
-            payload: data,
-      });
+            payload: reqUpdated,
+      }); 
       });
    };
+}
+export const getAllRequirements=()=>{
+   console.log(`Estoy dentro del todosaction`);
+   return async (dispatch) =>{
+      await axios.get(endpoint)
+      .then(({data})=>{
+         return dispatch({
+            type: GETALL_REQUERIMIENTOS,
+            payload: data
+         })
+      })
+   }
 }
 export const removeReq=(id)=>{
     

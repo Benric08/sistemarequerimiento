@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Add as AddIcon } from "@mui/icons-material";
 import { Box, List, Button, Dialog, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import AddRequerimiento from '../forms/AddRequerimiento';
 import Requerimiento from '../requerimiento/Requerimiento';
 import { useSelector,useDispatch } from 'react-redux';
 import { useState } from 'react';
-import {addReq} from '../../redux/actions';
+import {addReq, getAllRequirements, updateReq} from '../../redux/actions';
  const RequerimientoContainer = () => {
     const requerimientos = useSelector((state)=>state.allRequerimientos);
     const dispatch=useDispatch();
     console.log('aqui traigo datos del estado global',requerimientos);
     const [isOpenDialog, setIsOpenDialog] = useState(false);
     const [requerimientoSelected, setRequerimientoSelected] = useState();
-  
+
+    
+
     const _handleCloseDialog = () => {
       setIsOpenDialog(false);
       setRequerimientoSelected(null);
@@ -25,7 +27,8 @@ import {addReq} from '../../redux/actions';
     };
   
     const _handleUpdateRequerimiento = (inputRequerimiento) => {
-      console.log('actualizando el componente',inputRequerimiento);
+      console.log('actualizando el requerimiento',inputRequerimiento);
+      console.log(dispatch(updateReq(inputRequerimiento)));
     };
   
     const _handleClickDeleted = (requerimientoId) => {
@@ -33,6 +36,7 @@ import {addReq} from '../../redux/actions';
     };
   
     const _handleClickEditRequerimientoElement = (requerimiento) => {
+      console.log('boton edit',requerimiento);
       setRequerimientoSelected(requerimiento);
       setIsOpenDialog(true);
     };
@@ -50,7 +54,7 @@ import {addReq} from '../../redux/actions';
         </Button>
       </Box>
       <List>
-        {requerimientos.map((requerimiento) => (
+        { requerimientos.length > 0 && requerimientos.map((requerimiento) => (
           <Requerimiento
             key={requerimiento.idRequerimiento}
             requerimiento={requerimiento}

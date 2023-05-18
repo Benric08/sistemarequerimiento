@@ -13,11 +13,11 @@ const services = [
   }]
 export default function AddRequerimiento({ requerimiento, onCreate, onUpdate, onClose }) {
 const [inputs,setInputs] = useState({
-  descripcion:"",
-  detalle:"",
-  unidad_medida:"",
-  cantidad:"",
-  precio_unitario:"",
+  descripcion:requerimiento?.descripcion??"",
+  detalle:requerimiento?.detalle??"",
+  unidad_medida:requerimiento?.unidad_medida??"",
+  cantidad:requerimiento?.cantidad??"",
+  precio_unitario:requerimiento?.precio_unitario??"",
 
 });
 const [errors,setErrors] = useState({});    
@@ -32,6 +32,8 @@ const handleSubmit =(event)=>{
         if (onUpdate)
           onUpdate({
             
+            ...inputs,
+           idRequerimiento: requerimiento.idRequerimiento
           });
   
         if (onClose) onClose();
