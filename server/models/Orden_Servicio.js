@@ -10,9 +10,19 @@ module.exports=(dbConnection)=>{
         },
         clasificador:{
             type:DataTypes.STRING,
-            allowNull:false
+            allowNull:false,
+            defaultValue:'2.6.8.1.4.3'
         },
         numeroOrdenServicio:{
+            type:DataTypes.STRING,
+            allowNull:false,
+
+        },
+        numeroCertificacion:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        expedienteSiaf:{
             type:DataTypes.STRING,
             allowNull:false
         },
@@ -23,6 +33,11 @@ module.exports=(dbConnection)=>{
         idRequerimiento:{
             type:DataTypes.INTEGER,
             allowNull:false
+        },
+        idProveedor:{
+            type:DataTypes.INTEGER,
+            allowNull:false
         }
+
     });
 }

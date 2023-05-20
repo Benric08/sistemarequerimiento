@@ -15,7 +15,11 @@ module.exports=(dbConnection)=>{
             type:DataTypes.INTEGER,
             allowNull:false
         },
-        fechaEntregaOrdenServicio:{
+        fechaVencimiento:{
+            type:DataTypes.DATEONLY,
+            allowNull:false
+        },
+        estado:{
             type:DataTypes.DATEONLY,
             allowNull:false
         }
