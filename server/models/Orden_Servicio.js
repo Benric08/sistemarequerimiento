@@ -30,14 +30,14 @@ module.exports=(dbConnection)=>{
             type:DataTypes.DATEONLY,
             allowNull:false
         },
-        idRequerimiento:{
-            type:DataTypes.INTEGER,
-            allowNull:false
-        },
-        idProveedor:{
-            type:DataTypes.INTEGER,
-            allowNull:false
-        }
+        fileOrdenServicio:{
+            type:DataTypes.STRING,
 
+        },
+     
+
+    },
+    {
+        timestamps:false
     });
 }

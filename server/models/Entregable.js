@@ -1,21 +1,24 @@
 const {DataTypes}=require('sequelize');
-
 module.exports=(dbConnection)=>{
-    dbConnection.define('Detalle_Orden_Servicio',{
-        idDetalleOrdenServicio:{
+    dbConnection.define('Entregable',{
+        idEntregable:{
             type: DataTypes.INTEGER,
             primaryKey:true,
             allowNull:false,
             autoIncrement:true},
-        /* idOrdenServicio:{
-            type:DataTypes.INTEGER,
-            allowNull:false
-        }, */
-        montoOrdenServicio:{
+        idDetalleOrdenServicio:{
             type:DataTypes.INTEGER,
             allowNull:false
         },
-        fechaVencimiento:{
+        descripcion:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        fileEntregable:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        fechaEntregable:{
             type:DataTypes.DATEONLY,
             allowNull:false
         },
@@ -25,5 +28,7 @@ module.exports=(dbConnection)=>{
             values:['Pendiente','Entregable'],
             defaultValue:'Pendiente'
         }
-    });
+    }
+
+    )
 }
