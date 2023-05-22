@@ -32,7 +32,7 @@ module.exports=(dbConnection)=>{
         },
         fileOrdenServicio:{
             type:DataTypes.STRING,
-
+            defaultValue:''
         },
      
 

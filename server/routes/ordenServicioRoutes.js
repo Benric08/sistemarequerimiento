@@ -6,10 +6,12 @@ const {uploadFileOrdenServicio, insertOrdenServicio} = require('../controllers/o
 const jsonParser = bodyParser.json();
 routerOrdenServicio.post('/',uploadFileOrdenServicio.single('file'),async (req,res)=>{
     const formOsBody=JSON.parse(req.body.orden);
-    const file=req.file.path;
-    formOsBody.fileOrdenServicio=file;
+    if(req.file) {
+        const file=req.file.path;
+        formOsBody.fileOrdenServicio=file;
+    }
     console.log('body del form',formOsBody);
-    console.log('espero sea el file',file);
+    //console.log('espero sea el file',file);
     
     try {
         const proveedorInsertado = await insertOrdenServicio(formOsBody);

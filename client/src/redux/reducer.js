@@ -1,4 +1,6 @@
-import { ADD_REQUERIMIENTO,FILTER,ADD_ORDEN_SERVICIO,GETALL_REQUERIMIENTOS,ORDER,REMOVE_REQUERIMIENTO,UPDATE_REQUERIMIENTO } from './action-types';
+import { ADD_REQUERIMIENTO,
+    GET_ALL_REQUERIMIENTOS_DETALLE,
+    FILTER,ADD_ORDEN_SERVICIO,GETALL_REQUERIMIENTOS,ORDER,REMOVE_REQUERIMIENTO,UPDATE_REQUERIMIENTO } from './action-types';
 const initialState = {
     allRequerimientos:[/* {idRequerimiento:1000,
         descripcion:'SERVICIO DE ORGANIZACIÓN DOCUMENTARIA PARA LA FASE DE AUTORIZACIÓN',
@@ -17,7 +19,8 @@ const initialState = {
             cantidad:1,
             total:2500} */],
     requerimientosByEstado:[],
-    ordenesDeServicio:[]
+    ordenesDeServicio:[],
+    allRequerimientosDetalle:[]
 }
 
 export default function reducer(state=initialState,action){
@@ -38,6 +41,8 @@ export default function reducer(state=initialState,action){
         case ADD_ORDEN_SERVICIO:
             console.log('estoy entrando agregar orden servicio reducer');
             return {...state,ordenesDeServicio:payload};
+        case GET_ALL_REQUERIMIENTOS_DETALLE:
+            return {...state,allRequerimientosDetalle:[...state.allRequerimientosDetalle,payload],requerimientosByEstado:[...state.allRequerimientosDetalle,payload]};
         default:
             console.log('estoy entrando al reduer default');
             return {...state};

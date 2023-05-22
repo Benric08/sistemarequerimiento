@@ -66,7 +66,13 @@ Orden_Servicio.hasMany(Detalle_Orden_Servicio,{
         type:DataTypes.INTEGER
     }
 });
-Detalle_Orden_Servicio.belongsTo(Orden_Servicio);
+Detalle_Orden_Servicio.belongsTo(Orden_Servicio,{
+    foreignKey:{
+        name:"idOrdenServicio",
+        allowNull:false,
+        type:DataTypes.INTEGER
+    }
+});
 
 //relation between detalle orden sevcio and ejecucion presupuestal
 

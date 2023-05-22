@@ -82,9 +82,9 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
 
             const formData = new FormData();
             formData.append('file', fileOrdenServicio);
-         const newOrden={
+            const newOrden={
              ...inputs,
-             idRequerimiento:requerimiento.idRequerimiento,
+            idRequerimiento:requerimiento.idRequerimiento,
   
             precio_unitario:requerimiento.precio_unitario,
             cantidad:requerimiento.cantidad,

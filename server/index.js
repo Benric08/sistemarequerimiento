@@ -2,7 +2,7 @@ const server = require('./config/app');
 const {dbConnection} = require('./config/db');
 const PORT = 3001;
 
-dbConnection.sync({force:true})
+dbConnection.sync({force:false})
 .then(()=>{
     
     server.listen(PORT,()=>{
