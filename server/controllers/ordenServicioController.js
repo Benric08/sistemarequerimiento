@@ -43,9 +43,14 @@ const insertOrdenServicio = async(formordenServicio)=>{
   //insertar proveedor
   const {proveedor} = formordenServicio;
 
+  console.log('recueprando el provvedor en el controlador',proveedor);
   
-
-  const newProveedor=await Proveedor.create(proveedor);
+  
+  const [newProveedor,created]=await Proveedor.findOrCreate({
+    where: { dni: proveedor.dni },
+    defaults: proveedor
+  });
+  console.log('proveedor insertado',newProveedor);
   //return newProveedor;
   //obteneridprovedor
   //instertar orden servicio
@@ -96,7 +101,7 @@ const insertOrdenServicio = async(formordenServicio)=>{
   
 
   const newOrdenServicio = await Orden_Servicio.create(ordenServicio);
-  
+  //insertar orden Servico Detalle
   const detalleordenServicio={
     idOrdenServicio:newOrdenServicio.idOrdenServicio,
     montoOrdenServicio:precio_unitario,

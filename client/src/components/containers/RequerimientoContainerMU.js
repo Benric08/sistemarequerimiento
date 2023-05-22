@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import RequerimientoRow from '../requerimiento/RequerimientoRow';
 import AddRequerimiento from '../forms/AddRequerimiento';
 import TableContainer from '@mui/material/TableContainer';
@@ -7,6 +7,8 @@ import { Add as AddIcon } from "@mui/icons-material";
 import Paper from '@mui/material/Paper';
 import { useSelector , useDispatch} from 'react-redux';
 import {addReq, getAllRequirements, updateReq} from '../../redux/actions';
+import AddOrdenServicio from '../forms/AddOrdenServicio';
+import { addOrdenServicio } from '../../redux/actionsOrdenServicio';
 
 export default function RequerimientoContainerMU() {
     const requerimientos = useSelector((state)=>state.allRequerimientos);
@@ -14,12 +16,18 @@ export default function RequerimientoContainerMU() {
     console.log('aqui traigo datos del estado global',requerimientos);
     const [isOpenDialog, setIsOpenDialog] = useState(false);
     const [requerimientoSelected, setRequerimientoSelected] = useState();
+    const [isOpenDialogAddOrdenServicio, setIsOpenDialogAddOrdenServicio] = useState(false);
+    //const [ordenSelected, setOrdenSelected] = useState();
 
     
-
+    
     const _handleCloseDialog = () => {
       setIsOpenDialog(false);
       setRequerimientoSelected(null);
+    };
+    const _handleCloseDialogAddOrden=()=>{
+      setIsOpenDialogAddOrdenServicio(false);
+      setRequerimientoSelected(null)
     };
     const _handleClickOpenDialog = () => setIsOpenDialog(true);
   
@@ -33,17 +41,26 @@ export default function RequerimientoContainerMU() {
       console.log(dispatch(updateReq(inputRequerimiento)));
     };
   
-    
-  
+    const _handleCreateOrden=(newOrdenServicio)=>{
+      console.log(dispatch(addOrdenServicio(newOrdenServicio)));
+    }
+    const _handleUpdateOrden=(inputOrdenServicio)=>{
+      
+    }
     const _handleClickEditRequerimientoElement = (requerimiento) => {
       console.log('boton edit',requerimiento);
       setRequerimientoSelected(requerimiento);
       setIsOpenDialog(true);
     };
   
-    const _handleClickAddOrdenServicio = () => {
-        
+    const _handleClickAddOrdenServicio = (requerimiento) => {
+      console.log('boton OS',requerimiento);
+      setRequerimientoSelected(requerimiento);
+      setIsOpenDialogAddOrdenServicio(true);
     };
+
+    
+
     return (
         <>
         <Box display="flex" justifyContent="flex-end">
@@ -93,6 +110,25 @@ export default function RequerimientoContainerMU() {
                 onCreate={_handleCreateRequerimiento}
                 onUpdate={_handleUpdateRequerimiento}
                 onClose={_handleCloseDialog}
+            />
+            </DialogContent>
+        </Dialog>
+        <Dialog open={isOpenDialogAddOrdenServicio} onClose={_handleCloseDialogAddOrden}>
+            <DialogContent
+            sx={{
+                '& .MuiTextField-root': { m: 1 },
+            }}
+            > 
+            <DialogTitle>Registrar Orden de Servicio</DialogTitle>
+            <DialogContentText>
+
+            </DialogContentText>
+            <AddOrdenServicio
+                requerimiento={requerimientoSelected}
+                //proveedor={proveedorSelected}
+                onCreate={_handleCreateOrden}
+                onUpdate={_handleUpdateOrden}
+                onClose={_handleCloseDialogAddOrden}
             />
             </DialogContent>
         </Dialog>

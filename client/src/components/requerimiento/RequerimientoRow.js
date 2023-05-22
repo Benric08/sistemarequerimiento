@@ -19,7 +19,7 @@ export default function RequerimientoRow(props) {
         if (onEdit) onEdit(requerimiento);
     };
     const _handleClickAddOrdenServicio =()=>{
-        if(onAddOrdenServicio) onAddOrdenServicio(requerimiento.idRequerimiento);
+        if(onAddOrdenServicio) onAddOrdenServicio(requerimiento);
     }
     return (
       <React.Fragment >

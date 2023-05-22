@@ -29,14 +29,14 @@ module.exports=(dbConnection)=>{
                 isNumeric:true
             }
         },
-        ruc:{
+       /*  ruc:{
             type: DataTypes.STRING,
             allowNull:false,
             validate:{
                 len:[11],
                 isNumeric:true
             }
-        },
+        }, */
         celular:{
             type: DataTypes.STRING,
             allowNull:false,
