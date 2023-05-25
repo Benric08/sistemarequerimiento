@@ -1,7 +1,7 @@
-const {Requerimiento} = require('../config/db');
+const {requerimiento} = require('../config/db');
 
 const createRequerimiento = ({descripcion,detalle,unidad_medida,cantidad,precio_unitario})=>{
-    const newRequerimiento = Requerimiento.create({
+    const newRequerimiento = requerimiento.create({
         descripcion,
         detalle,
         unidad_medida,
@@ -14,7 +14,7 @@ const createRequerimiento = ({descripcion,detalle,unidad_medida,cantidad,precio_
 
 const updateRequerimiento = (id,updateRequerimiento)=>{
     //const requerimiento = getRequerimientoById(id);
-    const requerimientoUpdated = Requerimiento.update(updateRequerimiento,{
+    const requerimientoUpdated = requerimiento.update(updateRequerimiento,{
         where:{
             idRequerimiento:id
         }
@@ -24,12 +24,12 @@ const updateRequerimiento = (id,updateRequerimiento)=>{
 } 
 
 const getRequerimientoById=(id)=>{
-    const requerimiento = Requerimiento.findByPk(id);
+    const requerimiento = requerimiento.findByPk(id);
     return requerimiento;
 }
 
 const getAllRequirements = ()=>{
-    const allRequirements = Requerimiento.findAll({attributes:['descripcion','detalle','unidad_medida','cantidad','precio_unitario','total']});
+    const allRequirements = requerimiento.findAll({attributes:['descripcion','detalle','unidad_medida','cantidad','precio_unitario','total']});
     return allRequirements;
 }
 

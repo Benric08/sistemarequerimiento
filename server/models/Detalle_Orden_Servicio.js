@@ -1,16 +1,16 @@
 const {DataTypes}=require('sequelize');
 
 module.exports=(dbConnection)=>{
-    dbConnection.define('Detalle_Orden_Servicio',{
+    dbConnection.define('detalle_orden_servicio',{
         idDetalleOrdenServicio:{
             type: DataTypes.INTEGER,
             primaryKey:true,
             allowNull:false,
             autoIncrement:true},
-        /* idOrdenServicio:{
-            type:DataTypes.INTEGER,
+        descripcion:{
+            type:DataTypes.STRING,
             allowNull:false
-        }, */
+        }, 
         montoOrdenServicio:{
             type:DataTypes.INTEGER,
             allowNull:false
@@ -22,7 +22,7 @@ module.exports=(dbConnection)=>{
         estado:{
             type:DataTypes.STRING,
             allowNull:false,
-            values:['Pendiente','Entregable'],
+            values:['Pendiente','Entregado'],
             defaultValue:'Pendiente'
         }
     });

@@ -1,12 +1,12 @@
 import { GET_ALL_REQUERIMIENTOS_DETALLE } from "./action-types";
 import axios from 'axios';
 const endpoint = 'http://localhost:3001/orden_servicio/detalle';
-const getAllRequirementsDetalle = ()=>{
+export const getAllRequirementsDetalle = ()=>{
     return async (dispatch)=>{
         try {
-            await axios(endpoint)
+            await axios.get(endpoint)
             .then(({data})=>{
-                dispatch({
+                return dispatch({
                     type:GET_ALL_REQUERIMIENTOS_DETALLE,
                     payload: data
                 })
@@ -17,6 +17,3 @@ const getAllRequirementsDetalle = ()=>{
     } 
 }
 
-module.exports={
-    getAllRequirementsDetalle
-}

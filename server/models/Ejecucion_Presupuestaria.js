@@ -1,7 +1,7 @@
 const {DataTypes}=require('sequelize');
 
 module.exports=(dbConnection)=>{
-    dbConnection.define('Ejecucion_Presupuestaria',{
+    dbConnection.define('ejecucion_presupuestaria',{
         idEjecucionPresupuestaria:{
             type: DataTypes.INTEGER,
             primaryKey:true,

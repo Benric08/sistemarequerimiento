@@ -9,17 +9,20 @@ import { useSelector , useDispatch} from 'react-redux';
 import {addReq, getAllRequirements, updateReq} from '../../redux/actions';
 import AddOrdenServicio from '../forms/AddOrdenServicio';
 import { addOrdenServicio } from '../../redux/actionsOrdenServicio';
+import { getAllRequirementsDetalle} from '../../redux/actionsRequerimientoDetalleOrden';
+import { getAllProveedores } from '../../redux/actionsProveedor';
 
-export default function RequerimientoContainerMU() {
-    const requerimientos = useSelector((state)=>state.allRequerimientos);
+export default  function RequerimientoContainerMU() {
+    //const requerimientos = useSelector((state)=>state.allRequerimientos);
+    const requerimientos = useSelector((state)=>state.allRequerimientosDetalle);
+    
+    
+    
     const dispatch=useDispatch();
-    console.log('aqui traigo datos del estado global',requerimientos);
+    console.log('soy el papa de todos traigo todos los reque',requerimientos);
     const [isOpenDialog, setIsOpenDialog] = useState(false);
     const [requerimientoSelected, setRequerimientoSelected] = useState();
     const [isOpenDialogAddOrdenServicio, setIsOpenDialogAddOrdenServicio] = useState(false);
-    //const [ordenSelected, setOrdenSelected] = useState();
-
-    
     
     const _handleCloseDialog = () => {
       setIsOpenDialog(false);
@@ -34,6 +37,7 @@ export default function RequerimientoContainerMU() {
     const _handleCreateRequerimiento = (newRequerimiento) => {
       console.log('vemos que hay en nuevo requerimiento', newRequerimiento);
       console.log(dispatch(addReq(newRequerimiento)));
+
     };
   
     const _handleUpdateRequerimiento = (inputRequerimiento) => {
@@ -52,6 +56,12 @@ export default function RequerimientoContainerMU() {
       setRequerimientoSelected(requerimiento);
       setIsOpenDialog(true);
     };
+    const _handleClickEditOrdenServicioElement = (requerimiento) => {
+      console.log('boton edit orden servicio',requerimiento);
+      setRequerimientoSelected(requerimiento);
+      setIsOpenDialogAddOrdenServicio(true);
+      
+    };
   
     const _handleClickAddOrdenServicio = (requerimiento) => {
       console.log('boton OS',requerimiento);
@@ -59,7 +69,9 @@ export default function RequerimientoContainerMU() {
       setIsOpenDialogAddOrdenServicio(true);
     };
 
-    
+    useEffect( ()=>{
+      dispatch(getAllRequirementsDetalle());
+    },[])
 
     return (
         <>
@@ -83,12 +95,13 @@ export default function RequerimientoContainerMU() {
               </TableRow>
             </TableHead>
             <TableBody>
-                { requerimientos.length > 0 && requerimientos.map((requerimiento) => (
+                { requerimientos.length>0 && requerimientos.map((requerimiento) => (
                     <RequerimientoRow
                         key={requerimiento.idRequerimiento}
                         requerimiento={requerimiento}
                         onAddOrdenServicio={_handleClickAddOrdenServicio}
                         onEdit={_handleClickEditRequerimientoElement}
+                        onEditOrden={_handleClickEditOrdenServicioElement}
                     />
                 ))}
             </TableBody>
@@ -125,7 +138,8 @@ export default function RequerimientoContainerMU() {
             </DialogContentText>
             <AddOrdenServicio
                 requerimiento={requerimientoSelected}
-                //proveedor={proveedorSelected}
+                ordenServicio={requerimientoSelected?.orden_servicio}
+                proveedor={requerimientoSelected?.orden_servicio?.idProveedor}
                 onCreate={_handleCreateOrden}
                 onUpdate={_handleUpdateOrden}
                 onClose={_handleCloseDialogAddOrden}

@@ -1,21 +1,25 @@
+const { Sequelize } = require('sequelize');
 const {
-    Requerimiento,
-    Orden_Servicio,
-    Proveedor,
-    Detalle_Orden_Servicio,
-    Detalleos_Ejecucion_Presupuestaria
+    requerimiento,
+    orden_servicio,
+    proveedor,
+    detalle_orden_servicio,
+    Detalleos_Ejecucion_Presupuestaria,
+    dbConnection
+
     } = require('../config/db');
 
 const getRequerimientoOrdenServicio = async()=>{
-    const requerimientoDetalle = await Requerimiento.findAll({
+    const requerimientoDetalle = await requerimiento.findAll({
         //where: { idRequerimiento: 4 },
         include: [{ 
-            model: Orden_Servicio, 
+            model: orden_servicio, 
             include:[{
-                model:Detalle_Orden_Servicio
+                model:detalle_orden_servicio,
             }]
         }],
     });
+   
     return requerimientoDetalle;
 }
 

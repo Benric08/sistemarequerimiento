@@ -1,25 +1,27 @@
 import React, { useEffect } from 'react'
 //import { Dayjs } from 'dayjs';
 import { useState } from 'react'
-//import DatePicker from 'react-date-picker'
-import { Button, TextField, Box, Divider, Fab } from '@mui/material';
-import { Add as AddIcon } from '@mui/icons-material';
+
+import { Button, TextField, Box, Divider, Fab,IconButton  } from '@mui/material';
+import { Add as AddIcon ,PersonSearch as SearchIcon} from '@mui/icons-material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import 'react-date-picker/dist/DatePicker.css';
-import 'react-calendar/dist/Calendar.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllProveedores } from '../../redux/actionsProveedor';
 
-export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedor, onCreate, onUpdate, onClose }) {
+export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedor,onCreate, onUpdate, onClose }) {
+    const dispatch = useDispatch();
+    const proveedores =  useSelector((state=>state.allProveedores));
     const [inputs, setInputs] = useState({
         numeroOrdenServicio: ordenServicio?.numeroOrdenServicio ?? "",
         numeroCertificacion: ordenServicio?.numeroCertificacion ?? "",
         expedienteSiaf: ordenServicio?.expedienteSiaf ?? "",
-        /* fechaOrdenServicio:ordenServicio?.fechaOrdenServicio??new Date(),
-        fileOrdenServicio:ordenServicio?.fileOrdenServicio??"", */
+    
+        
 
     });
-
+    console.log('Proveedor',proveedores);
     const [inputsProveedor, setInputsProveedor] = useState({
         dni: proveedor?.dni ?? "",
         nombre: proveedor?.nombre ?? "",
@@ -27,7 +29,7 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
         apellido_materno: proveedor?.apellido_materno ?? "",
         celular: proveedor?.celular ?? "",
     });
-    const [fechaOrdenServicio, setFechaOrdenServicio] = useState(ordenServicio?.fechaOrdenServicio ?? null)
+    const [fechaOrdenServicio, setFechaOrdenServicio] = useState(null)
     const [fileOrdenServicio, setFileOrdenServicio] = useState(null);
     const cleanInputs=(inputs)=>{
         for (const key in inputs) {
@@ -37,6 +39,7 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
     }
     
     useEffect(()=>{
+        dispatch(getAllProveedores());
         return ()=>{
             setFileOrdenServicio(null);
             setFechaOrdenServicio(null);
@@ -46,7 +49,7 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
         }
     },[]);
 
-    console.log('ver el valor de fechaselected',`${fechaOrdenServicio?.$y}-${fechaOrdenServicio?.$M+1<10?"0"+(fechaOrdenServicio?.$M+1):fechaOrdenServicio?.$M+1}-${fechaOrdenServicio?.$D<10?"0"+fechaOrdenServicio?.$D:fechaOrdenServicio?.$D}`);
+    console.log('ver el valor de fechaselected',`${fechaOrdenServicio}`);
  
     console.log('vemos que contiene el file', fileOrdenServicio);
     const handleChangeFile = (event) => {
@@ -55,13 +58,14 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
 
     const handleChangeProveedor = (event) => {
         const { name, value } = event.target;
+
         setInputsProveedor({ ...inputsProveedor, [name]: value });
     }
     const handleChange = (event) => {
         const { name, value } = event.target;
 
         setInputs({ ...inputs, [name]: value });
-        //setErrors(validation({...inputs,[name]:value}));
+        
     }
 
     const handleSubmit = (event) => {
@@ -79,6 +83,7 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
             return;
         } */
         console.log('requerimiento para la orden de servicio',requerimiento)
+        console.log('fecha seleccionada',fechaOrdenServicio)
 
             const formData = new FormData();
             formData.append('file', fileOrdenServicio);
@@ -90,7 +95,7 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
             cantidad:requerimiento.cantidad,
             fechaOrdenServicio:`${fechaOrdenServicio?.$y}-${fechaOrdenServicio?.$M+1<10?"0"+(fechaOrdenServicio?.$M+1):fechaOrdenServicio?.$M+1}-${fechaOrdenServicio?.$D<10?"0"+fechaOrdenServicio?.$D:fechaOrdenServicio?.$D}`,
             fileOrdenServicio:'',
-            proveedor: inputsProveedor
+            proveedorf: inputsProveedor
         }
         formData.append('orden',JSON.stringify(newOrden));
         console.log('mi nuevo orden a ingresar',newOrden);
@@ -100,27 +105,31 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
         if (onClose) onClose();
 
     }
+   
+    const _handleSearchProvvedor=()=>{
+        console.log(proveedores);
+        const proveedorEncontrado = proveedores.length>0?proveedores.find(
+            (proveedor)=>proveedor.dni===inputsProveedor.dni):null;
+        if(proveedorEncontrado) setInputsProveedor(proveedorEncontrado);
+    }
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                {/* <label htmlFor="email">Email:</label>
-        <input type="text" name='email' onChange={handleChange} value={inputs.email} className={inputs.email && "warning"}/>
-        {errors.email && errors.email.map(err=><span>{err}</span>)}
-        <br />
-        <label htmlFor="password">Password:</label>
-        <input type="text" name='password' onChange={handleChange} value={inputs.password} className={inputs.password && "warning"}/>
-        {errors.password && errors.password.map(err=><span>{err}</span>)}
-        <br />
-        <button>Submit</button> */}
+               
                 <Divider>Proveedor</Divider>
                 <Box>
-                    <TextField
-                        label='DNI'
-                        name='dni'
-                        onChange={handleChangeProveedor}
-                        value={inputsProveedor.dni}
-                        inputProps={{ maxLength: 8, pattern: '[0-9]*',inputMode:'numerics' }}
-                    />
+                    <Box>
+                        <TextField
+                            label='DNI'
+                            name='dni'
+                            onChange={handleChangeProveedor}
+                            value={inputsProveedor.dni}
+                            inputProps={{ maxLength: 8, pattern: '[0-9]*',inputMode:'numerics' }}
+                        />
+                        <IconButton onClick={_handleSearchProvvedor}>
+                            <SearchIcon/>
+                        </IconButton>
+                    </Box>
                     <TextField
                         label='Nombres'
                         name='nombre'
@@ -173,16 +182,7 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
                         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                     />
 
-                    {/* <label htmlFor='fechaOrdenServicio' >Fecha</label> */}
-
-                    {/* <DatePicker
-              id='fechaOrdenServicio'
-              name='fechaOrdenServicio'
-              onChange={setFechaOrdenServicio}
-              value={fechaOrdenServicio}
-              
-          /> */}
-
+                    
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             label="Fecha Orden Servicio"
@@ -190,7 +190,7 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
                             onChange={(newValue) => {
                                 setFechaOrdenServicio(newValue);
                             }}
-                            /*renderInput={(params) => <TextField {...params} />}*/
+                            
                             slotProps={{ textField: { variant: 'outlined' } }}
                         />
                     </LocalizationProvider>

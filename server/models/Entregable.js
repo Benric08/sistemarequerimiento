@@ -1,6 +1,6 @@
 const {DataTypes}=require('sequelize');
 module.exports=(dbConnection)=>{
-    dbConnection.define('Entregable',{
+    dbConnection.define('entregable',{
         idEntregable:{
             type: DataTypes.INTEGER,
             primaryKey:true,
@@ -10,7 +10,7 @@ module.exports=(dbConnection)=>{
             type:DataTypes.INTEGER,
             allowNull:false
         },
-        descripcion:{
+        observacion:{
             type:DataTypes.STRING,
             allowNull:false
         },
@@ -22,12 +22,12 @@ module.exports=(dbConnection)=>{
             type:DataTypes.DATEONLY,
             allowNull:false
         },
-        estado:{
+       /*  estado:{
             type:DataTypes.STRING,
             allowNull:false,
             values:['Pendiente','Entregable'],
             defaultValue:'Pendiente'
-        }
+        } */
     }
 
     )

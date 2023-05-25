@@ -1,4 +1,4 @@
-const {Orden_Servicio,Proveedor,Detalle_Orden_Servicio,Detalleos_Ejecucion_Presupuestaria} = require('../config/db');
+const {orden_servicio,proveedor,detalle_orden_servicio,detalleos_ejecucion_presupuestaria} = require('../config/db');
 const multer = require('multer');
 const { dirname, extname, join } = require('path');
 const { fileURLToPath } = require('url');
@@ -41,14 +41,14 @@ const uploadFileOrdenServicio = multer({
 
 const insertOrdenServicio = async(formordenServicio)=>{
   //insertar proveedor
-  const {proveedor} = formordenServicio;
+  const {proveedorf} = formordenServicio;
 
   console.log('recueprando el provvedor en el controlador',proveedor);
   
   
-  const [newProveedor,created]=await Proveedor.findOrCreate({
-    where: { dni: proveedor.dni },
-    defaults: proveedor
+  const [newProveedor,created]=await proveedor.findOrCreate({
+    where: { dni: proveedorf.dni },
+    defaults: proveedorf
   });
   console.log('proveedor insertado',newProveedor);
   //return newProveedor;
@@ -100,7 +100,7 @@ const insertOrdenServicio = async(formordenServicio)=>{
 
   
 
-  const newOrdenServicio = await Orden_Servicio.create(ordenServicio);
+  const newOrdenServicio = await orden_servicio.create(ordenServicio);
   //insertar orden Servico Detalle
   const detalleordenServicio={
     idOrdenServicio:newOrdenServicio.idOrdenServicio,
@@ -108,6 +108,7 @@ const insertOrdenServicio = async(formordenServicio)=>{
     fechaVencimiento:newOrdenServicio.fechaOrdenServicio
   }
   const arrDetalles=[];
+  const cardinals=['','Primer','Segundo','Tercer','Cuarto','Quinto','Sexto','Septimo','Octavo','Noveno']
   for (let i = 1; i <= cantidad; i++) {
     const fecha = new Date(detalleordenServicio.fechaVencimiento);
     const fechaSumada = new Date(fecha.getTime() + (31 * 24 * 60 * 60 * 1000));
@@ -117,8 +118,9 @@ const insertOrdenServicio = async(formordenServicio)=>{
     const año = fechaSumada.getFullYear();
     const fechaFormateada = `${año}-${mes<10?'0'+mes:mes}-${dia<10?'0'+dia:dia}`;
     console.log(fechaFormateada);
-    detalleordenServicio['fechaVencimiento']=fechaFormateada;
-    arrDetalles.push(await Detalle_Orden_Servicio.create(detalleordenServicio));
+    detalleordenServicio['fechaVencimiento'] = fechaFormateada;
+    detalleordenServicio['descripcion'] = `${cardinals[i]} Entregable`;
+    arrDetalles.push(await detalle_orden_servicio.create(detalleordenServicio));
     
   }
   return {

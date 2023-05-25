@@ -1,7 +1,7 @@
 const {DataTypes}=require('sequelize');
 
 module.exports=(dbConnection)=>{
-    dbConnection.define('Siaf',{
+    dbConnection.define('siaf',{
         idSiaf:{
             type: DataTypes.INTEGER,
             primaryKey:true,

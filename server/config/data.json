@@ -1,0 +1,244 @@
+[
+    {
+        "total": 2500,
+        "idRequerimiento": 2,
+        "descripcion": "SERVICIO DE ORGANIZACIÓN DOCUMENTARIA PARA LA FASE DE AUTORIZACIÓN",
+        "detalle": "",
+        "estado": "Activo",
+        "unidad_medida": "Servicio",
+        "cantidad": 1,
+        "precio_unitario": 2500,
+        "createdAt": "2023-05-23T15:25:22.850Z",
+        "updatedAt": "2023-05-23T15:25:22.850Z",
+        "Orden_Servicio": {
+            "idOrdenServicio": 1,
+            "clasificador": "2.6.8.1.4.3",
+            "numeroOrdenServicio": "1573",
+            "numeroCertificacion": "0000",
+            "expedienteSiaf": "2693",
+            "fechaOrdenServicio": "2023-02-02",
+            "fileOrdenServicio": "",
+            "idRequerimiento": 2,
+            "idProveedor": 1,
+            "Detalle_Orden_Servicios": [
+                {
+                    "idDetalleOrdenServicio": 1,
+                    "montoOrdenServicio": 2500,
+                    "fechaVencimiento": "2023-03-04",
+                    "estado": "Pendiente",
+                    "createdAt": "2023-05-23T15:37:29.730Z",
+                    "updatedAt": "2023-05-23T15:37:29.730Z",
+                    "idOrdenServicio": 1
+                }
+            ]
+        }
+    },
+    {
+        "total": 39000,
+        "idRequerimiento": 1,
+        "descripcion": "CONSULTORIA EN PRIORIZACIÓN DE CADENAS PRODUCTIVAS\n",
+        "detalle": "",
+        "estado": "Activo",
+        "unidad_medida": "Servicio",
+        "cantidad": 1,
+        "precio_unitario": 39000,
+        "createdAt": "2023-05-23T15:24:51.590Z",
+        "updatedAt": "2023-05-23T15:24:51.590Z",
+        "Orden_Servicio": {
+            "idOrdenServicio": 2,
+            "clasificador": "2.6.8.1.4.3",
+            "numeroOrdenServicio": "1573",
+            "numeroCertificacion": "0000",
+            "expedienteSiaf": "1573",
+            "fechaOrdenServicio": "2023-02-02",
+            "fileOrdenServicio": "",
+            "idRequerimiento": 1,
+            "idProveedor": 1,
+            "Detalle_Orden_Servicios": [
+                {
+                    "idDetalleOrdenServicio": 2,
+                    "montoOrdenServicio": 39000,
+                    "fechaVencimiento": "2023-03-04",
+                    "estado": "Pendiente",
+                    "createdAt": "2023-05-23T15:40:08.758Z",
+                    "updatedAt": "2023-05-23T15:40:08.758Z",
+                    "idOrdenServicio": 2
+                }
+            ]
+        }
+    },
+    {
+        "total": 16000,
+        "idRequerimiento": 3,
+        "descripcion": "SERVICIO DE ESPECIALISTA EN SIPROCOMPITE",
+        "detalle": "",
+        "estado": "Activo",
+        "unidad_medida": "Servicio",
+        "cantidad": 4,
+        "precio_unitario": 4000,
+        "createdAt": "2023-05-23T15:27:10.405Z",
+        "updatedAt": "2023-05-23T15:27:10.405Z",
+        "Orden_Servicio": {
+            "idOrdenServicio": 3,
+            "clasificador": "2.6.8.1.4.3",
+            "numeroOrdenServicio": "1571",
+            "numeroCertificacion": "0000",
+            "expedienteSiaf": "2694",
+            "fechaOrdenServicio": "2023-02-15",
+            "fileOrdenServicio": "",
+            "idRequerimiento": 3,
+            "idProveedor": 1,
+            "Detalle_Orden_Servicios": [
+                {
+                    "idDetalleOrdenServicio": 3,
+                    "montoOrdenServicio": 4000,
+                    "fechaVencimiento": "2023-03-17",
+                    "estado": "Pendiente",
+                    "createdAt": "2023-05-23T15:43:05.321Z",
+                    "updatedAt": "2023-05-23T15:43:05.321Z",
+                    "idOrdenServicio": 3
+                },
+                {
+                    "idDetalleOrdenServicio": 4,
+                    "montoOrdenServicio": 4000,
+                    "fechaVencimiento": "2023-04-16",
+                    "estado": "Pendiente",
+                    "createdAt": "2023-05-23T15:43:05.334Z",
+                    "updatedAt": "2023-05-23T15:43:05.334Z",
+                    "idOrdenServicio": 3
+                },
+                {
+                    "idDetalleOrdenServicio": 5,
+                    "montoOrdenServicio": 4000,
+                    "fechaVencimiento": "2023-05-16",
+                    "estado": "Pendiente",
+                    "createdAt": "2023-05-23T15:43:05.341Z",
+                    "updatedAt": "2023-05-23T15:43:05.341Z",
+                    "idOrdenServicio": 3
+                },
+                {
+                    "idDetalleOrdenServicio": 6,
+                    "montoOrdenServicio": 4000,
+                    "fechaVencimiento": "2023-06-15",
+                    "estado": "Pendiente",
+                    "createdAt": "2023-05-23T15:43:05.348Z",
+                    "updatedAt": "2023-05-23T15:43:05.348Z",
+                    "idOrdenServicio": 3
+                }
+            ]
+        }
+    },
+    {
+        "total": 14000,
+        "idRequerimiento": 7,
+        "descripcion": "SERVICIO DE APOYO EN GESTIÓN ADMINISTRATIVA Y PRESUPUESTAL\n",
+        "detalle": "",
+        "estado": "Activo",
+        "unidad_medida": "Servicio",
+        "cantidad": 4,
+        "precio_unitario": 3500,
+        "createdAt": "2023-05-23T15:31:17.037Z",
+        "updatedAt": "2023-05-23T15:31:17.037Z",
+        "Orden_Servicio": {
+            "idOrdenServicio": 4,
+            "clasificador": "2.6.8.1.4.3",
+            "numeroOrdenServicio": "2046",
+            "numeroCertificacion": "9999",
+            "expedienteSiaf": "3526",
+            "fechaOrdenServicio": "2023-02-22",
+            "fileOrdenServicio": "",
+            "idRequerimiento": 7,
+            "idProveedor": 2,
+            "Detalle_Orden_Servicios": [
+                {
+                    "idDetalleOrdenServicio": 7,
+                    "montoOrdenServicio": 3500,
+                    "fechaVencimiento": "2023-03-24",
+                    "estado": "Pendiente",
+                    "createdAt": "2023-05-23T16:47:01.587Z",
+                    "updatedAt": "2023-05-23T16:47:01.587Z",
+                    "idOrdenServicio": 4
+                },
+                {
+                    "idDetalleOrdenServicio": 8,
+                    "montoOrdenServicio": 3500,
+                    "fechaVencimiento": "2023-04-23",
+                    "estado": "Pendiente",
+                    "createdAt": "2023-05-23T16:47:01.598Z",
+                    "updatedAt": "2023-05-23T16:47:01.598Z",
+                    "idOrdenServicio": 4
+                },
+                {
+                    "idDetalleOrdenServicio": 9,
+                    "montoOrdenServicio": 3500,
+                    "fechaVencimiento": "2023-05-23",
+                    "estado": "Pendiente",
+                    "createdAt": "2023-05-23T16:47:01.605Z",
+                    "updatedAt": "2023-05-23T16:47:01.605Z",
+                    "idOrdenServicio": 4
+                },
+                {
+                    "idDetalleOrdenServicio": 10,
+                    "montoOrdenServicio": 3500,
+                    "fechaVencimiento": "2023-06-22",
+                    "estado": "Pendiente",
+                    "createdAt": "2023-05-23T16:47:01.613Z",
+                    "updatedAt": "2023-05-23T16:47:01.613Z",
+                    "idOrdenServicio": 4
+                }
+            ]
+        }
+    },
+    {
+        "total": 8000,
+        "idRequerimiento": 5,
+        "descripcion": "SERVICIO DE ORGANIZACIÓN DOCUMENTARIA PARA LA FASE DE IMPLEMENTACIÓN",
+        "detalle": "",
+        "estado": "Activo",
+        "unidad_medida": "Servicio",
+        "cantidad": 4,
+        "precio_unitario": 2000,
+        "createdAt": "2023-05-23T15:28:50.735Z",
+        "updatedAt": "2023-05-23T18:18:27.308Z",
+        "Orden_Servicio": null
+    },
+    {
+        "total": 22000,
+        "idRequerimiento": 8,
+        "descripcion": "CONSULTORIA ELABORACIÓN DE BASES Y EJECUCIÓN DEL LANZAMIENTO DEL PROCOMPITE A TODO COSTO",
+        "detalle": "",
+        "estado": "Activo",
+        "unidad_medida": "Servicio",
+        "cantidad": 1,
+        "precio_unitario": 22000,
+        "createdAt": "2023-05-23T16:43:19.056Z",
+        "updatedAt": "2023-05-23T16:43:19.056Z",
+        "Orden_Servicio": null
+    },
+    {
+        "total": 24000,
+        "idRequerimiento": 6,
+        "descripcion": "SERVICIO DE ESPECIALISTA EN AUTORIZACIÓN E IMPLEMENTACIÓN DE PROCOMPITE",
+        "detalle": "",
+        "estado": "Activo",
+        "unidad_medida": "Servicio",
+        "cantidad": 4,
+        "precio_unitario": 6000,
+        "createdAt": "2023-05-23T15:30:34.627Z",
+        "updatedAt": "2023-05-23T15:30:34.627Z",
+        "Orden_Servicio": null
+    },
+    {
+        "total": 9900,
+        "idRequerimiento": 4,
+        "descripcion": "SERVICIO DE APOYO AL SIPROCOMPITE",
+        "detalle": "",
+        "estado": "Activo",
+        "unidad_medida": "Servicio",
+        "cantidad": 3,
+        "precio_unitario": 3300,
+        "createdAt": "2023-05-23T15:27:41.816Z",
+        "updatedAt": "2023-05-23T15:27:41.816Z",
+        "Orden_Servicio": null
+    }
+]

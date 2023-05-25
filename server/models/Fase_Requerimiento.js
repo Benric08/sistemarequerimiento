@@ -1,7 +1,7 @@
 const {DataTypes}=require('sequelize');
 
 module.exports=(dbConnection)=>{
-    dbConnection.define('Fase_Requerimiento',{
+    dbConnection.define('fase_requerimiento',{
         idFaseRequerimiento:{
             type: DataTypes.INTEGER,
             primaryKey:true,
