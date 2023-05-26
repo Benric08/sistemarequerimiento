@@ -24,7 +24,7 @@ module.exports=(dbConnection)=>{
             values: estados
         },
         fechaEstadoEntregable:{
-            type:DataTypes.DATEONLY,
+            type:DataTypes.DATE,
             allowNull:false
         },
         observacion:{

@@ -8,4 +8,4 @@ dbConnection.sync({force:false})
     server.listen(PORT,()=>{
         console.log(`server running in http://localhost:${PORT}`);
     });
-});
+}); 

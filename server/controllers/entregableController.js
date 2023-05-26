@@ -49,25 +49,35 @@ const insertEntregable= async({fileEntregable,
         }});      
     }
     // agregando estados del entregable
-    estado=marks.find((mark)=>{mark.value===parseInt(ubicacion)});
+    console.log('marks',marks);
+    const estado=marks.find((mark)=>{return mark.value===ubicacion});
+    console.log('estado',estado);
     const estadosActuales = await estado_entregable.findAll({
         where:{
             idEntregable:entregableInsertado.idEntregable
         }
     });
-    estadosActuales.length>0?
-    
-
     const estadoscreados=[];
-    for (let i = 0; i < estado.level; i++) {
-        const estadoInser = await estado_entregable.create({
-            idEntregable:entregableInsertado.idEntregable,
-            ubicacion:estado.label,
-            observacion,
-            fechaEstadoEntregable,
-        }) 
-        
+    if(estadosActuales.length>0){
+    // si el valor es menor solo se agrega un registro
+    // ordenar por fecha de agregado
+        /* estadosActuales.sort((a,b)=>a.createdAt>b.createdAt);
+        console.log('Estados ordenados por fecha',estadosActuales); */
+    }else{
+
+        for (let i = 0; i < estado.level; i++) {
+            const estadoInser = await estado_entregable.create({
+                idEntregable:entregableInsertado.idEntregable,
+                ubicacion:marks[i].label,
+                observacion,
+                estadoEntregable:marks[i].level,
+                fechaEstadoEntregable:fechaEntregable,
+            }) 
+            estadoscreados.push(estadoInser);
+        }
     }
+
+    return estadosActuales;
     /**Task for doing */
     // cuando estado.level es 8 generar devengado en el orden de servicio
     // cuando estado.level es 9 generar girado en el orden de servicio
