@@ -49,20 +49,47 @@ const insertEntregable= async({fileEntregable,
         }});      
     }
     // agregando estados del entregable
-    console.log('marks',marks);
+    
     const estado=marks.find((mark)=>{return mark.value===ubicacion});
-    console.log('estado',estado);
+    
     const estadosActuales = await estado_entregable.findAll({
         where:{
             idEntregable:entregableInsertado.idEntregable
         }
     });
     const estadoscreados=[];
+    let estadoActual={};
     if(estadosActuales.length>0){
     // si el valor es menor solo se agrega un registro
     // ordenar por fecha de agregado
         /* estadosActuales.sort((a,b)=>a.createdAt>b.createdAt);
         console.log('Estados ordenados por fecha',estadosActuales); */
+     estadoActual=estadosActuales.pop();
+     console.log('ultimo esatdo',estadoActual);
+     if (estado.level===estadoActual.estadoEntregable) {
+        console.log("no huvo cambios en el estado");
+     }   else if(estado.level<estadoActual.estadoEntregable){
+        const estadoInser = await estado_entregable.create({
+            idEntregable:entregableInsertado.idEntregable,
+            ubicacion:estado.label,
+            observacion,
+            estadoEntregable:estado.level,
+            fechaEstadoEntregable:fechaEntregable,
+        }) ;
+        estadoscreados.push(estadoInser);
+     }else{
+        for (let i = estadoActual.estadoEntregable; i < estado.level; i++) {
+            const estadoInser = await estado_entregable.create({
+                idEntregable:entregableInsertado.idEntregable,
+                ubicacion:marks[i].label,
+                observacion,
+                estadoEntregable:marks[i].level,
+                fechaEstadoEntregable:fechaEntregable,
+            }) 
+            estadoscreados.push(estadoInser);
+        }
+     }
+
     }else{
 
         for (let i = 0; i < estado.level; i++) {
@@ -77,7 +104,15 @@ const insertEntregable= async({fileEntregable,
         }
     }
 
-    return estadosActuales;
+    if (estado.level===8) {
+        console.log('generar devengado en detalleordenservcio');
+    }
+    if (estado.level===9) {
+        console.log('generar giro en detalleordenservicio');
+        
+    }
+
+    return estadoscreados;
     /**Task for doing */
     // cuando estado.level es 8 generar devengado en el orden de servicio
     // cuando estado.level es 9 generar girado en el orden de servicio
