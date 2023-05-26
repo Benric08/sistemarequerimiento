@@ -1,5 +1,7 @@
 const {DataTypes} = require('sequelize');
-
+const marks = require('../utils/entregableEstados');
+const ubicaciones = marks.map((mark)=>mark.label);
+const estados = marks.map((mark)=>mark.level);
 module.exports=(dbConnection)=>{
     dbConnection.define('estado_entregable',{
         idEstadoEntregable:{
@@ -14,7 +16,12 @@ module.exports=(dbConnection)=>{
         ubicacion:{
             type:DataTypes.STRING,
             allowNull:false,
-            values:['Procompite','Mesa de partes','Gerencia de Desarrollo Economico','Administracion','Logistica','Contabilidad','Tesoreria']
+            values: ubicaciones
+        },
+        estadoEntregable:{
+            type:DataTypes.INTEGER,
+            allowNull:false,
+            values: estados
         },
         fechaEstadoEntregable:{
             type:DataTypes.DATEONLY,

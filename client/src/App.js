@@ -5,9 +5,11 @@ import AddEntregable from './components/forms/AddEntregable';
 import RequerimientoContainerMU from './components/containers/RequerimientoContainerMU';
 import AddOrdenServicio from './components/forms/AddOrdenServicio';
 import ProveedorContainer from './components/containers/ProveedorContainer';
+import PrincipalMenu from './components/menu/PrincipalMenu';
 function App() {
   return (
-    <div className="App">
+    <div className="App" style={{display:'flex'}}>
+      <PrincipalMenu/>
       <Routes>
         <Route path='/requerimientos' element={<RequerimientoContainerMU/>}/>
         <Route path='/entregable' element={<AddEntregable/>}/>

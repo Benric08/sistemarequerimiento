@@ -74,78 +74,78 @@ export default  function RequerimientoContainerMU() {
     },[])
 
     return (
-        <>
-        <Box display="flex" justifyContent="flex-end">
-            <Button onClick={_handleClickOpenDialog} startIcon={<AddIcon />}>
-            Agregar
-            </Button>
-        </Box>
-        <TableContainer component={Paper}>
-          <Table aria-label="collapsible table">
-            <TableHead>
-              <TableRow>
-                <TableCell />
-                <TableCell>Descripcion</TableCell>
-                <TableCell align="right">Detalle</TableCell>
-                <TableCell align="right">Cantidad</TableCell>
-                <TableCell align="right">Precio Unitario</TableCell>
-                <TableCell align="right">Total</TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-                { requerimientos.length>0 && requerimientos.map((requerimiento) => (
-                    <RequerimientoRow
-                        key={requerimiento.idRequerimiento}
-                        requerimiento={requerimiento}
-                        onAddOrdenServicio={_handleClickAddOrdenServicio}
-                        onEdit={_handleClickEditRequerimientoElement}
-                        onEditOrden={_handleClickEditOrdenServicioElement}
-                    />
-                ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        <div>
+          <Box display="flex" justifyContent="flex-end">
+              <Button onClick={_handleClickOpenDialog} startIcon={<AddIcon />}>
+              Agregar
+              </Button>
+          </Box>
+          <TableContainer component={Paper}>
+            <Table aria-label="collapsible table">
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  <TableCell>Descripcion</TableCell>
+                  <TableCell align="right">Detalle</TableCell>
+                  <TableCell align="right">Cantidad</TableCell>
+                  <TableCell align="right">Precio Unitario</TableCell>
+                  <TableCell align="right">Total</TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                  { requerimientos.length>0 && requerimientos.map((requerimiento) => (
+                      <RequerimientoRow
+                          key={requerimiento.idRequerimiento}
+                          requerimiento={requerimiento}
+                          onAddOrdenServicio={_handleClickAddOrdenServicio}
+                          onEdit={_handleClickEditRequerimientoElement}
+                          onEditOrden={_handleClickEditOrdenServicioElement}
+                      />
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
 
-        <Dialog open={isOpenDialog} onClose={_handleCloseDialog}>
-            <DialogContent
-            sx={{
-                '& .MuiTextField-root': { m: 1 },
-            }}
-            > 
-            <DialogTitle>Registrar Requerimiento</DialogTitle>
-            <DialogContentText>
+          <Dialog open={isOpenDialog} onClose={_handleCloseDialog}>
+              <DialogContent
+              sx={{
+                  '& .MuiTextField-root': { m: 1 },
+              }}
+              > 
+              <DialogTitle>Registrar Requerimiento</DialogTitle>
+              <DialogContentText>
 
-            </DialogContentText>
-            <AddRequerimiento
-                requerimiento={requerimientoSelected}
-                onCreate={_handleCreateRequerimiento}
-                onUpdate={_handleUpdateRequerimiento}
-                onClose={_handleCloseDialog}
-            />
-            </DialogContent>
-        </Dialog>
-        <Dialog open={isOpenDialogAddOrdenServicio} onClose={_handleCloseDialogAddOrden}>
-            <DialogContent
-            sx={{
-                '& .MuiTextField-root': { m: 1 },
-            }}
-            > 
-            <DialogTitle>Registrar Orden de Servicio</DialogTitle>
-            <DialogContentText>
+              </DialogContentText>
+              <AddRequerimiento
+                  requerimiento={requerimientoSelected}
+                  onCreate={_handleCreateRequerimiento}
+                  onUpdate={_handleUpdateRequerimiento}
+                  onClose={_handleCloseDialog}
+              />
+              </DialogContent>
+          </Dialog>
+          <Dialog open={isOpenDialogAddOrdenServicio} onClose={_handleCloseDialogAddOrden}>
+              <DialogContent
+              sx={{
+                  '& .MuiTextField-root': { m: 1 },
+              }}
+              > 
+              <DialogTitle>Registrar Orden de Servicio</DialogTitle>
+              <DialogContentText>
 
-            </DialogContentText>
-            <AddOrdenServicio
-                requerimiento={requerimientoSelected}
-                ordenServicio={requerimientoSelected?.orden_servicio}
-                proveedor={requerimientoSelected?.orden_servicio?.idProveedor}
-                onCreate={_handleCreateOrden}
-                onUpdate={_handleUpdateOrden}
-                onClose={_handleCloseDialogAddOrden}
-            />
-            </DialogContent>
-        </Dialog>
-        </>
+              </DialogContentText>
+              <AddOrdenServicio
+                  requerimiento={requerimientoSelected}
+                  ordenServicio={requerimientoSelected?.orden_servicio}
+                  proveedor={requerimientoSelected?.orden_servicio?.idProveedor}
+                  onCreate={_handleCreateOrden}
+                  onUpdate={_handleUpdateOrden}
+                  onClose={_handleCloseDialogAddOrden}
+              />
+              </DialogContent>
+          </Dialog>
+        </div>
       );
 }

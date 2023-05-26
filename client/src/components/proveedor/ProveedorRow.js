@@ -71,6 +71,7 @@ export default function ProveedorRow(props) {
                         return <ProveedorSubRow 
                                       key={detalleOS.idOrdenServicio} 
                                       ordenServicio={detalleOS}
+                                      proveedorNombreCompleto={proveedor.nombreCompleto}
                                 />
                       })
                     }
