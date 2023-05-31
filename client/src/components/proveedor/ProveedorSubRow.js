@@ -1,4 +1,4 @@
-import { AppBar, Button,Dialog, DialogContent,
+import { AppBar, Box, Button,Dialog, DialogContent,
    DialogTitle, Divider, IconButton, List, ListItemText, Slide, 
    TableCell, TableRow, Toolbar, Typography } from '@mui/material'
 import React, { useState } from 'react'
@@ -30,12 +30,12 @@ export default function ProveedorSubRow({ordenServicio,proveedorNombreCompleto})
     <>
       <TableRow onClick={_handleRowOrdenServicio} hover >
         <TableCell component="th" scope="row">
-          {ordenServicio.numeroOrdenServicio}
+          {ordenServicio.numero_orden_servicio}
         </TableCell>
-        <TableCell align="right">{`${ordenServicio.numeroCertificacion}`}</TableCell>
-        <TableCell align="right">{ordenServicio.expedienteSiaf}</TableCell>
+        <TableCell align="right">{`${ordenServicio.numero_certificacion}`}</TableCell>
+        <TableCell align="right">{ordenServicio.expediente_siaf}</TableCell>
         <TableCell align="right">
-          {ordenServicio.fechaOrdenServicio}
+          {ordenServicio.fecha_orden_servicio}
         </TableCell>
       </TableRow>
       <Dialog 
@@ -68,21 +68,22 @@ export default function ProveedorSubRow({ordenServicio,proveedorNombreCompleto})
                 width:'100%'
             }}
             > 
-            <DialogTitle >
+              <DialogTitle >
+                
+                  <ListItemText 
+                    primary={`Orden de Servicio N°- ${ordenServicioSelected?.numero_orden_servicio}`}
+                    secondary={`Proveedor: ${proveedorNombreCompleto}` }
+                  />  
+                  <Divider sx={{color:'blue'}}/>
+              </DialogTitle>
               
-                <ListItemText 
-                  primary={`Orden de Servicio N°- ${ordenServicioSelected?.numeroOrdenServicio}`}
-                  secondary={`Proveedor: ${proveedorNombreCompleto}` }
-                />  
-                <Divider sx={{color:'blue'}}/>
-            </DialogTitle>
-            
-            <DetalleOrdenServicio
-                  
-                  ordenServicio={ordenServicioSelected}
-                  
-              />
-              
+              <Box sx={{height:'100%', padding:'0% 2%'}}>
+                <DetalleOrdenServicio
+                      
+                      ordenServicio={ordenServicioSelected}
+                      
+                />
+              </Box>              
             </DialogContent>
         </Dialog>
       </>

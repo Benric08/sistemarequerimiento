@@ -6,7 +6,7 @@ module.exports=(dbConnection)=>{
     dbConnection.define('detalleos_ejecucion_presupuestaria',{
        
         
-        fechaEstado:{
+        fecha_estado:{//fecha_estado
             type:DataTypes.DATEONLY,
             allowNull:false
         }

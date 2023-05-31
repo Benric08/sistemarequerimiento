@@ -2,7 +2,9 @@ const {
     
     proveedor,
     orden_servicio,
-    detalle_orden_servicio
+    detalle_orden_servicio,
+    entregable,
+    estado_entregable
     
     } = require('../config/db');
 
@@ -13,12 +15,15 @@ const getAllProveedores = async()=>{
 
 const getAllProveedoresDetalle = async()=>{
     const requerimientoDetalle = await proveedor.findAll({
-        //where: { idRequerimiento: 4 },
+        //where: { id_requerimiento: 4 },
         include: [{ 
             model: orden_servicio, 
-            include:[{
-                model:detalle_orden_servicio,
-            }]
+            include:[
+                {model:detalle_orden_servicio,
+                                   
+                },
+                
+            ]
         }],
     });
    

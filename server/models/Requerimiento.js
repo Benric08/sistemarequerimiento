@@ -2,7 +2,7 @@ const {DataTypes} = require('sequelize');
 
 module.exports=(dbConnection)=>{
     dbConnection.define('requerimiento',{
-        idRequerimiento:{
+        id_requerimiento:{
             type: DataTypes.INTEGER,
             autoIncrement:true,
             primaryKey:true

@@ -7,6 +7,7 @@ import Paper from '@mui/material/Paper';
 import { useSelector , useDispatch} from 'react-redux';
 import {  getAllProveedoresOrdenS } from '../../redux/actionsProveedor';
 import ProveedorRow from '../proveedor/ProveedorRow';
+import { getEstadoEntregable } from '../../redux/acionsEntregable';
 
 export default  function ProveedorContainer() {
     const proveedores = useSelector((state)=>state.allProveedoresOrdenServicio);
@@ -16,6 +17,8 @@ export default  function ProveedorContainer() {
     console.log('vemos el contenido de proveedoresdos', proveedores?.orden_servicios?.detalle_orden_servicio);
     useEffect( ()=>{
       dispatch(getAllProveedoresOrdenS());
+      dispatch(getEstadoEntregable());
+      //hacer llamado a los estados entregable
     },[])
 
     return (
@@ -34,7 +37,7 @@ export default  function ProveedorContainer() {
             <TableBody>
                 { proveedores.length>0 && proveedores.map((proveedor) => (
                     <ProveedorRow
-                        key={proveedor.idProveedor}
+                        key={proveedor.id_proveedor}
                         proveedor={proveedor}
                     />
                 ))}

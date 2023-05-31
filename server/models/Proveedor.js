@@ -3,7 +3,7 @@ const {DataTypes}=require('sequelize');
 module.exports=(dbConnection)=>{
     dbConnection.define('proveedor',{
     
-        idProveedor:{
+        id_proveedor:{
             type: DataTypes.INTEGER,
             primaryKey:true,
             allowNull:false,
@@ -29,7 +29,7 @@ module.exports=(dbConnection)=>{
                 isNumeric:true
             }
         },
-        nombreCompleto:{
+        nombre_completo:{
             type: DataTypes.VIRTUAL,
             get() {
                 return `${this.apellido_paterno} ${this.apellido_materno } ${this.nombre}`;

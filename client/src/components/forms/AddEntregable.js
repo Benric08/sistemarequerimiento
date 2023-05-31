@@ -1,5 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import dayjs from 'dayjs';
+import axios from 'axios';
 import { Button, TextField, Box, Divider, Fab,IconButton, FormGroup, FormControlLabel, Switch  } from '@mui/material';
 import { SaveOutlined as SaveIcon,Add as AddIcon ,CenterFocusStrong,PersonSearch as SearchIcon} from '@mui/icons-material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -9,25 +10,39 @@ import { useDispatch, useSelector } from 'react-redux';
 import Autocomplete from '@mui/material/Autocomplete';
 import Slider from "@mui/material/Slider";
 import {marks} from '../../utils/estadosEntregable';
+import { addEntregable, getEstadoEntregable } from '../../redux/acionsEntregable';
+
 const ubicaciones=['Procompite','Mesa de partes','Gerencia de Desarrollo Economico','Administracion','Logistica','Recuersos Humanos','Contabilidad','Tesoreria']
 
-export default function AddOrdenServicio({detalleOrdenServicio}) {
-    const [fechaEntregable,setFechaEntregable] = useState(dayjs(new Date()));
-    const [fileEntregable, setFileEntregable] = useState(null);
-    const [inputs,setInputs] = useState("");
-    const [sliderUbicacion,setSliderUbicacion] = useState(marks[0].value);
+export default function AddEntregable({detalleOrdenServicio}) {
+    console.log('Mira quien soy en el formulario',detalleOrdenServicio);
+    const obtenerEstado = useSelector((state)=>state.estadoEntregableActual);
+    const getEstado = obtenerEstado.find((estado)=>estado.id_detalle_os===detalleOrdenServicio.id_detalle_os);
+    console.log('recuperamos algo o no ',obtenerEstado);
+    console.log('recuperamos algo o no 2 ', getEstado?.entregable?.estado_entregables[0]?.valor_estado);
+    
+    
+    const [fecha_entregable,setfecha_entregable] = useState(dayjs(getEstado?.entregable?.estado_entregables[0]?.fecha_entregable)??dayjs(new Date()));
+    const [file_entregable, setfile_entregable] = useState(null);
+    const [inputs,setInputs] = useState(getEstado?.entregable?.estado_entregables[0]?.observacion??"");
+    const [sliderUbicacion,setSliderUbicacion] = useState(getEstado?.entregable?.estado_entregables[0]?.valor_estado??marks[0].value);
+    const dispatch = useDispatch();
+    console.log('slider ubicacion',sliderUbicacion);
+
     const _handleSubmit=(event)=>{
         event.preventDefault();
         const formDataEntregable = new FormData();
-        formDataEntregable.append('file', fileEntregable);
+        formDataEntregable.append('file', file_entregable);
         const entregable= {
-            idDetalleOrdenServicio:detalleOrdenServicio.idDetalleOrdenServicio,
-            fechaEntregable:`${fechaEntregable?.$y}-${fechaEntregable?.$M+1<10?"0"+(fechaEntregable?.$M+1):fechaEntregable?.$M+1}-${fechaEntregable?.$D<10?"0"+fechaEntregable?.$D:fechaEntregable?.$D}`,
+            id_detalle_os:detalleOrdenServicio.id_detalle_os,
+            fecha_entregable:`${fecha_entregable?.$y}-${fecha_entregable?.$M+1<10?"0"+(fecha_entregable?.$M+1):fecha_entregable?.$M+1}-${fecha_entregable?.$D<10?"0"+fecha_entregable?.$D:fecha_entregable?.$D}`,
             observacion:inputs,
-            fileEntregable:'',
+            file_entregable:'',
             ubicacion:sliderUbicacion
         }
         formDataEntregable.append('entregable',JSON.stringify(entregable));
+        console.log('veamos que hay en el obejto enviad  del from',entregable);
+        dispatch(addEntregable(formDataEntregable));
         
     }
     const _handleChange=(event)=>{
@@ -40,19 +55,29 @@ export default function AddOrdenServicio({detalleOrdenServicio}) {
           event.preventDefault();
         }
       }
-      const _handleSlider = (event) => {
-        const{value}=event.target;
-        setSliderUbicacion(value);
-        console.log('viendo lo que trae el slider',value);
+      const _handleFecha = (newValue) => {
+        setfecha_entregable(newValue);
+    }
+      const _handleSlider = (event, newValue) => {
+        if (typeof newValue === 'number') {
+            setSliderUbicacion(newValue);
+          }
       };
 
     
     const _handleChangeFile = (event) => {
-        setFileEntregable(event.target.files[0]);
+        setfile_entregable(event.target.files[0]);
     }
+    
+    
+    useEffect(()=>{
+       
+        _handleSlider(getEstado?.entregable?.estado_entregables?.valor_estado)
+        
+    },[])
     return (
         <div>
-            <form onSubmit={_handleSubmit}>
+            <form onSubmit={_handleSubmit}> 
                 <Box
                     sx={{
                         '& .MuiTextField-root': { m: 2 },
@@ -68,10 +93,8 @@ export default function AddOrdenServicio({detalleOrdenServicio}) {
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DatePicker
                                 label="Fecha Entregable"
-                                value={fechaEntregable}
-                                onChange={(newValue) => {
-                                    setFechaEntregable(newValue);
-                                }}
+                                value={fecha_entregable}
+                                onChange={_handleFecha}
                                 
                                 slotProps={{ textField: { variant: 'outlined' } }}
                             />
@@ -81,16 +104,16 @@ export default function AddOrdenServicio({detalleOrdenServicio}) {
                             label='Observacion'
                             name='observacionEntregable'
                             onChange={_handleChange}
-                            value={inputs.numeroOrdenServicio}
-                            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+                            value={inputs}
+                            
 
                         />
                     
-                        <label htmlFor='inputFileEntregable'>
+                        <label htmlFor='inputfile_entregable'>
 
                             <input
                                 type='file'
-                                id='inputFileEntregable'
+                                id='inputfile_entregable'
                                 style={{ display: "none" }}
                                 onChange={_handleChangeFile}
                             />
@@ -101,7 +124,7 @@ export default function AddOrdenServicio({detalleOrdenServicio}) {
                                 aria-label="add"
                                 variant="extended"
                             >
-                                <AddIcon /> {fileEntregable? 'Infome Adjuntado' : 'Adjuntar Informe'}
+                                <AddIcon /> {file_entregable? 'Infome Adjuntado' : 'Adjuntar Informe'}
                             </Fab>
                         </label>
                     </Box>
@@ -112,7 +135,7 @@ export default function AddOrdenServicio({detalleOrdenServicio}) {
                             display:'flex',
                             width:'50%',
                             justifyItems:'space-between' ,
-                            'flex-direction': 'column',
+                            flexDirection: 'column',
                             gap:'5%'
                             }}
                                 >
@@ -128,7 +151,7 @@ export default function AddOrdenServicio({detalleOrdenServicio}) {
                                         }
                                         }}
                                         orientation="vertical"
-                                        defaultValue={sliderUbicacion}
+                                        value={sliderUbicacion}
                                         aria-label="Ubicacion"
                                         valueLabelDisplay="off"
                                         marks={marks}
@@ -144,8 +167,8 @@ export default function AddOrdenServicio({detalleOrdenServicio}) {
                                 sx={{
                                         '& .MuiTextField-root': { m: 1 },
                                         display:'flex',
-                                        'flex-direction': 'column',
-                                        'align-items': 'flex-end',
+                                        flexDirection: 'column',
+                                        alignItems: 'flex-end',
                                         height:'20%',
                                         
                                     }}

@@ -12,11 +12,11 @@ const Requerimiento = ({ requerimiento, onEdit, onDelete, onClickStatus }) => {
   };
 
   const _handleClickDelete = () => {
-    if (onDelete) onDelete(requerimiento.idRequerimiento);
+    if (onDelete) onDelete(requerimiento.id_requerimiento);
   };
 
   const _handleClickStatus = () => {
-    if (onClickStatus) onClickStatus(requerimiento.idRequerimiento);
+    if (onClickStatus) onClickStatus(requerimiento.id_requerimiento);
   };
 
   return (

@@ -16,7 +16,7 @@ const updateRequerimiento = (id,updateRequerimiento)=>{
     //const requerimiento = getRequerimientoById(id);
     const requerimientoUpdated = requerimiento.update(updateRequerimiento,{
         where:{
-            idRequerimiento:id
+            id_requerimiento:id
         }
     });
 

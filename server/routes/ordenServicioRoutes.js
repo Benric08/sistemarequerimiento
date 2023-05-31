@@ -8,7 +8,7 @@ routerOrdenServicio.post('/',uploadFileOrdenServicio.single('file'),async (req,r
     const formOsBody=JSON.parse(req.body.orden);
     if(req.file) {
         const file=req.file.path;
-        formOsBody.fileOrdenServicio=file;
+        formOsBody.file_orden_servicio=file;
     }
     console.log('body del form',formOsBody);
     //console.log('espero sea el file',file);

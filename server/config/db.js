@@ -11,7 +11,7 @@ const estadoEntregableModel = require('../models/Estado_Entregable');
 const historialEntregableModel = require('../models/Historial_Entregable');
 const ordenServicioEjecucionPresupuestariaModel = require('../models/OrdenServicio_EjecucionPresupuestaria')
 const {DB_HOST,DB_PASSWORD,DB_DATABASE_NAME,DB_USER_NAME} = process.env;
-const dbConnection = new Sequelize(`postgres://${DB_USER_NAME}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE_NAME}`,{logging:false});
+const dbConnection = new Sequelize(`postgres://${DB_USER_NAME}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE_NAME}`,{logging:true});
 
 requerimientoModel(dbConnection); 
 ordenServicioModel(dbConnection);
@@ -39,13 +39,13 @@ const {requerimiento,
 
 requerimiento.hasOne(orden_servicio,{
     foreignKey:{
-            name:"idRequerimiento",
+            name:"id_requerimiento",
             type:DataTypes.INTEGER,
             allowNull:false}
 });
 orden_servicio.belongsTo(requerimiento,{
     foreignKey:{
-            name:"idRequerimiento",
+            name:"id_requerimiento",
             type:DataTypes.INTEGER,
             allowNull:false}
 });
@@ -54,14 +54,14 @@ orden_servicio.belongsTo(requerimiento,{
 
  proveedor.hasMany(orden_servicio,{
     foreignKey:{
-        name:"idProveedor",
+        name:"id_proveedor",
         allowNull:false,
         type:DataTypes.INTEGER
     }
 });
 orden_servicio.belongsTo(proveedor,{
     foreignKey:{
-        name:"idProveedor",
+        name:"id_proveedor",
         allowNull:false,
         type:DataTypes.INTEGER
     }
@@ -71,14 +71,14 @@ orden_servicio.belongsTo(proveedor,{
 
 orden_servicio.hasMany(detalle_orden_servicio,{
     foreignKey:{
-        name:"idOrdenServicio",
+        name:"id_orden_servicio",
         allowNull:false,
         type:DataTypes.INTEGER
     }
 });
 detalle_orden_servicio.belongsTo(orden_servicio,{
     foreignKey:{
-        name:"idOrdenServicio",
+        name:"id_orden_servicio",
         allowNull:false,
         type:DataTypes.INTEGER
     }
@@ -88,7 +88,7 @@ detalle_orden_servicio.belongsTo(orden_servicio,{
 
 detalle_orden_servicio.belongsToMany(ejecucion_presupuestaria,{
     through: detalleos_ejecucion_presupuestaria,
-    uniqueKey:'idDetalleosEjecucion'
+    uniqueKey:'id_detalleos_ejecucion'
 });
 ejecucion_presupuestaria.belongsToMany(detalle_orden_servicio,{
     through: detalleos_ejecucion_presupuestaria
@@ -99,13 +99,13 @@ console.log("imprimiendo los modelos de mi bd",dbConnection.models);
 
 detalle_orden_servicio.hasOne(entregable,{
     foreignKey:{
-            name:"idDetalleOrdenServicio",
+            name:"id_detalle_os",
             type:DataTypes.INTEGER,
             allowNull:false}
 });
 entregable.belongsTo(detalle_orden_servicio,{
     foreignKey:{
-            name:"idDetalleOrdenServicio",
+            name:"id_detalle_os",
             type:DataTypes.INTEGER,
             allowNull:false}
 });
@@ -113,29 +113,32 @@ entregable.belongsTo(detalle_orden_servicio,{
 //Entregable --- Estado entregable
 entregable.hasMany(estado_entregable,{
     foreignKey:{
-            name:"idEntregable",
+            name:"id_entregable",
             type:DataTypes.INTEGER,
             allowNull:false}
 });
 estado_entregable.belongsTo(entregable,{
     foreignKey:{
-            name:"idEntregable",
+            name:"id_entregable",
             type:DataTypes.INTEGER,
             allowNull:false}
 });
-// entregable-estadoentregable-historialentregable
-entregable.belongsToMany(estado_entregable,{
+// entregable-estado_entregable-historialentregable
+
+/* estado_entregable.belongsToMany(entregable,{
     through: historial_entregable,
-    uniqueKey:'idHistorialEntregable'
-});
-estado_entregable.belongsToMany(entregable,{
-    through: historial_entregable
+    uniqueKey:'id_historial_entregable'
 }); 
 
-// relacion orden servicio and ordenservicio - ejecucionpresupuestaria
+entregable.belongsToMany(estado_entregable,{
+    through: historial_entregable
+}); */
+
+
+// relacion orden servicio and ordenservicio - ejecucion_presupuestaria
 orden_servicio.belongsToMany(ejecucion_presupuestaria,{
     through: orden_servicio_ejecucion_presupuestaria,
-    uniqueKey:'idOrdenEjecucion'
+    uniqueKey:'id_orden_ejecucion'
 });
 ejecucion_presupuestaria.belongsToMany(orden_servicio,{
     through: orden_servicio_ejecucion_presupuestaria

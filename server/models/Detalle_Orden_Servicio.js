@@ -2,20 +2,20 @@ const {DataTypes}=require('sequelize');
 
 module.exports=(dbConnection)=>{
     dbConnection.define('detalle_orden_servicio',{
-        idDetalleOrdenServicio:{
+        id_detalle_os:{//id_detalle_os
             type: DataTypes.INTEGER,
             primaryKey:true,
-            allowNull:false,
+            allowNull:false, 
             autoIncrement:true},
         descripcion:{
             type:DataTypes.STRING,
             allowNull:false
         }, 
-        montoOrdenServicio:{
+        monto_orden_servicio:{//monto_orden_servicio
             type:DataTypes.INTEGER,
             allowNull:false
         },
-        fechaVencimiento:{
+        fecha_vencimiento:{//fecha_vencimiento
             type:DataTypes.DATEONLY,
             allowNull:false
         },

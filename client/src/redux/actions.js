@@ -21,14 +21,14 @@ export const addReq=(requerimiento)=>{
 }
 export const updateReq=(requerimiento)=>{
    console.log(`requerimineto que recibe el update del front ${requerimiento}`);
-    const {idRequerimiento} = requerimiento;
+    const {id_requerimiento} = requerimiento;
    return async (dispatch) => {
-      await axios.put(endpoint+"/"+idRequerimiento, requerimiento)
+      await axios.put(endpoint+"/"+id_requerimiento, requerimiento)
       .then(async( {data} ) => {
          console.log(`vemos que devuelve data del put  de update` , data);
          let reqUpdated={};
          if(data[0]) {
-            reqUpdated = await axios.get(endpoint+"/"+idRequerimiento)
+            reqUpdated = await axios.get(endpoint+"/"+id_requerimiento)
             .then(({data})=>data);
             
          }

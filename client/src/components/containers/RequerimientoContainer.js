@@ -56,7 +56,7 @@ import {addReq, getAllRequirements, updateReq} from '../../redux/actions';
       <List>
         { requerimientos.length > 0 && requerimientos.map((requerimiento) => (
           <Requerimiento
-            key={requerimiento.idRequerimiento}
+            key={requerimiento.id_requerimiento}
             requerimiento={requerimiento}
             onClickStatus={_handleClickNextStatus}
             onDelete={_handleClickDeleted}

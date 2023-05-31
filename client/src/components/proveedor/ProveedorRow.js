@@ -43,7 +43,7 @@ export default function ProveedorRow(props) {
             }
           </TableCell>
           <TableCell component="th" scope="row">
-            {proveedor.nombreCompleto}
+            {proveedor.nombre_completo}
           </TableCell>
           <TableCell align="right">{proveedor.dni}</TableCell>
           <TableCell align="right">{proveedor.celular}</TableCell>
@@ -69,9 +69,9 @@ export default function ProveedorRow(props) {
                     {
                       proveedor?.orden_servicios?.map((detalleOS)=>{
                         return <ProveedorSubRow 
-                                      key={detalleOS.idOrdenServicio} 
+                                      key={detalleOS.id_orden_servicio} 
                                       ordenServicio={detalleOS}
-                                      proveedorNombreCompleto={proveedor.nombreCompleto}
+                                      proveedorNombreCompleto={proveedor.nombre_completo}
                                 />
                       })
                     }

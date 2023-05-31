@@ -97,7 +97,7 @@ export default  function RequerimientoContainerMU() {
               <TableBody>
                   { requerimientos.length>0 && requerimientos.map((requerimiento) => (
                       <RequerimientoRow
-                          key={requerimiento.idRequerimiento}
+                          key={requerimiento.id_requerimiento}
                           requerimiento={requerimiento}
                           onAddOrdenServicio={_handleClickAddOrdenServicio}
                           onEdit={_handleClickEditRequerimientoElement}
@@ -139,7 +139,7 @@ export default  function RequerimientoContainerMU() {
               <AddOrdenServicio
                   requerimiento={requerimientoSelected}
                   ordenServicio={requerimientoSelected?.orden_servicio}
-                  proveedor={requerimientoSelected?.orden_servicio?.idProveedor}
+                  proveedor={requerimientoSelected?.orden_servicio?.id_proveedor}
                   onCreate={_handleCreateOrden}
                   onUpdate={_handleUpdateOrden}
                   onClose={_handleCloseDialogAddOrden}

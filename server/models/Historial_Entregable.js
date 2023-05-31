@@ -2,7 +2,7 @@ const {DataTypes}=require('sequelize');
 
 module.exports=(dbConnection)=>{
     dbConnection.define('historial_entregable',{
-       idHistorialEntregable:{
+       id_historial_entregable:{
         type:DataTypes.INTEGER,
         primaryKey:true,
         allowNull:false,

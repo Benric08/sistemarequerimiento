@@ -1,24 +1,20 @@
 const {DataTypes}=require('sequelize');
 module.exports=(dbConnection)=>{
     dbConnection.define('entregable',{
-        idEntregable:{
+        id_entregable:{ //id_entregable
             type: DataTypes.INTEGER,
             primaryKey:true,
             allowNull:false,
             autoIncrement:true},
-        idDetalleOrdenServicio:{
-            type:DataTypes.INTEGER,
-            allowNull:false
-        },
         observacion:{
             type:DataTypes.STRING,
             allowNull:false
         },
-        fileEntregable:{
+        file_entregable:{//file_entregable
             type:DataTypes.STRING,
             allowNull:false
         },
-        fechaEntregable:{
+        fecha_entregable:{//fecha_entregable
             type:DataTypes.DATEONLY,
             allowNull:false
         },
@@ -30,5 +26,5 @@ module.exports=(dbConnection)=>{
         } */
     }
 
-    )
+    );
 }

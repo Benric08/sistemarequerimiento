@@ -33,7 +33,7 @@ const handleSubmit =(event)=>{
           onUpdate({
             
             ...inputs,
-           idRequerimiento: requerimiento.idRequerimiento
+           id_requerimiento: requerimiento.id_requerimiento
           });
   
         if (onClose) onClose();
@@ -103,7 +103,7 @@ const handleSubmit =(event)=>{
               name='cantidad'
               onChange={handleChange}
               value={inputs.cantidad}
-              type='number'
+              inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
               sx={{
                 width:"20%"
               }}

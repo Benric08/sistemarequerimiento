@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize, QueryTypes } = require('sequelize');
 const {
     requerimiento,
     orden_servicio,
@@ -11,15 +11,15 @@ const {
 
 const getRequerimientoOrdenServicio = async()=>{
     const requerimientoDetalle = await requerimiento.findAll({
-        //where: { idRequerimiento: 4 },
+        //where: { id_requerimiento: 4 },
         include: [{ 
             model: orden_servicio, 
             include:[{
-                model:detalle_orden_servicio,
+                model:detalle_orden_servicio
             }]
         }],
-    });
-   
+    }); 
+   //dbConnection.query('select*from orden_servicios inner join detalle_orden_servicios on orden_servicios.id_orden_servicio=detalle_orden_servicios.id_orden_servicio', { type: QueryTypes.SELECT })
     return requerimientoDetalle;
 }
 

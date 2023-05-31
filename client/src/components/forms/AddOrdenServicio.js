@@ -14,9 +14,9 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
     const dispatch = useDispatch();
     const proveedores =  useSelector((state=>state.allProveedores));
     const [inputs, setInputs] = useState({
-        numeroOrdenServicio: ordenServicio?.numeroOrdenServicio ?? "",
-        numeroCertificacion: ordenServicio?.numeroCertificacion ?? "",
-        expedienteSiaf: ordenServicio?.expedienteSiaf ?? "",
+        numero_orden_servicio: ordenServicio?.numero_orden_servicio ?? "",
+        numero_certificacion: ordenServicio?.numero_certificacion ?? "",
+        expediente_siaf: ordenServicio?.expediente_siaf ?? "",
     
         
 
@@ -29,8 +29,8 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
         apellido_materno: proveedor?.apellido_materno ?? "",
         celular: proveedor?.celular ?? "",
     });
-    const [fechaOrdenServicio, setFechaOrdenServicio] = useState(null)
-    const [fileOrdenServicio, setFileOrdenServicio] = useState(null);
+    const [fecha_orden_servicio, setFechaOrdenServicio] = useState(null)
+    const [file_orden_servicio, setFileOrdenServicio] = useState(null);
     const cleanInputs=(inputs)=>{
         for (const key in inputs) {
             inputs[key]=""
@@ -49,9 +49,9 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
         }
     },[]);
 
-    console.log('ver el valor de fechaselected',`${fechaOrdenServicio}`);
+    console.log('ver el valor de fechaselected',`${fecha_orden_servicio}`);
  
-    console.log('vemos que contiene el file', fileOrdenServicio);
+    console.log('vemos que contiene el file', file_orden_servicio);
     const handleChangeFile = (event) => {
         setFileOrdenServicio(event.target.files[0]);
     }
@@ -75,7 +75,7 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
                 onUpdate({
 
                     ...inputs,
-                    idOrdenServicio: ordenServicio.idOrdenServicio
+                    id_orden_servicio: ordenServicio.id_orden_servicio
                 });
 
             if (onClose) onClose();
@@ -83,18 +83,18 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
             return;
         } */
         console.log('requerimiento para la orden de servicio',requerimiento)
-        console.log('fecha seleccionada',fechaOrdenServicio)
+        console.log('fecha seleccionada',fecha_orden_servicio)
 
             const formData = new FormData();
-            formData.append('file', fileOrdenServicio);
+            formData.append('file', file_orden_servicio);
             const newOrden={
              ...inputs,
-            idRequerimiento:requerimiento.idRequerimiento,
+            id_requerimiento:requerimiento.id_requerimiento,
   
             precio_unitario:requerimiento.precio_unitario,
             cantidad:requerimiento.cantidad,
-            fechaOrdenServicio:`${fechaOrdenServicio?.$y}-${fechaOrdenServicio?.$M+1<10?"0"+(fechaOrdenServicio?.$M+1):fechaOrdenServicio?.$M+1}-${fechaOrdenServicio?.$D<10?"0"+fechaOrdenServicio?.$D:fechaOrdenServicio?.$D}`,
-            fileOrdenServicio:'',
+            fecha_orden_servicio:`${fecha_orden_servicio?.$y}-${fecha_orden_servicio?.$M+1<10?"0"+(fecha_orden_servicio?.$M+1):fecha_orden_servicio?.$M+1}-${fecha_orden_servicio?.$D<10?"0"+fecha_orden_servicio?.$D:fecha_orden_servicio?.$D}`,
+            file_orden_servicio:'',
             proveedorf: inputsProveedor
         }
         formData.append('orden',JSON.stringify(newOrden));
@@ -160,25 +160,25 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
                 <Box>
                     <TextField
                         label='N° de orden de servicio'
-                        name='numeroOrdenServicio'
+                        name='numero_orden_servicio'
                         onChange={handleChange}
-                        value={inputs.numeroOrdenServicio}
+                        value={inputs.numero_orden_servicio}
                         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
 
                     />
                     <TextField
                         label='N° de certificacion'
-                        name='numeroCertificacion'
+                        name='numero_certificacion'
                         onChange={handleChange}
-                        value={inputs.numeroCertificacion}
+                        value={inputs.numero_certificacion}
                         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
 
                     />
                     <TextField
                         label='Expediente Siaf'
-                        name='expedienteSiaf'
+                        name='expediente_siaf'
                         onChange={handleChange}
-                        value={inputs.expedienteSiaf}
+                        value={inputs.expediente_siaf}
                         inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
                     />
 
@@ -186,7 +186,7 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
                             label="Fecha Orden Servicio"
-                            value={fechaOrdenServicio}
+                            value={fecha_orden_servicio}
                             onChange={(newValue) => {
                                 setFechaOrdenServicio(newValue);
                             }}
@@ -210,7 +210,7 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
                             aria-label="add"
                             variant="extended"
                         >
-                            <AddIcon /> {fileOrdenServicio? 'Archivo Cargado' : 'Seleccionar archivo'}
+                            <AddIcon /> {file_orden_servicio? 'Archivo Cargado' : 'Seleccionar archivo'}
                         </Fab>
                     </label>
                 </Box>

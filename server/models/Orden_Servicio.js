@@ -2,7 +2,7 @@ const {DataTypes} = require('sequelize');
 
 module.exports=(dbConnection)=>{
     dbConnection.define('orden_servicio',{
-        idOrdenServicio:{
+        id_orden_servicio:{
             type: DataTypes.INTEGER,
             primaryKey:true,
             allowNull:false,
@@ -13,24 +13,24 @@ module.exports=(dbConnection)=>{
             allowNull:false,
             defaultValue:'2.6.8.1.4.3'
         },
-        numeroOrdenServicio:{
+        numero_orden_servicio:{
             type:DataTypes.STRING,
             allowNull:false,
 
         },
-        numeroCertificacion:{
+        numero_certificacion:{
             type:DataTypes.STRING,
             allowNull:false
         },
-        expedienteSiaf:{
+        expediente_siaf:{
             type:DataTypes.STRING,
             allowNull:false
         },
-        fechaOrdenServicio:{
+        fecha_orden_servicio:{
             type:DataTypes.DATEONLY,
             allowNull:false
         },
-        fileOrdenServicio:{
+        file_orden_servicio:{
             type:DataTypes.STRING,
             defaultValue:''
         },

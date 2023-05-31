@@ -99,8 +99,8 @@ export default function RequerimientoRow(props) {
                     }                  
                   >
                     <ListItemText 
-                      primary={`Detalle Orden Servicio N-${requerimiento?.orden_servicio?.numeroOrdenServicio}`} 
-                      secondary={`fecha ${requerimiento?.orden_servicio?.fechaOrdenServicio}`}
+                      primary={`Detalle Orden Servicio N-${requerimiento?.orden_servicio?.numero_orden_servicio}`} 
+                      secondary={`fecha ${requerimiento?.orden_servicio?.fecha_orden_servicio}`}
                     />
                   </ListItem>
                 </List>
@@ -117,12 +117,12 @@ export default function RequerimientoRow(props) {
                   </TableHead>
                   <TableBody>
                     {requerimiento?.orden_servicio?.detalle_orden_servicios.length>0&&requerimiento?.orden_servicio?.detalle_orden_servicios.map((dos) => (
-                      <TableRow key={dos.idDetalleOrdenServicio}>
+                      <TableRow key={dos.id_detalle_os}>
                         <TableCell component="th" scope="row">
                           {dos.descripcion}
                         </TableCell>
-                        <TableCell>{`S/. ${dos.montoOrdenServicio}`}</TableCell>
-                        <TableCell align="right">{dos.fechaVencimiento}</TableCell>
+                        <TableCell>{`S/. ${dos.monto_orden_servicio}`}</TableCell>
+                        <TableCell align="right">{dos.fecha_vencimiento}</TableCell>
                         <TableCell align="right">
                           {dos.estado}
                         </TableCell>
