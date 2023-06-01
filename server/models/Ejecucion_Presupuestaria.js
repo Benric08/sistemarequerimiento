@@ -14,5 +14,8 @@ module.exports=(dbConnection)=>{
             values:['Certificado','Comprometido','Devengado','Girado'],
             allowNull:false
         }
+    },
+    {
+        timestamps:false
     });
 }

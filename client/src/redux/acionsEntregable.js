@@ -8,7 +8,7 @@ export const addEntregable=(entregable)=>{
       try {
         await axios.post(endpoint, entregable)
         .then(({ data }) => {
-         console.log('vamos a ver data',data);
+         console.log('vamos a ver data deberia ser un array',data);
          return dispatch({
             type: ADD_ENTREGABLE,
             payload: data,

@@ -11,6 +11,8 @@ import Autocomplete from '@mui/material/Autocomplete';
 import Slider from "@mui/material/Slider";
 import {marks} from '../../utils/estadosEntregable';
 import { addEntregable, getEstadoEntregable } from '../../redux/acionsEntregable';
+import ConfirmEjecucionPresupuestaria from '../dialogs/ConfirmEjecucionPresupuestaria';
+import EnvioExitoso from '../dialogs/EnvioExitoso';
 
 const ubicaciones=['Procompite','Mesa de partes','Gerencia de Desarrollo Economico','Administracion','Logistica','Recuersos Humanos','Contabilidad','Tesoreria']
 
@@ -20,8 +22,9 @@ export default function AddEntregable({detalleOrdenServicio}) {
     const getEstado = obtenerEstado.find((estado)=>estado.id_detalle_os===detalleOrdenServicio.id_detalle_os);
     console.log('recuperamos algo o no ',obtenerEstado);
     console.log('recuperamos algo o no 2 ', getEstado?.entregable?.estado_entregables[0]?.valor_estado);
-    
-    
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [open,setOpen] = useState(false);
+    const [ejecucionPresupuestal,setEjecucionPresupuestal]=useState(0)
     const [fecha_entregable,setfecha_entregable] = useState(dayjs(getEstado?.entregable?.estado_entregables[0]?.fecha_entregable)??dayjs(new Date()));
     const [file_entregable, setfile_entregable] = useState(null);
     const [inputs,setInputs] = useState(getEstado?.entregable?.estado_entregables[0]?.observacion??"");
@@ -43,7 +46,8 @@ export default function AddEntregable({detalleOrdenServicio}) {
         formDataEntregable.append('entregable',JSON.stringify(entregable));
         console.log('veamos que hay en el obejto enviad  del from',entregable);
         dispatch(addEntregable(formDataEntregable));
-        
+        dispatch(getEstadoEntregable());
+        setIsSubmitted(true);
     }
     const _handleChange=(event)=>{
         const { value } = event.target;
@@ -62,6 +66,16 @@ export default function AddEntregable({detalleOrdenServicio}) {
         if (typeof newValue === 'number') {
             setSliderUbicacion(newValue);
           }
+        if (newValue === marks[7].value) {
+            setEjecucionPresupuestal(8);
+            setOpen(true);
+            console.log('generar deve');
+        }
+        if (newValue === marks[8].value) {
+            setEjecucionPresupuestal(9);
+            setOpen(true);
+            console.log('generar gira');
+        }
       };
 
     
@@ -69,7 +83,9 @@ export default function AddEntregable({detalleOrdenServicio}) {
         setfile_entregable(event.target.files[0]);
     }
     
-    
+    const handleClose=()=>{
+        setOpen(false);
+    }
     useEffect(()=>{
        
         _handleSlider(getEstado?.entregable?.estado_entregables?.valor_estado)
@@ -77,6 +93,15 @@ export default function AddEntregable({detalleOrdenServicio}) {
     },[])
     return (
         <div>
+            <ConfirmEjecucionPresupuestaria 
+                open={open} 
+                idDetalleOS={detalleOrdenServicio.id_detalle_os}
+                descripcion={detalleOrdenServicio.descripcion}
+                estadoEntregable={ejecucionPresupuestal}
+                onClose={handleClose}
+             
+            />
+
             <form onSubmit={_handleSubmit}> 
                 <Box
                     sx={{
@@ -192,8 +217,11 @@ export default function AddEntregable({detalleOrdenServicio}) {
                     </Box>   
                     
                 
+            
                 
             </form>
+            <EnvioExitoso open={isSubmitted} onClose={()=>setIsSubmitted(false)} />
+
         </div>
     )
 }

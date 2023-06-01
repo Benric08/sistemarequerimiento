@@ -114,7 +114,9 @@ const insertEntregable= async({file_entregable,
         
     } */
 
-    return estadoscreados;
+    const ea = await getEntregableByIdDOS();
+
+    return ea;
     /**Task for doing */
     // cuando estado.level es 8 generar devengado en el orden de servicio
     // cuando estado.level es 9 generar girado en el orden de servicio

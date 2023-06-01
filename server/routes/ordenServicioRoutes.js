@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const routerOrdenServicio = require('express').Router();
 
 const {uploadFileOrdenServicio, insertOrdenServicio} = require('../controllers/ordenServicioController');
+const { addEjecucionPresupuestariaDetalleOS } = require('../controllers/detalleOrdenServicioController');
 
 const jsonParser = bodyParser.json();
 routerOrdenServicio.post('/',uploadFileOrdenServicio.single('file'),async (req,res)=>{
@@ -26,5 +27,15 @@ routerOrdenServicio.post('/',uploadFileOrdenServicio.single('file'),async (req,r
     res.sendStatus(200);
     
 }); */
+
+routerOrdenServicio.post('/detalle_orden_servicio',async(req,res)=>{
+    const detalleOS =req.body;
+    try {
+        const ejecDOS = await addEjecucionPresupuestariaDetalleOS(detalleOS);
+        res.status(200).json(ejecDOS);
+    } catch (error) {
+        res.status(404).json({error:error.message});
+    }
+})
 
 module.exports=routerOrdenServicio;
