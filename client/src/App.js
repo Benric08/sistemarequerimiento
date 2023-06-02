@@ -6,11 +6,15 @@ import RequerimientoContainerMU from './components/containers/RequerimientoConta
 import AddOrdenServicio from './components/forms/AddOrdenServicio';
 import ProveedorContainer from './components/containers/ProveedorContainer';
 import PrincipalMenu from './components/menu/PrincipalMenu';
+import { Call } from '@mui/icons-material';
+import { Callendar } from './components/containers/Callendar';
 function App() {
   return (
-    <div className="App" style={{display:'flex'}}>
+    <div className="App" >
       <PrincipalMenu/>
       <Routes>
+
+        <Route path='/' element={<Callendar/>}/>
         <Route path='/requerimientos' element={<RequerimientoContainerMU/>}/>
         <Route path='/entregable' element={<AddEntregable/>}/>
         <Route path='/ordenservicio' element={<AddOrdenServicio/>}/>
