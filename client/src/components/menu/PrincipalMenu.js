@@ -20,6 +20,15 @@ export default function PrincipalMenu() {
               <ListItemIcon>
                 <EditCalendar />
               </ListItemIcon>
+              <NavLink to='/' style={{textDecoration: 'none' }}><ListItemText primary="Inicio" sx={{color:'white'}}/></NavLink>
+            </ListItemButton>
+          </ListItem>
+          <Divider/>
+          <ListItem >
+            <ListItemButton>
+              <ListItemIcon>
+                <EditCalendar />
+              </ListItemIcon>
               <NavLink to='/requerimientos' style={{textDecoration: 'none' }}><ListItemText primary="Requerimientos" sx={{color:'white'}}/></NavLink>
             </ListItemButton>
           </ListItem>
