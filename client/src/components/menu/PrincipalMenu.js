@@ -7,6 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import AssignmentInd from '@mui/icons-material/AssignmentInd';
 import EditCalendar from '@mui/icons-material/EditCalendar';
+import Home from '@mui/icons-material/Home';
 import {NavLink} from 'react-router-dom'
 import { Divider } from '@mui/material';
 
@@ -18,7 +19,7 @@ export default function PrincipalMenu() {
           <ListItem >
             <ListItemButton>
               <ListItemIcon>
-                <EditCalendar />
+                <Home />
               </ListItemIcon>
               <NavLink to='/' style={{textDecoration: 'none' }}><ListItemText primary="Inicio" sx={{color:'white'}}/></NavLink>
             </ListItemButton>
