@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import validation from '../../utils/validation';
-import { Button, TextField,Box, InputAdornment, MenuItem } from '@mui/material';
+import { Button, TextField,Box, InputAdornment, MenuItem, Snackbar, Alert } from '@mui/material';
 const services = [
   {
     value: 'Servicio',
@@ -12,10 +12,11 @@ const services = [
     label: 'Bien',
   }]
 export default function AddRequerimiento({ requerimiento, onCreate, onUpdate, onClose }) {
-const [inputs,setInputs] = useState({
+  
+  const [inputs,setInputs] = useState({
   descripcion:requerimiento?.descripcion??"",
   detalle:requerimiento?.detalle??"",
-  unidad_medida:requerimiento?.unidad_medida??"",
+  unidad_medida:requerimiento?.unidad_medida??services[0].value,
   cantidad:requerimiento?.cantidad??"",
   precio_unitario:requerimiento?.precio_unitario??"",
 
@@ -29,12 +30,15 @@ const handleChange =(event)=>{
 const handleSubmit =(event)=>{
     event.preventDefault();
     if (requerimiento) {
-        if (onUpdate)
-          onUpdate({
+        if (onUpdate){
+          onUpdate(inputs,requerimiento.id_requerimiento)
+        }
+          /* onUpdate({
             
             ...inputs,
            id_requerimiento: requerimiento.id_requerimiento
-          });
+          }); */
+
   
         if (onClose) onClose();
   
@@ -44,20 +48,14 @@ const handleSubmit =(event)=>{
       if (onCreate) onCreate(inputs);
   
       if (onClose) onClose();
+    
         
 }    
   return (
     <div>
+      
       <form onSubmit={handleSubmit}>
-        {/* <label htmlFor="email">Email:</label>
-        <input type="text" name='email' onChange={handleChange} value={inputs.email} className={inputs.email && "warning"}/>
-        {errors.email && errors.email.map(err=><span>{err}</span>)}
-        <br />
-        <label htmlFor="password">Password:</label>
-        <input type="text" name='password' onChange={handleChange} value={inputs.password} className={inputs.password && "warning"}/>
-        {errors.password && errors.password.map(err=><span>{err}</span>)}
-        <br />
-        <button>Submit</button> */}
+        
         <Box
          
         >

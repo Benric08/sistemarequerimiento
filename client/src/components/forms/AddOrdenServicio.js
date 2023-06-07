@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-//import { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { useState } from 'react'
 
 import { Button, TextField, Box, Divider, Fab,IconButton  } from '@mui/material';
@@ -29,7 +29,7 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
         apellido_materno: proveedor?.apellido_materno ?? "",
         celular: proveedor?.celular ?? "",
     });
-    const [fecha_orden_servicio, setFechaOrdenServicio] = useState(null)
+    const [fecha_orden_servicio, setFechaOrdenServicio] = useState(dayjs(new Date()));
     const [file_orden_servicio, setFileOrdenServicio] = useState(null);
     const cleanInputs=(inputs)=>{
         for (const key in inputs) {
@@ -54,6 +54,9 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
     console.log('vemos que contiene el file', file_orden_servicio);
     const handleChangeFile = (event) => {
         setFileOrdenServicio(event.target.files[0]);
+    }
+    const handleChangeDate = (newValue) => {
+        setFechaOrdenServicio(newValue);
     }
 
     const handleChangeProveedor = (event) => {
@@ -185,11 +188,9 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
                     
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                         <DatePicker
-                            label="Fecha Orden Servicio"
+                            label="Fecha de Notificación"
                             value={fecha_orden_servicio}
-                            onChange={(newValue) => {
-                                setFechaOrdenServicio(newValue);
-                            }}
+                            onChange={handleChangeDate}
                             
                             slotProps={{ textField: { variant: 'outlined' } }}
                         />

@@ -30,7 +30,7 @@ export default function DetalleOrdenServicio({ordenServicio}) {
       setValue(newValue);
     };
 
-    const detalleOrdenServicioOrdenado=ordenServicio?.detalle_orden_servicios.sort(function (a, b) {
+    const detalleOrdenServicioOrdenado = ordenServicio?.detalle_orden_servicios.sort(function (a, b) {
      return a.id_detalle_os-b.id_detalle_os;
     });
 

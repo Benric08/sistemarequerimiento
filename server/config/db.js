@@ -1,4 +1,5 @@
 require('dotenv').config();
+const {DB_HOST,DB_PASSWORD,DB_DATABASE_NAME,DB_USER_NAME} = process.env;
 const {Sequelize, DataTypes} = require('sequelize');
 const requerimientoModel = require('../models/Requerimiento');
 const ordenServicioModel = require('../models/Orden_Servicio');
@@ -9,8 +10,8 @@ const detalleOSEjecucionPresupuestariaModel = require('../models/Detalleos_Ejecu
 const entregableModel = require('../models/Entregable');
 const estadoEntregableModel = require('../models/Estado_Entregable');
 const historialEntregableModel = require('../models/Historial_Entregable');
-const ordenServicioEjecucionPresupuestariaModel = require('../models/OrdenServicio_EjecucionPresupuestaria')
-const {DB_HOST,DB_PASSWORD,DB_DATABASE_NAME,DB_USER_NAME} = process.env;
+const ordenServicioEjecucionPresupuestariaModel = require('../models/OrdenServicio_EjecucionPresupuestaria');
+const estadoRequerimientoModel = require('../models/Estado_Requerimiento');
 const dbConnection = new Sequelize(`postgres://${DB_USER_NAME}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE_NAME}`,{logging:true});
 
 requerimientoModel(dbConnection); 
@@ -23,6 +24,8 @@ entregableModel(dbConnection);
 estadoEntregableModel(dbConnection);
 historialEntregableModel(dbConnection);
 ordenServicioEjecucionPresupuestariaModel(dbConnection); 
+estadoRequerimientoModel(dbConnection);
+
 const {requerimiento,
     orden_servicio,
     proveedor,
@@ -32,7 +35,8 @@ const {requerimiento,
     entregable,
     estado_entregable,
     historial_entregable,
-    orden_servicio_ejecucion_presupuestaria
+    orden_servicio_ejecucion_presupuestaria,
+    estado_requerimiento,
 } = dbConnection.models; 
 
 //relations  between requerimeinto and Orden Servicio
@@ -120,6 +124,19 @@ entregable.hasMany(estado_entregable,{
 estado_entregable.belongsTo(entregable,{
     foreignKey:{
             name:"id_entregable",
+            type:DataTypes.INTEGER,
+            allowNull:false}
+});
+//requerimiento --- Estado requerimiento
+requerimiento.hasMany(estado_requerimiento,{
+    foreignKey:{
+            name:"id_requerimiento",
+            type:DataTypes.INTEGER,
+            allowNull:false}
+});
+estado_requerimiento.belongsTo(requerimiento,{
+    foreignKey:{
+            name:"id_requerimiento",
             type:DataTypes.INTEGER,
             allowNull:false}
 });

@@ -1,20 +1,16 @@
 import React, { useEffect,useState } from 'react'
 import dayjs from 'dayjs';
-import axios from 'axios';
-import { Button, TextField, Box, Divider, Fab,IconButton, FormGroup, FormControlLabel, Switch  } from '@mui/material';
-import { SaveOutlined as SaveIcon,Add as AddIcon ,CenterFocusStrong,PersonSearch as SearchIcon} from '@mui/icons-material';
+import { TextField, Box, Divider, Fab,} from '@mui/material';
+import { SaveOutlined as SaveIcon,Add as AddIcon } from '@mui/icons-material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useDispatch, useSelector } from 'react-redux';
-import Autocomplete from '@mui/material/Autocomplete';
 import Slider from "@mui/material/Slider";
 import {marks} from '../../utils/estadosEntregable';
-import { addEntregable, getEstadoEntregable } from '../../redux/acionsEntregable';
+import { addEntregable } from '../../redux/acionsEntregable';
 import ConfirmEjecucionPresupuestaria from '../dialogs/ConfirmEjecucionPresupuestaria';
 import EnvioExitoso from '../dialogs/EnvioExitoso';
-
-const ubicaciones=['Procompite','Mesa de partes','Gerencia de Desarrollo Economico','Administracion','Logistica','Recuersos Humanos','Contabilidad','Tesoreria']
 
 export default function AddEntregable({detalleOrdenServicio}) {
     console.log('Mira quien soy en el formulario',detalleOrdenServicio);
@@ -38,7 +34,7 @@ export default function AddEntregable({detalleOrdenServicio}) {
         formDataEntregable.append('file', file_entregable);
         const entregable= {
             id_detalle_os:detalleOrdenServicio.id_detalle_os,
-            fecha_entregable:`${fecha_entregable?.$y}-${fecha_entregable?.$M+1<10?"0"+(fecha_entregable?.$M+1):fecha_entregable?.$M+1}-${fecha_entregable?.$D<10?"0"+fecha_entregable?.$D:fecha_entregable?.$D}`,
+            fecha_entregable:fecha_entregable.format('YYYY-MM-DD'),
             observacion:inputs,
             file_entregable:'',
             ubicacion:sliderUbicacion
@@ -46,7 +42,7 @@ export default function AddEntregable({detalleOrdenServicio}) {
         formDataEntregable.append('entregable',JSON.stringify(entregable));
         console.log('veamos que hay en el obejto enviad  del from',entregable);
         dispatch(addEntregable(formDataEntregable));
-        dispatch(getEstadoEntregable());
+        //dispatch(getEstadoEntregable());
         setIsSubmitted(true);
     }
     const _handleChange=(event)=>{

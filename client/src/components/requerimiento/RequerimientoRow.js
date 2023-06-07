@@ -14,18 +14,22 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Edit as EditIcon, Close as CloseIcon, PictureAsPdf as PdfIcon } from "@mui/icons-material";
 import { blueGrey } from "@mui/material/colors";
+import ConfirmDelete from "../dialogs/ConfirmDelete";
 export default function RequerimientoRow(props) {
-    const { requerimiento,onEdit,onEditOrden,onAddOrdenServicio,onDelete} = props;
+    const { requerimiento,onEdit,onEditOrden,onAddOrdenServicio,onDelete,onDialogFollowClose,onDialogFollowOpen} = props;
     
     const [open, setOpen] = useState(false);
-    const [enableButtonOS, setEnableButtonOS] = useState(false);
+    const [openDelete, setOpenDelete] = useState(false);
+    const [enableButtons, setEnableButtons] = useState(false);
     const [hiddenIcon, setHiddenIcon] = useState(false);
     
     const _handleClickEdit = () => {
         if (onEdit) onEdit(requerimiento);
     };
     const _handleClickDelete = () => {
-        if (onDelete) onDelete(requerimiento)
+        setOpenDelete(true)
+
+        /* if (onDelete) onDelete(requerimiento.id_requerimiento) */
     }
     const _handleClickAddOrdenServicio =()=>{
         if(onAddOrdenServicio) onAddOrdenServicio(requerimiento);
@@ -34,17 +38,30 @@ export default function RequerimientoRow(props) {
     const _handleOrdenClickEdit=()=>{
         if (onEditOrden) onEditOrden(requerimiento);
     }
+    const handleCloseDelete=(res)=>{
+        console.log('contenido del fomrdelete',res);
+        if (res==='confirmDelete') {
+          if (onDelete) onDelete(requerimiento.id_requerimiento)
+        } 
+          setOpenDelete(false);
+        console.log('muestrame que valor tiene opendelete',openDelete);
+           
+    }
+    const handleClickOpenFollowReq=()=>{
+      if(onDialogFollowOpen) onDialogFollowOpen(true,requerimiento);
+    }
     useEffect(()=>{
       if(requerimiento?.orden_servicio){
         setHiddenIcon(true)
-        setEnableButtonOS(true)
+        setEnableButtons(true)
       }
       
     },[]);
 
     return (
       <React.Fragment >
-        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+        <ConfirmDelete open={openDelete} onClose={handleCloseDelete} />
+        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }} hover>
           <TableCell>
             {
               hiddenIcon && <IconButton
@@ -57,26 +74,33 @@ export default function RequerimientoRow(props) {
                             </IconButton>
             }
           </TableCell>
-          <TableCell component="th" scope="row">
-            {requerimiento.descripcion}
-          </TableCell>
+          {
+            hiddenIcon ? 
+            <TableCell component="th" scope="row"  >
+              {requerimiento.descripcion}
+            </TableCell>:
+            <TableCell component="th" scope="row" onClick={handleClickOpenFollowReq} >
+              {requerimiento.descripcion}
+            </TableCell>
+          }
           <TableCell align="right">{requerimiento.detalle}</TableCell>
           <TableCell align="right">{requerimiento.cantidad}</TableCell>
           <TableCell align="right">{requerimiento.precio_unitario}</TableCell>
           <TableCell align="right">{requerimiento.total}</TableCell>
           <TableCell align="right">
-            <Button onClick={_handleClickAddOrdenServicio} disabled={enableButtonOS}>
+            <Button onClick={_handleClickAddOrdenServicio} disabled={enableButtons}>
                 OS
             </Button>
           </TableCell>
           <TableCell align="right">
-            <IconButton size="small" onClick={_handleClickEdit}>
+            <IconButton size="small" onClick={_handleClickEdit} disabled={enableButtons}>
                 <EditIcon fontSize="small" />
             </IconButton>
           </TableCell>
           <TableCell align="right">
-            <IconButton size="small" onClick={_handleClickDelete}>
+            <IconButton size="small" onClick={_handleClickDelete} disabled={enableButtons}>
                 <CloseIcon fontSize="small" />
+                
             </IconButton>
           </TableCell>
         </TableRow>
@@ -99,8 +123,8 @@ export default function RequerimientoRow(props) {
                     }                  
                   >
                     <ListItemText 
-                      primary={`Detalle Orden Servicio N-${requerimiento?.orden_servicio?.numero_orden_servicio}`} 
-                      secondary={`fecha ${requerimiento?.orden_servicio?.fecha_orden_servicio}`}
+                      primary={`Detalle Orden Servicio N - ${requerimiento?.orden_servicio?.numero_orden_servicio}`} 
+                      secondary={`Fecha de Notificación: ${requerimiento?.orden_servicio?.fecha_orden_servicio}`}
                     />
                   </ListItem>
                 </List>
@@ -109,7 +133,7 @@ export default function RequerimientoRow(props) {
                 <Table size="small" aria-label="purchases">
                   <TableHead >
                     <TableRow >
-                      <TableCell sx={{ fontWeight: 'bold' }}>Descripcion</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold' }}>Descripción</TableCell>
                       <TableCell sx={{ fontWeight: 'bold' }}>{`Total (S./)`}</TableCell>
                       <TableCell align="right" sx={{ fontWeight: 'bold' }}>Fecha de Vencimiento</TableCell>
                       <TableCell align="right" sx={{ fontWeight: 'bold' }}>Estado</TableCell>
@@ -117,7 +141,7 @@ export default function RequerimientoRow(props) {
                   </TableHead>
                   <TableBody>
                     {requerimiento?.orden_servicio?.detalle_orden_servicios.length>0&&requerimiento?.orden_servicio?.detalle_orden_servicios.map((dos) => (
-                      <TableRow key={dos.id_detalle_os}>
+                      <TableRow key={dos.id_detalle_os} >
                         <TableCell component="th" scope="row">
                           {dos.descripcion}
                         </TableCell>

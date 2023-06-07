@@ -17,6 +17,7 @@ function RenderEventContent(eventInfo) {
       <Chip color='primary' label={`${eventInfo.timeText} ${eventInfo.event.title}`}>
         
       </Chip>
+      
     )
 }
 

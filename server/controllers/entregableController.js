@@ -1,7 +1,7 @@
 const {entregable,estado_entregable,historial_entregable,detalle_orden_servicio,orden_servicio,dbConnection} = require('../config/db');
 const multer = require('multer');
 const { dirname, extname, join } = require('path');
-const marks = require('../utils/entregableEstados');
+const {marks} = require('../utils/estadosEntregable');
 const { QueryTypes } = require('sequelize');
 
 const CURRENT_DIR = dirname(require.resolve('./ordenServicioController.js'));

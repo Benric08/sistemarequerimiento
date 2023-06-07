@@ -1,5 +1,5 @@
 const {DataTypes} = require('sequelize');
-const marks = require('../utils/entregableEstados');
+const {marks} = require('../utils/estadosEntregable');
 const ubicaciones = marks.map((mark)=>mark.label);
 const estados = marks.map((mark)=>mark.level);
 module.exports=(dbConnection)=>{

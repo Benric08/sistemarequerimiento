@@ -8,18 +8,20 @@ import ProveedorContainer from './components/containers/ProveedorContainer';
 import PrincipalMenu from './components/menu/PrincipalMenu';
 import { Call } from '@mui/icons-material';
 import { Callendar } from './components/containers/Callendar';
+import { Box } from '@mui/material';
 function App() {
   return (
     <div className="App" >
       <PrincipalMenu/>
-      <Routes>
-
-        <Route path='/' element={<Callendar/>}/>
-        <Route path='/requerimientos' element={<RequerimientoContainerMU/>}/>
-        <Route path='/entregable' element={<AddEntregable/>}/>
-        <Route path='/ordenservicio' element={<AddOrdenServicio/>}/>
-        <Route path='/proveedores' element={<ProveedorContainer/>}/>
-      </Routes>
+      <Box sx={{padding:'3%'}}>
+        <Routes>
+          <Route path='/' element={<Callendar/>}/>
+          <Route path='/requerimientos' element={<RequerimientoContainerMU/>}/>
+          <Route path='/entregable' element={<AddEntregable/>}/>
+          <Route path='/ordenservicio' element={<AddOrdenServicio/>}/>
+          <Route path='/proveedores' element={<ProveedorContainer/>}/>
+        </Routes>
+      </Box>
     </div>
   );
 }

@@ -1,4 +1,5 @@
-import {ADD_REQUERIMIENTO,REMOVE_REQUERIMIENTO,UPDATE_REQUERIMIENTO,ORDER,FILTER, GETALL_REQUERIMIENTOS} from './action-types';
+import {ADD_REQUERIMIENTO,REMOVE_REQUERIMIENTO,UPDATE_REQUERIMIENTO,
+   ORDER,FILTER, GETALL_REQUERIMIENTOS, ADD_ESTADO_REQUERIMIENTO, GET_ESTADO_REQUERIMIENTO} from './action-types';
 
 import axios from "axios";
 
@@ -19,39 +20,41 @@ export const addReq=(requerimiento)=>{
       }
    };
 }
-export const updateReq=(requerimiento)=>{
-   console.log(`requerimineto que recibe el update del front ${requerimiento}`);
-    const {id_requerimiento} = requerimiento;
+export const updateReq=(requerimiento,id_requerimiento)=>{
+   console.log(`requerimineto que recibe el update del front`, requerimiento);
+   console.log(`id que recibe el update del front`, id_requerimiento);
+   
    return async (dispatch) => {
-      await axios.put(endpoint+"/"+id_requerimiento, requerimiento)
-      .then(async( {data} ) => {
-         console.log(`vemos que devuelve data del put  de update` , data);
-         let reqUpdated={};
-         if(data[0]) {
-            reqUpdated = await axios.get(endpoint+"/"+id_requerimiento)
-            .then(({data})=>data);
-            
-         }
-         return dispatch({
-            type: UPDATE_REQUERIMIENTO,
-            payload: reqUpdated,
-      }); 
-      });
+      try {
+         await axios.put(endpoint+"/"+id_requerimiento, requerimiento)
+         .then(async( {data} ) => {
+            return dispatch({
+               type: UPDATE_REQUERIMIENTO,
+               payload: data,
+            }); 
+         });
+      } catch (error) {
+         console.log(error.message);
+      }
    };
 }
 export const getAllRequirements=()=>{
    console.log(`Estoy dentro del todosaction`);
    return async (dispatch) =>{
-      await axios.get(endpoint)
-      .then(({data})=>{
-         return dispatch({
-            type: GETALL_REQUERIMIENTOS,
-            payload: data
+      try {
+         await axios.get(endpoint)
+         .then(({data})=>{
+            return dispatch({
+               type: GETALL_REQUERIMIENTOS,
+               payload: data
+            });
          })
-      })
+      } catch (error) {
+         console.log(error.message);
+      }
    }
 }
-export const removeReq=(id)=>{
+export const deleteReque=(id)=>{
     
    return async (dispatch) => {
       await axios.delete(endpoint+"/"+id)
@@ -62,4 +65,30 @@ export const removeReq=(id)=>{
       });
       });
    };
+}
+
+export const addEstadoRequerimiento = (estadoRequerimiento) =>{
+   return async (dispatch) =>{
+      await axios.post(`${endpoint}/detalle/estado`,estadoRequerimiento)
+      .then(({data})=>{
+         return dispatch({
+            type:ADD_ESTADO_REQUERIMIENTO,
+            payload: data
+
+         })
+      })
+   }
+}
+
+export const getEstadoEntregable =  ()=>{
+   return async (dispatch)=>{
+      await axios.get(`${endpoint}/detalle/estado`)
+      .then(({data})=>{return dispatch(
+         {
+            type: GET_ESTADO_REQUERIMIENTO,
+            payload: data
+         }
+      )});
+
+   }
 }

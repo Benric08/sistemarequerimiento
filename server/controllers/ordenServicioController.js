@@ -123,10 +123,15 @@ const insertOrdenServicio = async(formordenServicio)=>{
     arrDetalles.push(await detalle_orden_servicio.create(detalleordenServicio));
     
   }
+
+
   return {
-    ...newOrdenServicio,
-    proveedor:newProveedor,
-    detalleOrdenServiciop:arrDetalles
+    orden_servicio:{
+      ...newOrdenServicio.dataValues,
+      detalle_orden_servicios:arrDetalles
+    },
+    id_requerimiento
+    
 
   }
   //return newOrdenServicio;
