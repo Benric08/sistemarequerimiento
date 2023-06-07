@@ -1,5 +1,5 @@
 require('dotenv').config();
-const {DB_HOST,DB_PASSWORD,DB_DATABASE_NAME,DB_USER_NAME} = process.env;
+const {DB_HOST,DB_PASSWORD,DB_DATABASE_NAME,DB_USER_NAME,DB_PORT} = process.env;
 const {Sequelize, DataTypes} = require('sequelize');
 const requerimientoModel = require('../models/Requerimiento');
 const ordenServicioModel = require('../models/Orden_Servicio');
@@ -12,7 +12,7 @@ const estadoEntregableModel = require('../models/Estado_Entregable');
 const historialEntregableModel = require('../models/Historial_Entregable');
 const ordenServicioEjecucionPresupuestariaModel = require('../models/OrdenServicio_EjecucionPresupuestaria');
 const estadoRequerimientoModel = require('../models/Estado_Requerimiento');
-const dbConnection = new Sequelize(`postgres://${DB_USER_NAME}:${DB_PASSWORD}@${DB_HOST}/${DB_DATABASE_NAME}`,{logging:true});
+const dbConnection = new Sequelize(`postgres://${DB_USER_NAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE_NAME}`,{logging:true});
 
 requerimientoModel(dbConnection); 
 ordenServicioModel(dbConnection);
