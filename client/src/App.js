@@ -9,6 +9,9 @@ import PrincipalMenu from './components/menu/PrincipalMenu';
 import { Call } from '@mui/icons-material';
 import { Callendar } from './components/containers/Callendar';
 import { Box } from '@mui/material';
+import axios from 'axios';
+axios.defaults.baseURL="http://localhost:3001/"
+
 function App() {
   return (
     <div className="App" >

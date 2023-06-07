@@ -13,7 +13,7 @@ const ConfirmEjecucionPresupuestaria = ({open,idDetalleOS,descripcion,estadoEntr
 
     const handleConfirm = async () =>{
        
-        await axios.post(`http://localhost:3001/orden_servicio/detalle_orden_servicio`,{
+        await axios.post(`/orden_servicio/detalle_orden_servicio`,{
             id_detalle_os:idDetalleOS,
             level_ep:estadoEntregable===8?3:4
         });

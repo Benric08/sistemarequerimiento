@@ -3,7 +3,7 @@ import {ADD_REQUERIMIENTO,REMOVE_REQUERIMIENTO,UPDATE_REQUERIMIENTO,
 
 import axios from "axios";
 
-const endpoint = 'http://localhost:3001/requerimiento';
+const endpoint = 'requerimiento';
 export const addReq=(requerimiento)=>{
    return async (dispatch) => {
       try {

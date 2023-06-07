@@ -2,7 +2,7 @@ import {ADD_ORDEN_SERVICIO} from './action-types';
 
 import axios from "axios";
 
-const endpoint = 'http://localhost:3001/orden_servicio';
+const endpoint = 'orden_servicio';
 export const addOrdenServicio=(ordenServicio)=>{
    return async (dispatch) => {
       try {

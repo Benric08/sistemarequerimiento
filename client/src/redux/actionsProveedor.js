@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {GET_ALL_PROVEEDORES, GET_ALL_PROVEEDORES_ORDENS} from './action-types';
 
-const endpoint = 'http://localhost:3001/proveedor'
+const endpoint = 'proveedor'
 export const getAllProveedores=()=>{
     return async (dispatch)=>{
         await axios.get(endpoint)

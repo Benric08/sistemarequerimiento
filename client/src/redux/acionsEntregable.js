@@ -2,7 +2,7 @@ import {ADD_ENTREGABLE,GET_ESTADO_ALL} from './action-types';
 
 import axios from "axios";
 
-const endpoint = 'http://localhost:3001/entregable';
+const endpoint = 'entregable';
 export const addEntregable=(entregable)=>{
    return async (dispatch) => {
       try {
