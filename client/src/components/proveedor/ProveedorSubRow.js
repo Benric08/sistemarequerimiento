@@ -21,9 +21,7 @@ export default function ProveedorSubRow({ordenServicio,proveedorNombreCompleto})
     console.log('que orden de servicio envio',ordenServicioSelected);
   }
 
-  const _handleClickSave=()=>{
-
-  }
+  
 
   
   return (
@@ -57,9 +55,7 @@ export default function ProveedorSubRow({ordenServicio,proveedorNombreCompleto})
                 <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                   Detalle Orden De Servicio
                 </Typography>
-                <Button autoFocus color="inherit" onClick={_handleClickSave}>
-                  Guardar
-                </Button>
+                
               </Toolbar>
             </AppBar>
             <DialogContent
