@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import dayjs from 'dayjs';
 import { useState } from 'react'
-
+import { Document, Page } from 'react-pdf';
 import { Button, TextField, Box, Divider, Fab,IconButton  } from '@mui/material';
 import { Add as AddIcon ,PersonSearch as SearchIcon} from '@mui/icons-material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -21,6 +21,7 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
         
 
     });
+    const [numPages, setNumPages] = useState(null);
     console.log('Proveedor',proveedores);
     const [inputsProveedor, setInputsProveedor] = useState({
         dni: proveedor?.dni ?? "",
@@ -115,6 +116,10 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
             (proveedor)=>proveedor.dni===inputsProveedor.dni):null;
         if(proveedorEncontrado) setInputsProveedor(proveedorEncontrado);
     }
+
+    const onDocumentLoadSuccess = ({ numPages }) => {
+        setNumPages(numPages);
+      };
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -199,11 +204,13 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
                     <label htmlFor='inputFileOrdenServicio'>
 
                         <input
+                            accept="application/pdf"
                             type='file'
                             id='inputFileOrdenServicio'
                             style={{ display: "none" }}
                             onChange={handleChangeFile}
                         />
+                        
                         <Fab
                             color="secondary"
                             size="small"
@@ -214,6 +221,16 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
                             <AddIcon /> {file_orden_servicio? 'Archivo Cargado' : 'Seleccionar archivo'}
                         </Fab>
                     </label>
+
+                    {file_orden_servicio && (
+                        <div>
+                        <Document file={file_orden_servicio} onLoadSuccess={onDocumentLoadSuccess}>
+                            {Array.from(new Array(numPages), (el, index) => (
+                            <Page key={`${index + 1}`} pageNumber={index + 1} />
+                            ))}
+                        </Document>
+                        </div>
+                    )}
                 </Box>
 
                 <Button

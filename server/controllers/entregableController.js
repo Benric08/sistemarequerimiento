@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
             const fileExtension = extname(file.originalname);
             const fileName = file.originalname.split(fileExtension)[0];
 
-            cb(null, `${Date.now()}-OS-${fileName}${fileExtension}`);
+            cb(null, `OS-${Date.now()}${fileExtension}`);
     },
   });
 
@@ -27,7 +27,7 @@ const uploadfile_entregable = multer({
         else cb(new Error(`Only ${MIMETYPES.join(' ')} mimetypes are allowed`));
     },
     limits:{
-        fieldSize:2000000,
+        fieldSize:20000000,
     }
 });
 

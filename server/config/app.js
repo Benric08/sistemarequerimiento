@@ -8,6 +8,7 @@ const routerProveedor = require('../routes/proveedorRoutes');
 const routerEntregable = require('../routes/entregableRoutes');
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use('/requerimiento',requerimientoRoutes);
 app.use('/orden_servicio',routerRequerimientoOrden);
 app.use('/orden_servicio',routerOrdenServicio);

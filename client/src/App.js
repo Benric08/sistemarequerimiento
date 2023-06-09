@@ -6,11 +6,12 @@ import RequerimientoContainerMU from './components/containers/RequerimientoConta
 import AddOrdenServicio from './components/forms/AddOrdenServicio';
 import ProveedorContainer from './components/containers/ProveedorContainer';
 import PrincipalMenu from './components/menu/PrincipalMenu';
-import { Call } from '@mui/icons-material';
+import Fileview from './components/forms/Fileview';
 import { Callendar } from './components/containers/Callendar';
 import { Box } from '@mui/material';
 import axios from 'axios';
 axios.defaults.baseURL="https://sistemarequerimiento-production.up.railway.app/"
+//axios.defaults.baseURL="http://localhost:3001/"
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/entregable' element={<AddEntregable/>}/>
           <Route path='/ordenservicio' element={<AddOrdenServicio/>}/>
           <Route path='/proveedores' element={<ProveedorContainer/>}/>
+          <Route path='/testfile' element={<Fileview/>}/>
         </Routes>
       </Box>
     </div>
