@@ -25,7 +25,7 @@ function RenderEventContent(eventInfo) {
 export function Callendar() {
     const [proveedores,setProveedores] = useState(null);
     const getProveedores = async () => { 
-        const response= await axios.get(`http://localhost:3001/proveedor/detalle_entregable`);
+        const response= await axios.get(`proveedor/detalle_entregable`);
         setProveedores(response.data);
     }
    console.log(proveedores);
