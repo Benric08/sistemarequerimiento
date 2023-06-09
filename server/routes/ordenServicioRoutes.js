@@ -7,9 +7,10 @@ const { addEjecucionPresupuestariaDetalleOS } = require('../controllers/detalleO
 const jsonParser = bodyParser.json();
 routerOrdenServicio.post('/',uploadFileOrdenServicio.single('file'),async (req,res)=>{
     const formOsBody=JSON.parse(req.body.orden);
+    console.log('vemos donde se guardo',req.file);
     if(req.file) {
-        const file=req.file.path;
-        formOsBody.file_orden_servicio=file;
+        const fileName=req.file.filename;
+        formOsBody.file_orden_servicio=fileName;
     }
     console.log('body del form',formOsBody);
     //console.log('espero sea el file',file);
@@ -37,5 +38,6 @@ routerOrdenServicio.post('/detalle_orden_servicio',async(req,res)=>{
         res.status(404).json({error:error.message});
     }
 })
+
 
 module.exports=routerOrdenServicio;
