@@ -49,7 +49,7 @@ export default function DetalleOrdenServicio({ordenServicio}) {
       >
         <Tabs
           orientation="vertical"
-          variant='scrollable'
+          
           value={value}
           onChange={_handleChangeTabs}
           aria-label="Vertical tabs example"
