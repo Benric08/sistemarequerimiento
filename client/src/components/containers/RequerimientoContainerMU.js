@@ -12,13 +12,16 @@ import { addOrdenServicio } from '../../redux/actionsOrdenServicio';
 import { getAllRequirementsDetalle} from '../../redux/actionsRequerimientoDetalleOrden';
 import { getAllProveedores } from '../../redux/actionsProveedor';
 import FollowReq from '../dialogs/FollowReq';
-
+import axios from 'axios';
+import PdfViewer from '../dialogs/PdfViewer';
 export default  function RequerimientoContainerMU() {
     //const requerimientos = useSelector((state)=>state.allRequerimientos);
     
     const dispatch=useDispatch();
     const requerimientos = useSelector((state)=>state.allRequerimientosDetalle);
+    const [nameFile,setNameFile] = useState('');
     const [isOpenDialogFollowReq,setIsOpenDialogFollowReq] = useState(false);
+    const [isOpenDialogPdfViewer,setIsOpenDialogPdfViewer] = useState(false);
     const [isLoading,setIsLoading] = useState(true);
     const [isSubmited,setIsSubmited] = useState(false);
     console.log('soy el papa de todos traigo todos los reque',requerimientos);
@@ -85,9 +88,20 @@ export default  function RequerimientoContainerMU() {
     const _handleCloseDialogFollowReq = () =>{
       setIsOpenDialogFollowReq(false)
     }
+    const _handleCloseDialogPdfViewer = () =>{
+      setIsOpenDialogPdfViewer(false)
+    }
     const _handleOpenDialogFollowReq = (estado,requerimiento) =>{
       setIsOpenDialogFollowReq(estado)
       setRequerimientoSelected(requerimiento)
+    }
+
+    const _handleShowPDF= (namefile)=>{
+      console.log('nombre del archivo',namefile);
+      
+      setNameFile(`ordenservicio/pdf/${namefile}`);
+      setIsOpenDialogPdfViewer(true);
+      
     }
 
 
@@ -139,6 +153,7 @@ export default  function RequerimientoContainerMU() {
                           onDelete={_handleClickDeleteRequerimientoElement}
                           onDialogFollowClose={_handleCloseDialogFollowReq}
                           onDialogFollowOpen={_handleOpenDialogFollowReq}
+                          onShowPDF={_handleShowPDF}
                       />
                   ))}
               </TableBody>
@@ -184,6 +199,7 @@ export default  function RequerimientoContainerMU() {
               </DialogContent>
           </Dialog>
           <FollowReq open={isOpenDialogFollowReq} onClose={_handleCloseDialogFollowReq} requerimiento={requerimientoSelected}/>
+          <PdfViewer openDialog={isOpenDialogPdfViewer} onClose={_handleCloseDialogPdfViewer} namefile={nameFile}/>
         </div>
       );
 }

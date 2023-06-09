@@ -16,8 +16,8 @@ import { Edit as EditIcon, Close as CloseIcon, PictureAsPdf as PdfIcon } from "@
 import { blueGrey } from "@mui/material/colors";
 import ConfirmDelete from "../dialogs/ConfirmDelete";
 export default function RequerimientoRow(props) {
-    const { requerimiento,onEdit,onEditOrden,onAddOrdenServicio,onDelete,onDialogFollowClose,onDialogFollowOpen} = props;
-    
+    const { requerimiento,onEdit,onEditOrden,onAddOrdenServicio,onDelete,onDialogFollowClose,onDialogFollowOpen,onShowPDF} = props;
+    // uselocator para traer todos las ordens por id y nombre de archivo 
     const [open, setOpen] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
     const [enableButtons, setEnableButtons] = useState(false);
@@ -34,7 +34,14 @@ export default function RequerimientoRow(props) {
     const _handleClickAddOrdenServicio =()=>{
         if(onAddOrdenServicio) onAddOrdenServicio(requerimiento);
     }
-    const _handleShowPdfUploaded=()=>{}
+    const _handleShowPdfUploaded=()=>{
+      // enviar id de la orden de servicio requerimiento.orden_servicio.id_orden_servicio
+      //buscar en el use selector por id y obtener el nombre del archivo
+      console.log('veamos que nos trae requerimiento',requerimiento);
+      const namefile = requerimiento?.orden_servicio?.file_orden_servicio;
+      if(onShowPDF) onShowPDF(namefile);
+
+    }
     const _handleOrdenClickEdit=()=>{
         if (onEditOrden) onEditOrden(requerimiento);
     }
@@ -55,6 +62,7 @@ export default function RequerimientoRow(props) {
         setHiddenIcon(true)
         setEnableButtons(true)
       }
+      //dispatch para obtener todos los ordenes de servicio por id y nombre de archivo
       
     },[]);
 

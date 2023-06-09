@@ -222,15 +222,16 @@ export default function AddOrdenServicio({ requerimiento,ordenServicio, proveedo
                         </Fab>
                     </label>
 
-                    {file_orden_servicio && (
-                        <div>
+                    {file_orden_servicio &&
+                    
+                        
                         <Document file={file_orden_servicio} onLoadSuccess={onDocumentLoadSuccess}>
-                            {Array.from(new Array(numPages), (el, index) => (
-                            <Page key={`${index + 1}`} pageNumber={index + 1} />
-                            ))}
+                           
+                            <Page  pageNumber={1} scale={0.2}/>
+                           
                         </Document>
-                        </div>
-                    )}
+                        
+                    }
                 </Box>
 
                 <Button
