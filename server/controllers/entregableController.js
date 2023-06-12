@@ -1,4 +1,7 @@
-const {entregable,estado_entregable,historial_entregable,detalle_orden_servicio,orden_servicio,dbConnection} = require('../config/db');
+const {entregable,estado_entregable,historial_entregable,
+    detalleos_ejecucion_presupuestaria,
+    detalle_orden_servicio,orden_servicio,
+    ejecucion_presupuestaria,dbConnection} = require('../config/db');
 const multer = require('multer');
 const { dirname, extname, join } = require('path');
 const {marks} = require('../utils/estadosEntregable');
@@ -146,15 +149,22 @@ const getEntregableByIdDOS = async ()=>{
         /* where:{
             id_detalle_os : id_detalle_os
         }, */
-        include:[{
+        
+        include:
+            [{model:ejecucion_presupuestaria,
+                order: [['createdAt', 'DESC']],
+                },
+                {
             model:entregable,
             include:[{
                 model:estado_entregable,
                 order: [['createdAt', 'DESC']],
                 limit: 1
-            }] 
+            },
+            ] 
         }]
       });
+    
     return entregableR;
 }
 /* const getEntregableByIdDOS = async (id_detalle_os)=>{

@@ -10,5 +10,5 @@ module.exports=(dbConnection)=>{
             type:DataTypes.DATEONLY,
             allowNull:false
         }
-    },{timestamps:false});
+    });
 }

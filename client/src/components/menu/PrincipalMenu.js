@@ -8,10 +8,17 @@ import ListItemText from '@mui/material/ListItemText';
 import AssignmentInd from '@mui/icons-material/AssignmentInd';
 import EditCalendar from '@mui/icons-material/EditCalendar';
 import Home from '@mui/icons-material/Home';
-import {NavLink} from 'react-router-dom'
+import {NavLink, useLocation} from 'react-router-dom'
 import { Divider } from '@mui/material';
 
 export default function PrincipalMenu() {
+  const location = useLocation(); // esto permitirá verificar la ruta actual
+  const isLoginPage = location.pathname === '/login'; // evalúa si es la ruta de login
+
+  // si la ruta actual es de login, retornamos null para evitar que se muestre la barra de navegación
+  if (isLoginPage) {
+    return null;
+  }
   return (
     <Box sx={{ width: '100%', maxWidth: 300,backgroundColor: 'primary.light' }}>
       <nav aria-label="main mailbox folders">

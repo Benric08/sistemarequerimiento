@@ -12,7 +12,8 @@ const estadoEntregableModel = require('../models/Estado_Entregable');
 const historialEntregableModel = require('../models/Historial_Entregable');
 const ordenServicioEjecucionPresupuestariaModel = require('../models/OrdenServicio_EjecucionPresupuestaria');
 const estadoRequerimientoModel = require('../models/Estado_Requerimiento');
-const dbConnection = new Sequelize(`postgres://${DB_USER_NAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE_NAME}`,{logging:true});
+const usuarioModel = require('../models/Usuario');
+const dbConnection = new Sequelize(`postgres://${DB_USER_NAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE_NAME}`,{logging:false});
 
 requerimientoModel(dbConnection); 
 ordenServicioModel(dbConnection);
@@ -25,6 +26,8 @@ estadoEntregableModel(dbConnection);
 historialEntregableModel(dbConnection);
 ordenServicioEjecucionPresupuestariaModel(dbConnection); 
 estadoRequerimientoModel(dbConnection);
+usuarioModel(dbConnection);
+
 
 const {requerimiento,
     orden_servicio,
@@ -37,6 +40,7 @@ const {requerimiento,
     historial_entregable,
     orden_servicio_ejecucion_presupuestaria,
     estado_requerimiento,
+    usuario,
 } = dbConnection.models; 
 
 //relations  between requerimeinto and Orden Servicio
@@ -91,8 +95,8 @@ detalle_orden_servicio.belongsTo(orden_servicio,{
 //relation between detalle orden sevcio and ejecucion presupuestal
 
 detalle_orden_servicio.belongsToMany(ejecucion_presupuestaria,{
-    through: detalleos_ejecucion_presupuestaria,
-    uniqueKey:'id_detalleos_ejecucion'
+    through: detalleos_ejecucion_presupuestaria
+    
 });
 ejecucion_presupuestaria.belongsToMany(detalle_orden_servicio,{
     through: detalleos_ejecucion_presupuestaria

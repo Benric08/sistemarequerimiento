@@ -1,12 +1,12 @@
 import { Button, Dialog, DialogContent, DialogTitle } from '@mui/material';
 import React, { useState } from 'react'
-import { Document, Page } from 'react-pdf';
+//import { Document, Page } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
-import { pdfjs } from 'react-pdf';
+////import { pdfjs } from 'react-pdf';
 //const baseUrl='http://localhost:3001/';
 const baseUrl='https://sistemarequerimiento-production.up.railway.app/';
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+//pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const PdfViewer = ({openDialog,onClose,namefile}) => {
    
     const [numPages, setNumPages] = useState(null);

@@ -60,7 +60,7 @@ export default function reducer(state=initialState,action){
             console.log('veamos lo que tiene el payload de daddEntregable',payload);
             return {...state,estadoEntregableActual:payload};
         case GET_ESTADO_ALL:
-            console.log('veamos lo que tiene el payload de destado by iddetalle',payload);
+            console.log('veamos lo que tiene el get estado all',payload);
             return {...state,estadoEntregableActual:payload};
         case ADD_ESTADO_REQUERIMIENTO:
             console.log('veamos lo que tiene el payload de daddEntregable',payload);

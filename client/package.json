@@ -21,6 +21,7 @@
     "lodash": "^4.17.21",
     "npm": "^9.6.6",
     "react": "^18.2.0",
+    "react-auth-kit": "^2.12.2",
     "react-date-picker": "^10.1.0",
     "react-dom": "^18.2.0",
     "react-pdf": "^7.1.1",
