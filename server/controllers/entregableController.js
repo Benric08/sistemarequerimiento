@@ -151,9 +151,9 @@ const getEntregableByIdDOS = async ()=>{
         }, */
         
         include:
-            [/* {model:ejecucion_presupuestaria,
+            [{model:ejecucion_presupuestaria,
                 order: [['createdAt', 'DESC']],
-                }, */
+                },
                 {
             model:entregable,
             include:[{
