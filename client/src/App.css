@@ -6,17 +6,17 @@
 
 .slider{
   aspect-ratio: 10/16;
-  width: 300px;
+  
   position: relative;
   display: flex;
   overflow: scroll;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
 }
 .slider img{
   width: 100%;
   left: 0;
   position: sticky;
-  object-fit: cover;
+  object-fit: fill;
   border-radius: 5px;
 }
 

@@ -1,5 +1,6 @@
 import React from 'react'
 import '../../src/App.css'
+import { Grid } from '@mui/material';
 const images = [
     {
       label: 'San Francisco – Oakland Bay Bridge, United States',
@@ -24,9 +25,13 @@ const images = [
   ];
 const Estados = () => {
   return (
-    <div className='slider'>
-      {images.map(image=><img key={image.label} src={image.imgPath}/>)}
-    </div>
+    <Grid container spacing={1}>
+        <Grid item xs={12}>
+            <div className='slider'>
+                {images.map(image=><img key={image.label} src={image.imgPath}/>)}
+            </div>
+        </Grid>
+    </Grid>
   )
 }
 
