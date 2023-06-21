@@ -13,6 +13,7 @@ import axios from 'axios';
 import Login from './components/forms/Login';
 import { RequireAuth } from 'react-auth-kit';
 import CircularLoader from './components/loaders/CircularLoader';
+import Estados from './estados/Estados';
 axios.defaults.baseURL="https://sistemarequerimiento-production.up.railway.app/"
 //axios.defaults.baseURL="http://localhost:3001/"
 
@@ -30,6 +31,7 @@ function App() {
           <Route path='/testfile' element={<Fileview/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/loader' element={<CircularLoader/>}/>
+          <Route path='/procompite' element={<Estados/>}/>
         </Routes>
       </Box>
     </div>
