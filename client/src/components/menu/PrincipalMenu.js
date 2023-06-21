@@ -14,16 +14,16 @@ import { Divider } from '@mui/material';
 export default function PrincipalMenu() {
   const location = useLocation(); // esto permitirá verificar la ruta actual
   const isLoginPage = location.pathname === '/login'; // evalúa si es la ruta de login
-
+  const isEstadosPage = location.pathname ==='/procompite';
   // si la ruta actual es de login, retornamos null para evitar que se muestre la barra de navegación
-  if (isLoginPage) {
+  if (isLoginPage || isEstadosPage) {
     return null;
   }
   return (
-    <Box sx={{ width: '100%', maxWidth: 300,backgroundColor: 'primary.light' }}>
+    <Box sx={{ width: '100%', maxWidth: 400,backgroundColor: 'primary.light' }}>
       <nav aria-label="main mailbox folders">
         <List>
-          <ListItem >
+          <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 <Home />
@@ -32,7 +32,7 @@ export default function PrincipalMenu() {
             </ListItemButton>
           </ListItem>
           <Divider/>
-          <ListItem >
+          <ListItem disablePadding >
             <ListItemButton>
               <ListItemIcon>
                 <EditCalendar />
@@ -41,7 +41,7 @@ export default function PrincipalMenu() {
             </ListItemButton>
           </ListItem>
           <Divider/>
-          <ListItem >
+          <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 <AssignmentInd />
