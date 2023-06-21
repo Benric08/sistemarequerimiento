@@ -30,7 +30,7 @@ function App() {
           <Route path='/proveedores' element={<RequireAuth loginPath={'/login'}><ProveedorContainer/></RequireAuth>}/>
           <Route path='/testfile' element={<Fileview/>}/>
           <Route path='/login' element={<Login/>}/>
-          <Route path='/loader' element={<CircularLoader/>}/>
+          {/* <Route path='/loader' element={<CircularLoader/>}/> */}
           <Route path='/procompite' element={<Estados/>}/>
         </Routes>
       </Box>
