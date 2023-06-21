@@ -12,7 +12,7 @@ import { Box } from '@mui/material';
 import axios from 'axios';
 import Login from './components/forms/Login';
 import { RequireAuth } from 'react-auth-kit';
-import CircularLoader from './components/loaders/CircularLoader';
+//import CircularLoader from './components/loaders/CircularLoader';
 import Estados from './estados/Estados';
 axios.defaults.baseURL="https://sistemarequerimiento-production.up.railway.app/"
 //axios.defaults.baseURL="http://localhost:3001/"
