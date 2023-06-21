@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../src/App.css'
 const images = [
     {
       label: 'San Francisco – Oakland Bay Bridge, United States',
