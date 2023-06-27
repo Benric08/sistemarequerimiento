@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useSignIn } from 'react-auth-kit'
 
 export default function Login() {
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     const sigIn = useSignIn();
     const [formData, setFormData] = useState({ nombre_usuario: '', password: '' });
     const handleChangeFormData = (event) => {
@@ -16,28 +16,28 @@ export default function Login() {
     const handleOnSubmit = async (event) => {
         event.preventDefault();
         try {
-           const response = await axios.post('usuario/token', formData);
-           const isloged=sigIn({
-            token: response.data.token,
-            expiresIn: 3000,
-            tokenType: 'Bearer',
-            authState: { usuario: formData.nombre_usuario }
-           })
-           if (isloged) {
-            console.log('imprimimos locstio');
-            navigate('/')
-           } else {
-            
-           }
-               
+            const response = await axios.post('usuario/token', formData);
+            const isloged = sigIn({
+                token: response.data.token,
+                expiresIn: 3000,
+                tokenType: 'Bearer',
+                authState: { usuario: formData.nombre_usuario }
+            })
+            if (isloged) {
+                console.log('imprimimos locstio');
+                navigate('/')
+            } else {
+
+            }
+
         } catch (error) {
-            console.log('consoloLogacces',error.response.data.error);
-           alert(error.response.data.error)
+            console.log('consoloLogacces', error.response.data.error);
+            alert(error.response.data.error)
         }
     }
     return (
-        <form  onSubmit={handleOnSubmit}>
-            <Grid  container spacing={2}>
+        <form onSubmit={handleOnSubmit}>
+            <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <Typography variant="h4" component="h1" gutterBottom>
                         Iniciar sesión
@@ -67,6 +67,13 @@ export default function Login() {
                 <Grid item xs={12}>
                     <Button variant="contained" color="primary" type="submit">
                         Ingresar
+                    </Button>
+                </Grid>
+                <Grid item xs={12}>
+                    <Button variant="contained" color="secondary">
+                        <Link href="https://app.powerbi.com/links/CGUynGyqkF?ctid=29e51c24-6ce5-47aa-8260-0517205aee84&pbi_source=linkShare" underline="none">
+                            Transparencia
+                        </Link>
                     </Button>
                 </Grid>
             </Grid>
