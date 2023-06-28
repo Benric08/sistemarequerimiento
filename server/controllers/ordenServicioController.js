@@ -55,7 +55,7 @@ const insertOrdenServicio = async(formordenServicio)=>{
   fecha_orden_servicio,
   file_orden_servicio,
   precio_unitario,
-  cantidad}= formordenServicio;
+  cantidad,meta,clasificador}= formordenServicio;
 
   const ordenServicio={
     numero_orden_servicio,
@@ -64,37 +64,12 @@ const insertOrdenServicio = async(formordenServicio)=>{
     expediente_siaf,
     fecha_orden_servicio,
     file_orden_servicio,
+    meta,
+    clasificador,
     id_proveedor:newProveedor.id_proveedor
   }
 
- /*  {"numero_orden_servicio":"283",
-"id_requerimiento":1,
-  "numero_certificacion":"1290",
-  "expediente_siaf":"123",
-  "fecha_orden_servicio":"2023-04-20",
-  "file_orden_servicio":"/os-richard.pdf",
-  "precio_unitario":"3000",
-  "cantidad":"3"
-  "proveedor":{"nombre":"Richard",
-    "apellido_paterno":"Bendezu",
-    "apellido_materno":"Villena",
-    "dni":"46300972",
-    "ruc":"10463009720",
-    "celular":"952064709"}
-  } 
-  
-  {
-    "descripcion":"vamos para alla",
-    "detalle":"vamos para alla",
-    "unidad_medida":"Servicio",
-    "cantidad":"3",
-    "precio_unitario":"3000",
-  }
-  */
-
-  
-
-  const newOrdenServicio = await orden_servicio.create(ordenServicio);
+   const newOrdenServicio = await orden_servicio.create(ordenServicio);
   //insertar orden Servico Detalle
   const detalleordenServicio={
     id_orden_servicio:newOrdenServicio.id_orden_servicio,
@@ -105,8 +80,8 @@ const insertOrdenServicio = async(formordenServicio)=>{
   const cardinals=['','Primer','Segundo','Tercer','Cuarto','Quinto','Sexto','Septimo','Octavo','Noveno']
   for (let i = 1; i <= cantidad; i++) {
     const fecha = new Date(detalleordenServicio.fecha_vencimiento);
-    const fechaSumada = new Date(fecha.getTime() + (31 * 24 * 60 * 60 * 1000));
-    console.log(fechaSumada);
+    const fechaSumada = new Date(fecha.getTime() + (30 * 24 * 60 * 60 * 1000));
+    console.log('fecha con suma de 30 dias',fechaSumada);
     const dia = fechaSumada.getDate();
     const mes = fechaSumada.getMonth() + 1;
     const año = fechaSumada.getFullYear();
