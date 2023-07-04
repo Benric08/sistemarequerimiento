@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import dayjs from 'dayjs';
 import { useState } from 'react'
 import { Document, Page } from 'react-pdf';
-import { Button, TextField, Box, Divider, Fab, IconButton, FormHelperText } from '@mui/material';
+import { Button, TextField, Box, Divider, Fab, IconButton, FormHelperText, Grid } from '@mui/material';
 import { Add as AddIcon, PersonSearch as SearchIcon } from '@mui/icons-material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -19,6 +19,8 @@ export default function AddOrdenServicio({ requerimiento, ordenServicio, proveed
 
 
     const [inputs, setInputs] = useState({
+        meta: ordenServicio?.meta ?? "",
+        clasificador: ordenServicio?.clasificador ?? "",
         numero_orden_servicio: ordenServicio?.numero_orden_servicio ?? "",
         numero_certificacion: ordenServicio?.numero_certificacion ?? "",
         expediente_siaf: ordenServicio?.expediente_siaf ?? "",
@@ -27,6 +29,7 @@ export default function AddOrdenServicio({ requerimiento, ordenServicio, proveed
     console.log('Proveedor', proveedores);
     const [inputsProveedor, setInputsProveedor] = useState({
         dni: proveedor?.dni ?? "",
+        ruc: proveedor?.ruc ?? "",
         nombre: proveedor?.nombre ?? "",
         apellido_paterno: proveedor?.apellido_paterno ?? "",
         apellido_materno: proveedor?.apellido_materno ?? "",
@@ -58,27 +61,27 @@ export default function AddOrdenServicio({ requerimiento, ordenServicio, proveed
     const handleChangeFile = (event) => {
         setFileOrdenServicio(event.target.files[0]);
         //setErrorsFile(ordenServicioValidation({ file: event.target.fie[0] }));
-        setErrors(ordenServicioValidation({ ...inputsProveedor,...inputs,fecha_orden_servicio,file_orden_servicio:event.target.files[0]}))
+        setErrors(ordenServicioValidation({ ...inputsProveedor, ...inputs, fecha_orden_servicio, file_orden_servicio: event.target.files[0] }))
     }
     const handleChangeDate = (newValue) => {
         setFechaOrdenServicio(newValue);
-        setErrors(ordenServicioValidation({ ...inputsProveedor,...inputs,fecha_orden_servicio:newValue,file_orden_servicio}))
+        setErrors(ordenServicioValidation({ ...inputsProveedor, ...inputs, fecha_orden_servicio: newValue, file_orden_servicio }))
     }
     const handleChangeProveedor = (event) => {
         const { name, value } = event.target;
         setInputsProveedor({ ...inputsProveedor, [name]: value });
-        setErrors(ordenServicioValidation({ ...inputsProveedor,...inputs,fecha_orden_servicio,file_orden_servicio, [name]: value }));
+        setErrors(ordenServicioValidation({ ...inputsProveedor, ...inputs, fecha_orden_servicio, file_orden_servicio, [name]: value }));
     }
     const handleChange = (event) => {
         const { name, value } = event.target;
 
         setInputs({ ...inputs, [name]: value });
-        setErrors(ordenServicioValidation({ ...inputsProveedor,...inputs,fecha_orden_servicio,file_orden_servicio, [name]: value }));
+        setErrors(ordenServicioValidation({ ...inputsProveedor, ...inputs, fecha_orden_servicio, file_orden_servicio, [name]: value }));
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (isCorrectForm(errors) ) {
+        if (isCorrectForm(errors)) {
             console.log('requerimiento para la orden de servicio', requerimiento)
             console.log('fecha seleccionada', fecha_orden_servicio)
 
@@ -129,7 +132,7 @@ export default function AddOrdenServicio({ requerimiento, ordenServicio, proveed
     const onDocumentLoadSuccess = ({ numPages }) => {
         setNumPages(numPages);
     };
-    console.log('veamos que trae el error de file',errors);
+    console.log('veamos que trae el error de file', errors);
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -137,102 +140,170 @@ export default function AddOrdenServicio({ requerimiento, ordenServicio, proveed
                 <Divider>Proveedor</Divider>
                 <Box>
                     <Box>
-                        <TextField
-                            required
-                            label='DNI'
-                            name='dni'
-                            onChange={handleChangeProveedor}
-                            value={inputsProveedor.dni}
-                            error={errors?.dni?true:false}
-                            helperText={errors?.dni}
-                            inputProps={{ maxLength: 8 }}
-                        />
-                        <IconButton onClick={_handleSearchProvvedor}>
-                            <SearchIcon />
-                        </IconButton>
+                        <Grid container spacing={2}>
+                            <Grid item xs={5}>
+                                <TextField
+                                    required
+                                    label='DNI'
+                                    name='dni'
+                                    onChange={handleChangeProveedor}
+                                    value={inputsProveedor.dni}
+                                    error={errors?.dni ? true : false}
+                                    helperText={errors?.dni}
+                                    inputProps={{ maxLength: 8 }}
+                                />
+                            </Grid>
+                            <Grid item xs={1}>
+                                <IconButton onClick={_handleSearchProvvedor}>
+                                    <SearchIcon />
+                                </IconButton>
+                            </Grid>
+                            <Grid item xs>
+                                <TextField
+                                    required
+                                    label='RUC'
+                                    name='ruc'
+                                    onChange={handleChangeProveedor}
+                                    value={inputsProveedor.ruc}
+                                    error={errors?.ruc ? true : false}
+                                    helperText={errors?.ruc}
+                                    inputProps={{ maxLength: 11 }}
+                                />
+                            </Grid>
+                        </Grid>
                     </Box>
-                    <TextField
-                        required
-                        label='Nombres'
-                        name='nombre'
-                        onChange={handleChangeProveedor}
-                        value={inputsProveedor.nombre}
-                        error={errors?.nombre?true:false}
-                        helperText={errors?.nombre}
-                    />
-                    <TextField
-                        required
-                        label='Apellido Paterno'
-                        name='apellido_paterno'
-                        onChange={handleChangeProveedor}
-                        value={inputsProveedor.apellido_paterno}
-                        error={errors?.apellido_paterno?true:false}
-                        helperText={errors?.apellido_paterno}
-                    />
-                    <TextField
-                        required
-                        label='Apellido Materno'
-                        name='apellido_materno'
-                        onChange={handleChangeProveedor}
-                        value={inputsProveedor.apellido_materno}
-                        error={errors?.apellido_materno?true:false}
-                        helperText={errors?.apellido_materno}
-                    />
-                    <TextField
-                        label='Celular'
-                        name='celular'
-                        required
-                        onChange={handleChangeProveedor}
-                        value={inputsProveedor.celular}
-                        inputProps={{  maxLength: 9 }}
-                        error={errors?.celular?true:false}
-                        helperText={errors?.celular}
-                    />
+                    <Grid container spacing={2}>
+                        <Grid item xs>
+                            <TextField
+                                required
+                                label='Nombres'
+                                name='nombre'
+                                onChange={handleChangeProveedor}
+                                value={inputsProveedor.nombre}
+                                error={errors?.nombre ? true : false}
+                                helperText={errors?.nombre}
+                            />
+
+                        </Grid>
+                        <Grid item xs>
+                            <TextField
+                                required
+                                label='Apellido Paterno'
+                                name='apellido_paterno'
+                                onChange={handleChangeProveedor}
+                                value={inputsProveedor.apellido_paterno}
+                                error={errors?.apellido_paterno ? true : false}
+                                helperText={errors?.apellido_paterno}
+                            />
+                        </Grid>
+                    </Grid>
+
+                    <Grid container spacing={2}>
+                        <Grid item xs>
+                            <TextField
+                                required
+                                label='Apellido Materno'
+                                name='apellido_materno'
+                                onChange={handleChangeProveedor}
+                                value={inputsProveedor.apellido_materno}
+                                error={errors?.apellido_materno ? true : false}
+                                helperText={errors?.apellido_materno}
+                            />
+                        </Grid>
+                        <Grid item xs>
+                            <TextField
+                                label='Celular'
+                                name='celular'
+                                required
+                                onChange={handleChangeProveedor}
+                                value={inputsProveedor.celular}
+                                inputProps={{ maxLength: 9 }}
+                                error={errors?.celular ? true : false}
+                                helperText={errors?.celular}
+                            />
+                        </Grid>
+                    </Grid>
                 </Box>
                 <Divider>Orden de Servicio</Divider>
                 <Box>
-                    <TextField
-                        label='N° de orden de servicio'
-                        name='numero_orden_servicio'
-                        onChange={handleChange}
-                        value={inputs.numero_orden_servicio}
-                        required
-                        error={errors?.numero_orden_servicio?true:false}
-                        helperText={errors?.numero_orden_servicio}
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                            <TextField
+                                label='N° de Meta'
+                                name='meta'
+                                onChange={handleChange}
+                                value={inputs.meta}
+                                required
+                                error={errors?.meta ? true : false}
+                                helperText={errors?.meta}
 
-                    />
-                    <TextField
-                        label='N° de certificacion'
-                        name='numero_certificacion'
-                        onChange={handleChange}
-                        value={inputs.numero_certificacion}
-                        error={errors?.numero_certificacion?true:false}
-                        helperText={errors?.numero_certificacion}
-                    />
-                    <TextField
-                        label='Expediente Siaf'
-                        name='expediente_siaf'
-                        onChange={handleChange}
-                        value={inputs.expediente_siaf}
-                        error={errors?.expediente_siaf?true:false}
-                        helperText={errors?.expediente_siaf}
-                    />
+                            />
+
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                label='N° de Clasificador'
+                                name='clasificador'
+                                onChange={handleChange}
+                                value={inputs.clasificador}
+                                error={errors?.clasificador ? true : false}
+                                helperText={errors?.clasificador}
+                            />
+
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                label='N° de orden de servicio'
+                                name='numero_orden_servicio'
+                                onChange={handleChange}
+                                value={inputs.numero_orden_servicio}
+                                required
+                                error={errors?.numero_orden_servicio ? true : false}
+                                helperText={errors?.numero_orden_servicio}
+
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField label='N° de certificacion'
+                                name='numero_certificacion'
+                                onChange={handleChange}
+                                value={inputs.numero_certificacion}
+                                error={errors?.numero_certificacion ? true : false}
+                                helperText={errors?.numero_certificacion}
+                            />
+
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                label='Expediente Siaf'
+                                name='expediente_siaf'
+                                onChange={handleChange}
+                                value={inputs.expediente_siaf}
+                                error={errors?.expediente_siaf ? true : false}
+                                helperText={errors?.expediente_siaf}
+                            />
+
+                        </Grid>
+                        <Grid item xs={6}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="Fecha de Notificación"
+                                    value={fecha_orden_servicio}
+                                    onChange={handleChangeDate}
+
+                                    slotProps={{ textField: { variant: 'outlined', error: errors?.fecha_orden_servicio ? true : false, helperText: errors?.fecha_orden_servicio } }}
+                                />
+                            </LocalizationProvider>
+
+                        </Grid>
 
 
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
-                            label="Fecha de Notificación"
-                            value={fecha_orden_servicio}
-                            onChange={handleChangeDate}
-                            
-                            slotProps={{ textField: { variant: 'outlined',error:errors?.fecha_orden_servicio?true:false ,helperText:errors?.fecha_orden_servicio } }}
-                        />
-                    </LocalizationProvider>
+                    </Grid>
 
                     <label htmlFor='inputFileOrdenServicio'>
 
                         <input
-                           
+
                             type='file'
                             id='inputFileOrdenServicio'
                             style={{ display: "none" }}
@@ -250,8 +321,8 @@ export default function AddOrdenServicio({ requerimiento, ordenServicio, proveed
                         </Fab>
 
                     </label>
-                    { 
-                    errors?.file_orden_servicio&&<FormHelperText error>{errors?.file_orden_servicio}</FormHelperText> }  
+                    {
+                        errors?.file_orden_servicio && <FormHelperText error>{errors?.file_orden_servicio}</FormHelperText>}
 
                     {file_orden_servicio && !errors?.file_orden_servicio &&
 

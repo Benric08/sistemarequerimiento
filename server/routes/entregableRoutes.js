@@ -15,9 +15,10 @@ const jsonParser = bodyParser.json();
     } catch (error) {
         res.status(404).json({error:error.message});
     } 
-    
+     
 }); */
 routerEntregable.post('/',uploadfile_entregable.single('file'),async (req,res)=>{
+    console.log("recibimos data del actions en el router",req.body.entregable);
     const formOsBody=JSON.parse(req.body.entregable);
     if(req.file) {
         const file=req.file.path;

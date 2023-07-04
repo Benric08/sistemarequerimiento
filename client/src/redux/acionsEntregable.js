@@ -4,6 +4,7 @@ import axios from "axios";
 
 const endpoint = 'entregable';
 export const addEntregable=(entregable)=>{
+   console.log("agregar entregable", entregable);
    return async (dispatch) => {
       try {
         await axios.post(endpoint, entregable)

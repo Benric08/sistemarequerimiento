@@ -60,8 +60,7 @@ export default function ProveedorSubRow({ordenServicio,proveedorNombreCompleto})
             </AppBar>
             <DialogContent
             sx={{
-                '& .MuiTextField-root': { m: 1 },
-                width:'100%'
+                '& .MuiTextField-root': { m: 1 }
             }}
             > 
               <DialogTitle >

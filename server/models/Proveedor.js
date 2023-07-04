@@ -29,6 +29,14 @@ module.exports=(dbConnection)=>{
                 isNumeric:true
             }
         },
+        ruc:{
+            type: DataTypes.STRING,
+            allowNull:false,
+            validate:{
+                len:[11],
+                isNumeric:true
+            }
+        },
         nombre_completo:{
             type: DataTypes.VIRTUAL,
             get() {

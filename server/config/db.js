@@ -13,6 +13,8 @@ const historialEntregableModel = require('../models/Historial_Entregable');
 const ordenServicioEjecucionPresupuestariaModel = require('../models/OrdenServicio_EjecucionPresupuestaria');
 const estadoRequerimientoModel = require('../models/Estado_Requerimiento');
 const usuarioModel = require('../models/Usuario');
+const detalleEntregableModel = require('../models/Detalle_Entregable');
+const Entregable = require('../models/Entregable');
 const dbConnection = new Sequelize(`postgres://${DB_USER_NAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_DATABASE_NAME}`,{logging:false});
 
 requerimientoModel(dbConnection); 
@@ -27,7 +29,7 @@ historialEntregableModel(dbConnection);
 ordenServicioEjecucionPresupuestariaModel(dbConnection); 
 estadoRequerimientoModel(dbConnection);
 usuarioModel(dbConnection);
-
+detalleEntregableModel(dbConnection);
 
 const {requerimiento,
     orden_servicio,
@@ -41,6 +43,7 @@ const {requerimiento,
     orden_servicio_ejecucion_presupuestaria,
     estado_requerimiento,
     usuario,
+    detalle_entregable
 } = dbConnection.models; 
 
 //relations  between requerimeinto and Orden Servicio
@@ -164,6 +167,21 @@ orden_servicio.belongsToMany(ejecucion_presupuestaria,{
 ejecucion_presupuestaria.belongsToMany(orden_servicio,{
     through: orden_servicio_ejecucion_presupuestaria
 }); 
+
+//relations  between Entregable and Detalle Entregable
+
+entregable.hasOne(detalle_entregable,{
+    foreignKey:{
+            name:"id_entregable",
+            type:DataTypes.INTEGER,
+            allowNull:false}
+});
+detalle_entregable.belongsTo(entregable,{
+    foreignKey:{
+            name:"id_entregable",
+            type:DataTypes.INTEGER,
+            allowNull:false}
+});
 
 module.exports={
     dbConnection,

@@ -1,18 +1,27 @@
 import React, { useState } from 'react'
-import { TextField, Button, Grid, Typography, Link } from '@mui/material';
+import { TextField, Button, Grid, Typography, Link, FormControl } from '@mui/material';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import { useSignIn } from 'react-auth-kit'
-
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import InputAdornment from '@mui/material/InputAdornment';
 export default function Login() {
     const navigate = useNavigate();
     const sigIn = useSignIn();
+    const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({ nombre_usuario: '', password: '' });
     const handleChangeFormData = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
     }
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
     const handleOnSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -37,7 +46,8 @@ export default function Login() {
     }
     return (
         <form onSubmit={handleOnSubmit}>
-            <Grid container spacing={2}>
+
+            <Grid container spacing={2} >
                 <Grid item xs={12}>
                     <Typography variant="h4" component="h1" gutterBottom>
                         Iniciar sesión
@@ -50,19 +60,33 @@ export default function Login() {
                         variant="outlined"
                         onChange={handleChangeFormData}
                         value={formData.usuario}
-                        fullWidth
+
                     />
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField
-                        label="Contraseña"
-                        name='password'
-                        type="password"
-                        variant="outlined"
-                        onChange={handleChangeFormData}
-                        value={formData.password}
-                        fullWidth
-                    />
+                    <FormControl sx={{m:1,width:'26ch'}}>
+                        <OutlinedInput
+                            label="Contraseña"
+                            name='password'
+                            type={showPassword ? 'text' : 'password'}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            
+                            onChange={handleChangeFormData}
+                            value={formData.password}
+
+                        />
+                    </FormControl>
                 </Grid>
                 <Grid item xs={12}>
                     <Button variant="contained" color="primary" type="submit">
@@ -71,12 +95,13 @@ export default function Login() {
                 </Grid>
                 <Grid item xs={12}>
                     <Button variant="contained" color="secondary">
-                        <Link href="https://app.powerbi.com/links/CGUynGyqkF?ctid=29e51c24-6ce5-47aa-8260-0517205aee84&pbi_source=linkShare" underline="none">
+                        <Link color='inherit' href="https://app.powerbi.com/links/CGUynGyqkF?ctid=29e51c24-6ce5-47aa-8260-0517205aee84&pbi_source=linkShare" underline="none">
                             Transparencia
                         </Link>
                     </Button>
                 </Grid>
             </Grid>
+
         </form>
     )
 }

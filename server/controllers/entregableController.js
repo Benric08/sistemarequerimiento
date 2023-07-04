@@ -37,16 +37,17 @@ const uploadfile_entregable = multer({
 const insertEntregable= async({file_entregable,
     observacion,
     fecha_entregable,
-    id_detalle_os,ubicacion})=>{
+    id_detalle_os,ubicacion,numero_informe})=>{
     
     const [entregableInsertado,created] = await entregable.findOrCreate({
         where:{
             id_detalle_os:id_detalle_os
         },
         defaults:{id_detalle_os,
-            observacion,fecha_entregable,file_entregable}
+            observacion,fecha_entregable,file_entregable,numero_informe}
     });
-    console.log('imprimimos si fue creado o no', created);
+    console.log('imprimimos si fue creado o no el entregable', created);
+    console.log('entregable insertdao', entregableInsertado);
     if(created) {
         const updateDetalleOS = await detalle_orden_servicio.update({estado:'Entregado'},{
         where:{
@@ -152,7 +153,7 @@ const getEntregableByIdDOS = async ()=>{
         
         include:
             [{model:ejecucion_presupuestaria,
-                order: [['createdAt', 'DESC']],
+                order: [['createdAt', 'DESC']]
                 },
                 {
             model:entregable,

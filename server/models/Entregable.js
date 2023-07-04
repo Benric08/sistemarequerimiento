@@ -10,6 +10,10 @@ module.exports=(dbConnection)=>{
             type:DataTypes.STRING,
             allowNull:false
         },
+        numero_informe:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
         file_entregable:{//file_entregable
             type:DataTypes.STRING,
             allowNull:false

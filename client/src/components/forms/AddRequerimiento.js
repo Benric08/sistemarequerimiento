@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import requerimientoValidation from '../../validation/requerimientoValidation';
-import { Button, TextField, Box, InputAdornment, MenuItem, Snackbar, Alert } from '@mui/material';
+import { Button, TextField, Box, InputAdornment, MenuItem, Snackbar, Alert, Grid } from '@mui/material';
 import { isCorrectForm } from '../../utils/validation';
 const services = [
   {
@@ -22,7 +22,7 @@ export default function AddRequerimiento({ requerimiento, onCreate, onUpdate, on
     precio_unitario: requerimiento?.precio_unitario ?? "",
 
   });
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState();
   const handleChange = (event) => {
     const { name, value } = event.target;
     setInputs({ ...inputs, [name]: value });
@@ -33,20 +33,13 @@ export default function AddRequerimiento({ requerimiento, onCreate, onUpdate, on
     if (isCorrectForm(errors)) {
       if (requerimiento) {
         if (onUpdate) {
-          onUpdate(inputs, requerimiento.id_requerimiento)
+          onUpdate(inputs, requerimiento.id_requerimiento);
         }
-        /* onUpdate({
-          
-          ...inputs,
-         id_requerimiento: requerimiento.id_requerimiento
-        }); */
-
-
         if (onClose) onClose();
-
         return;
       }
-
+      console.log('before the oncreate',inputs);
+      console.log('before the oncreate',onCreate);
       if (onCreate) onCreate(inputs);
 
       if (onClose) onClose();
@@ -134,12 +127,24 @@ export default function AddRequerimiento({ requerimiento, onCreate, onUpdate, on
           />
         </Box>
 
-        <Button
-          type='submit'
-          variant='contained'
+        <Grid container spacing={1} justifyItems="center" alignContent="center">
+          <Grid item xs>
+            <Button
+              type='submit'
+              variant='contained'
 
-        >Guardar</Button>
+            >Guardar</Button>
+          </Grid>
+          <Grid item xs>
+            <Button
+              onClick={onClose}
+              variant='contained'
+
+            >Cancelar</Button>
+          </Grid>
+        </Grid>
       </form>
+      
     </div>
   )
 }

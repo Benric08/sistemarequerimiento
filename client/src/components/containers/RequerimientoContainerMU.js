@@ -12,11 +12,9 @@ import { addOrdenServicio } from '../../redux/actionsOrdenServicio';
 import { getAllRequirementsDetalle } from '../../redux/actionsRequerimientoDetalleOrden';
 import { getAllProveedores } from '../../redux/actionsProveedor';
 import FollowReq from '../dialogs/FollowReq';
-import axios from 'axios';
+
 import PdfViewer from '../dialogs/PdfViewer';
 export default function RequerimientoContainerMU() {
-  //const requerimientos = useSelector((state)=>state.allRequerimientos);
-
   const dispatch = useDispatch();
   const requerimientos = useSelector((state) => state.allRequerimientosDetalle);
   const [nameFile, setNameFile] = useState('');
@@ -101,7 +99,7 @@ export default function RequerimientoContainerMU() {
 
     setNameFile(`ordenservicio/pdf/${namefile}`);
     setIsOpenDialogPdfViewer(true);
-
+    console.log('nombre del archivo despues de unir con la api',nameFile);
   }
 
 
@@ -164,7 +162,7 @@ export default function RequerimientoContainerMU() {
         </Box>
       </Grid>
 
-      <Dialog open={isOpenDialog} onClose={_handleCloseDialog}>
+      <Dialog open={isOpenDialog} /* onClose={_handleCloseDialog} */>
         <DialogContent
           sx={{
             '& .MuiTextField-root': { m: 1 },

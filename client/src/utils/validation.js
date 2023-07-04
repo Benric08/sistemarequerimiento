@@ -49,6 +49,11 @@ export  function isNumber(text){
     if(!regex.test(text)) return true;
     else return false;
 }
+export  function isNumberDocument(text){
+    regex=/^[0-9\-]+$/;
+    if(!regex.test(text)) return true;
+    else return false;
+}
 export  function isGreaterThanZero(text){
     if(parseInt(text)===0) return true;
     else return false;

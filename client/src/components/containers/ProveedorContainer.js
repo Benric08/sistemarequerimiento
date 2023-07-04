@@ -13,8 +13,6 @@ export default  function ProveedorContainer() {
     const proveedores = useSelector((state)=>state.allProveedoresOrdenServicio);
     const dispatch=useDispatch();
     console.log('vemos el contenido de proveedores', proveedores);
-    console.log('vemos el contenido de proveedoresos', proveedores?.orden_servicios);
-    console.log('vemos el contenido de proveedoresdos', proveedores?.orden_servicios?.detalle_orden_servicio);
     useEffect( ()=>{
       dispatch(getAllProveedoresOrdenS());
       dispatch(getEstadoEntregable());

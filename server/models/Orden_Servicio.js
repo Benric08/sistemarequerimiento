@@ -8,10 +8,15 @@ module.exports=(dbConnection)=>{
             allowNull:false,
             autoIncrement:true
         },
+        meta:{
+            type:DataTypes.STRING,
+            allowNull:false,
+            
+        },
         clasificador:{
             type:DataTypes.STRING,
             allowNull:false,
-            defaultValue:'2.6.8.1.4.3'
+            
         },
         numero_orden_servicio:{
             type:DataTypes.STRING,
