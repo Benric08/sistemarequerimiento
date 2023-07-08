@@ -27,7 +27,6 @@ export default function DetalleOrdenServicio({ ordenServicio }) {
   console.log('veamos que hay en el orden de servicio', ordenServicio)
   const [value, setValue] = useState(0);
   const [showMoreDocuments, setShowMoreDocuments] = useState(false);
-  const dispatch = useDispatch();
   const _handleChangeTabs = (event, newValue) => {
     setValue(newValue);
   };
@@ -39,12 +38,7 @@ export default function DetalleOrdenServicio({ ordenServicio }) {
     return a.id_detalle_os - b.id_detalle_os;
   });
 
-  /*****/
-
-
-
-
-
+  
   useEffect(() => {
     
   }, []);

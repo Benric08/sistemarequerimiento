@@ -8,7 +8,7 @@ import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 const baseUrl='https://sistemarequerimiento-production.up.railway.app/';
 //pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const PdfViewer = ({openDialog,onClose,namefile}) => {
-   
+    console.log(`open Dialog content ${baseUrl}${namefile}` );
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
   

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TextField, Button, Grid, Typography, Link, FormControl } from '@mui/material';
+import { TextField, Button, Grid, Typography, Link, FormControl, Container } from '@mui/material';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
@@ -45,63 +45,68 @@ export default function Login() {
         }
     }
     return (
-        <form onSubmit={handleOnSubmit}>
+        <Container maxWidth="xs">
+            <form onSubmit={handleOnSubmit}>
 
-            <Grid container spacing={2} >
-                <Grid item xs={12}>
-                    <Typography variant="h4" component="h1" gutterBottom>
-                        Iniciar sesión
-                    </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        label="Usuario"
-                        name='nombre_usuario'
-                        variant="outlined"
-                        onChange={handleChangeFormData}
-                        value={formData.usuario}
+                <Grid container spacing={2} sx={{alignItems:"center" , justifyContent:"center"}}>
+                    <Grid item xs={12} align='center' >
+                        <Typography variant="h4" component="h3" gutterBottom>
+                            Iniciar sesión
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} align='center'  >
+                        <FormControl sx={{ m: 1, width: '25ch' }}>
+                            <TextField
+                                label="Usuario"
+                                name='nombre_usuario'
+                                variant="outlined"
+                                onChange={handleChangeFormData}
+                                value={formData.usuario}
 
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <FormControl sx={{m:1,width:'26ch'}}>
-                        <OutlinedInput
-                            label="Contraseña"
-                            name='password'
-                            type={showPassword ? 'text' : 'password'}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {showPassword ? <Visibility /> : <VisibilityOff />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            
-                            onChange={handleChangeFormData}
-                            value={formData.password}
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12} align='center'>
+                        <FormControl sx={{ m: 1, width: '25ch' }}>
+                            <OutlinedInput
+                                label="Contraseña"
+                                name='password'
+                                type={showPassword ? 'text' : 'password'}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={handleMouseDownPassword}
+                                            edge="end"
+                                        >
+                                            {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
 
-                        />
-                    </FormControl>
-                </Grid>
-                <Grid item xs={12}>
-                    <Button variant="contained" color="primary" type="submit">
-                        Ingresar
-                    </Button>
-                </Grid>
-                <Grid item xs={12}>
-                    <Button variant="contained" color="secondary">
-                        <Link color='inherit' href="https://app.powerbi.com/links/CGUynGyqkF?ctid=29e51c24-6ce5-47aa-8260-0517205aee84&pbi_source=linkShare" underline="none">
-                            Transparencia
-                        </Link>
-                    </Button>
-                </Grid>
-            </Grid>
+                                onChange={handleChangeFormData}
+                                value={formData.password}
 
-        </form>
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12} align='center'>
+                        <Button variant="contained" color="primary" type="submit">
+                            Ingresar
+                        </Button>
+                    </Grid>
+                    <Grid item xs={12} align='center'>
+                        <Button variant="contained" color="secondary">
+                            <Link color='inherit' href="https://app.powerbi.com/links/CGUynGyqkF?ctid=29e51c24-6ce5-47aa-8260-0517205aee84&pbi_source=linkShare" underline="none">
+                                Transparencia
+                            </Link>
+                        </Button>
+                    </Grid>
+                </Grid>
+
+            </form>
+        </Container>
+
     )
 }

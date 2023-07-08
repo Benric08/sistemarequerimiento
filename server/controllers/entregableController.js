@@ -15,11 +15,13 @@ const storage = multer.diskStorage({
 
     destination: join(CURRENT_DIR, '../file_uploads/entregables'),
     filename: (req, file, cb) => {
-            
+            const {entregable} = req.body;
+            const entre= JSON.parse(entregable);
+           
             const fileExtension = extname(file.originalname);
             const fileName = file.originalname.split(fileExtension)[0];
 
-            cb(null, `OS-${Date.now()}${fileExtension}`);
+            cb(null, `IE-${entre.numero_informe}-${Date.now()}${fileExtension}`);
     },
   });
 

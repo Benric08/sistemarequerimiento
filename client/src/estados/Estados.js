@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, {  useState } from 'react'
 import '../../src/App.css'
 import { Grid } from '@mui/material';
-import FullCalendar from '@fullcalendar/react';
 const images = [
     {
       label: 'San Francisco – Oakland Bay Bridge, United States',

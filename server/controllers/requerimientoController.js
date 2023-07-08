@@ -106,7 +106,7 @@ const addEstadoRequerimiento = async(estadoRequerimiento)=>{
 }
 
 const getEstadoRequerimiento = async ()=>{
-    console.log('me estan llamando get estado Requerimiento');
+    //console.log('me estan llamando get estado Requerimiento');
     const estadosRequerimiento = await requerimiento.findAll({
         include:[{
                 model:estado_requerimiento,

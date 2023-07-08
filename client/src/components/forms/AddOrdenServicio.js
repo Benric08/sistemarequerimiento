@@ -86,7 +86,6 @@ export default function AddOrdenServicio({ requerimiento, ordenServicio, proveed
             console.log('fecha seleccionada', fecha_orden_servicio)
 
             const formData = new FormData();
-            formData.append('file', file_orden_servicio);
             const newOrden = {
                 ...inputs,
                 id_requerimiento: requerimiento.id_requerimiento,
@@ -98,6 +97,7 @@ export default function AddOrdenServicio({ requerimiento, ordenServicio, proveed
                 proveedorf: inputsProveedor
             }
             formData.append('orden', JSON.stringify(newOrden));
+            formData.append('file', file_orden_servicio);
             console.log('mi nuevo orden a ingresar', newOrden);
             console.log('mi nuevo orden a ingresar', formData);
             if (onCreate) onCreate(formData);

@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar, TextField } from '@mui/material'
+import { Alert, Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar, TextField } from '@mui/material'
 import axios from 'axios';
 import React, { useState } from 'react'
 
@@ -54,7 +54,7 @@ const ConfirmEjecucionPresupuestaria = ({ open, idDetalleOS, descripcion, estado
           <DialogContentText>
             {`Comfirmar si el ${descripcion} ha sido ${estadoEntregable === 8 ? 'devengado' : 'girado'}.`}
           </DialogContentText>
-
+          {/* agregar fecha */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleConfirm}>Si</Button>

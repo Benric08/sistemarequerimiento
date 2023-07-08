@@ -21,6 +21,9 @@ app.use('/entregable',routerEntregable);
 app.use('/usuario',routerUsuario);
 app.use('/entregable/pdf',routerDetalleEntregable);
 app.use('/ordenservicio/pdf',express.static(join(CURRENT_DIR, '../file_uploads/orden_servicio')));
+app.use('/entregabledocs/pdf',express.static(join(CURRENT_DIR, '../file_uploads/entregables/detalle')));
+app.use('/entregables/pdf',express.static(join(CURRENT_DIR, '../file_uploads/entregables')));
+
 
 
 module.exports=app;

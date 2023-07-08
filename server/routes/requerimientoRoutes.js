@@ -77,7 +77,7 @@ routerRequerimiento.post('/detalle/estado',async (req,res)=>{
 }); 
 
 routerRequerimiento.get('/detalle/estado',async(req,res)=>{
-    console.log('soy el controlerr y me estan llamando ');
+    //console.log('soy el controlerr y me estan llamando ');
     try {
         const allRequirements = await getEstadoRequerimiento();
         if(allRequirements.length)  res.status(200).json(allRequirements);

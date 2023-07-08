@@ -32,15 +32,10 @@ export default function AddEntregable({ detalleOrdenServicio }) {
 
     const [sliderUbicacion, setSliderUbicacion] = useState(getEstado?.entregable?.estado_entregables[0]?.valor_estado ?? marks[0].value);
     const dispatch = useDispatch();
-    /* console.log('slider ubicacion', sliderUbicacion);
-    console.log('tamanio del array', siseAePresupuestal);
-    console.log('ejecucion presupuestal', ePresupuestal); */
-
     const _handleSubmit = (event) => {
         event.preventDefault();
         if (isCorrectForm(errors)) {
             const formDataEntregable = new FormData();
-            formDataEntregable.append('file', file_entregable);
             const entregable = {
                 id_detalle_os: detalleOrdenServicio.id_detalle_os,
                 fecha_entregable: fecha_entregable.format('YYYY-MM-DD'),
@@ -49,6 +44,7 @@ export default function AddEntregable({ detalleOrdenServicio }) {
                 ubicacion: sliderUbicacion
             }
             formDataEntregable.append('entregable', JSON.stringify(entregable));
+            formDataEntregable.append('file', file_entregable);
             console.log('enviando el entregable', entregable);
             dispatch(addEntregable(formDataEntregable));
             //dispatch(getEstadoEntregable());

@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   display: grid;
-  grid-template-columns: auto 3fr;
+  grid-template-columns: 20% 80%;
 }
 
 .slider{
@@ -20,6 +20,7 @@
   border-radius: 5px;
   
 }
+
 
 
  

@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import RequerimientoRow from '../requerimiento/RequerimientoRow';
 import AddRequerimiento from '../forms/AddRequerimiento';
 import TableContainer from '@mui/material/TableContainer';
-import { Alert, Box, Button, CircularProgress, Dialog, DialogContent, DialogContentText, DialogTitle, Grid, Snackbar, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { Alert, Backdrop, Box, Button, CircularProgress, Dialog, DialogContent, DialogContentText, DialogTitle, Grid, Snackbar, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { Add as AddIcon } from "@mui/icons-material";
 import Paper from '@mui/material/Paper';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,7 +10,7 @@ import { addReq, updateReq, deleteReque } from '../../redux/actions';
 import AddOrdenServicio from '../forms/AddOrdenServicio';
 import { addOrdenServicio } from '../../redux/actionsOrdenServicio';
 import { getAllRequirementsDetalle } from '../../redux/actionsRequerimientoDetalleOrden';
-import { getAllProveedores } from '../../redux/actionsProveedor';
+
 import FollowReq from '../dialogs/FollowReq';
 
 import PdfViewer from '../dialogs/PdfViewer';
@@ -99,7 +99,7 @@ export default function RequerimientoContainerMU() {
 
     setNameFile(`ordenservicio/pdf/${namefile}`);
     setIsOpenDialogPdfViewer(true);
-    console.log('nombre del archivo despues de unir con la api',nameFile);
+    console.log('nombre del archivo despues de unir con la api', nameFile);
   }
 
 
@@ -118,9 +118,12 @@ export default function RequerimientoContainerMU() {
           {`El requerimiento se guardo correctamente.`}
         </Alert>
       </Snackbar>
-      {isLoading && <Box sx={{ display: 'flex' /* , position:'absolute',top:'50%' */ }}>
-        <CircularProgress />
-      </Box>}
+      {<Backdrop
+        sx={{ color: '#FAFAFA', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>}
       <Box display="flex" justifyContent="flex-end">
         <Button onClick={_handleClickOpenDialog} startIcon={<AddIcon />}>
           Agregar
@@ -128,37 +131,37 @@ export default function RequerimientoContainerMU() {
       </Box>
       <Grid item xs={12}>
         <Box overflow="auto">
-        <TableContainer component={Paper}>
-          <Table aria-label="collapsible table">
-            <TableHead>
-              <TableRow>
-                <TableCell />
-                <TableCell>Descripcion</TableCell>
-                <TableCell align="right">Detalle</TableCell>
-                <TableCell align="right">Cantidad</TableCell>
-                <TableCell align="right">Precio Unitario</TableCell>
-                <TableCell align="right">Total</TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell align="right"></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {requerimientos.length > 0 && requerimientos.map((requerimiento) => (
-                <RequerimientoRow
-                  key={requerimiento?.id_requerimiento}
-                  requerimiento={requerimiento}
-                  onAddOrdenServicio={_handleClickAddOrdenServicio}
-                  onEdit={_handleClickEditRequerimientoElement}
-                  onEditOrden={_handleClickEditOrdenServicioElement}
-                  onDelete={_handleClickDeleteRequerimientoElement}
-                  onDialogFollowClose={_handleCloseDialogFollowReq}
-                  onDialogFollowOpen={_handleOpenDialogFollowReq}
-                  onShowPDF={_handleShowPDF}
-                />
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+          <TableContainer component={Paper}>
+            <Table aria-label="collapsible table">
+              <TableHead>
+                <TableRow>
+                  <TableCell />
+                  <TableCell>Descripcion</TableCell>
+                  <TableCell align="right">Detalle</TableCell>
+                  <TableCell align="right">Cantidad</TableCell>
+                  <TableCell align="right">Precio Unitario</TableCell>
+                  <TableCell align="right">Total</TableCell>
+                  <TableCell align="right"></TableCell>
+                  <TableCell align="right"></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {requerimientos.length > 0 && requerimientos.map((requerimiento) => (
+                  <RequerimientoRow
+                    key={requerimiento?.id_requerimiento}
+                    requerimiento={requerimiento}
+                    onAddOrdenServicio={_handleClickAddOrdenServicio}
+                    onEdit={_handleClickEditRequerimientoElement}
+                    onEditOrden={_handleClickEditOrdenServicioElement}
+                    onDelete={_handleClickDeleteRequerimientoElement}
+                    onDialogFollowClose={_handleCloseDialogFollowReq}
+                    onDialogFollowOpen={_handleOpenDialogFollowReq}
+                    onShowPDF={_handleShowPDF}
+                  />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </Box>
       </Grid>
 

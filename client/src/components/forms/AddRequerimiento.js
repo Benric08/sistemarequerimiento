@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import requerimientoValidation from '../../validation/requerimientoValidation';
-import { Button, TextField, Box, InputAdornment, MenuItem, Snackbar, Alert, Grid } from '@mui/material';
+import { Button, TextField, Box, InputAdornment, MenuItem,  Grid } from '@mui/material';
 import { isCorrectForm } from '../../utils/validation';
 const services = [
   {
@@ -38,12 +38,12 @@ export default function AddRequerimiento({ requerimiento, onCreate, onUpdate, on
         if (onClose) onClose();
         return;
       }
-      console.log('before the oncreate',inputs);
-      console.log('before the oncreate',onCreate);
+      console.log('before the oncreate', inputs);
+      console.log('before the oncreate', onCreate);
       if (onCreate) onCreate(inputs);
 
       if (onClose) onClose();
-    }else{
+    } else {
       alert(`Algo salio mal!!!`);
     }
 
@@ -66,7 +66,7 @@ export default function AddRequerimiento({ requerimiento, onCreate, onUpdate, on
             multiline
             rows={3}
             fullWidth
-            error={errors?.descripcion?true:false}
+            error={errors?.descripcion ? true : false}
             helperText={errors?.descripcion}
           />
 
@@ -78,7 +78,7 @@ export default function AddRequerimiento({ requerimiento, onCreate, onUpdate, on
             multiline
             rows={3}
             fullWidth
-            error={errors?.detalle?true:false}
+            error={errors?.detalle ? true : false}
             helperText={errors?.detalle}
           />
           <TextField
@@ -108,7 +108,7 @@ export default function AddRequerimiento({ requerimiento, onCreate, onUpdate, on
             sx={{
               width: "20%"
             }}
-            error={errors?.cantidad?true:false}
+            error={errors?.cantidad ? true : false}
             helperText={errors?.cantidad}
           />
           <TextField
@@ -122,7 +122,7 @@ export default function AddRequerimiento({ requerimiento, onCreate, onUpdate, on
             sx={{
               width: "37%"
             }}
-            error={errors?.precio_unitario?true:false}
+            error={errors?.precio_unitario ? true : false}
             helperText={errors?.precio_unitario}
           />
         </Box>
@@ -144,7 +144,7 @@ export default function AddRequerimiento({ requerimiento, onCreate, onUpdate, on
           </Grid>
         </Grid>
       </form>
-      
+
     </div>
   )
 }

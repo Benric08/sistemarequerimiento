@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import AddFollowReq from '../forms/AddFollowReq'
 import {Close as CloseIcon} from '@mui/icons-material'
-import { AppBar, Box, Button, Dialog, DialogContent, DialogTitle, Divider, IconButton, ListItemText, Slide, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Dialog, DialogContent, DialogTitle, Divider, IconButton, ListItemText, Slide, Toolbar, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEstadoRequerimiento, getEstadoEntregable } from '../../redux/actions';
 const Transition = React.forwardRef(function Transition(props, ref) {

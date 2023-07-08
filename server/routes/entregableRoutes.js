@@ -21,8 +21,8 @@ routerEntregable.post('/',uploadfile_entregable.single('file'),async (req,res)=>
     console.log("recibimos data del actions en el router",req.body.entregable);
     const formOsBody=JSON.parse(req.body.entregable);
     if(req.file) {
-        const file=req.file.path;
-        formOsBody.file_entregable=file;
+        const fileName=req.file.filename;
+        formOsBody.file_entregable=fileName;
     }
     console.log('body del form',formOsBody);
     //console.log('espero sea el file',file);
