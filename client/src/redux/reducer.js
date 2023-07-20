@@ -67,8 +67,8 @@ export default function reducer(state = initialState, action) {
             console.log('veamos lo que tiene el payload de daddEntregable', payload);
             return { ...state, estadoRequerimientoActual: payload };
         case GET_ESTADO_REQUERIMIENTO:
-            console.log('veamos lo que tiene el payload de destado by iddetalle', payload);
-            return { ...state, estadoRequerimientoActual: payload };
+            console.log('veamos lo que tiene el payload de estadoRequerimiento by iddetalle', payload);
+            return { ...state, estadoRequerimientoActual: payload.error?[]:payload };
         default:
             console.log('estoy entrando al reduer default');
             return { ...state };

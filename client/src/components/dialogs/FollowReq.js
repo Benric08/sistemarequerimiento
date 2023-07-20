@@ -8,19 +8,16 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 const FollowReq = ({open, requerimiento,onClose}) => {
-  console.log('veamos que tenemos del req que nos envia reccontainer',requerimiento);
+  const disptach = useDispatch();
+  console.log('veamos que tenemos del req que nos envia requcontainer',requerimiento);
   const obtenerEstado = useSelector((state)=>state.estadoRequerimientoActual);
   console.log('recuperamos algo o no ',obtenerEstado);
+  
   const getEstado = obtenerEstado.find((estado)=>estado.id_requerimiento===requerimiento?.id_requerimiento);
   console.log('recuperamos algo o no ',getEstado);
-    
-  const disptach = useDispatch();
-
   const _handleCloseDialogFollowReq  = ()=>{
-    if(onClose) onClose()
-    
+    if(onClose) onClose();
   }
-
   const _handleClickSave=(estadoRequerimiento)=>{
     console.log('que estado estoy por guardar ',estadoRequerimiento);
     const estadoReq={...estadoRequerimiento,id_requerimiento:requerimiento.id_requerimiento};
@@ -71,15 +68,15 @@ const FollowReq = ({open, requerimiento,onClose}) => {
             > 
               <DialogTitle >
                 
-                  <ListItemText 
+                  {requerimiento && <ListItemText 
                     primary={`Requerimiento`}
                     secondary={`${requerimiento?.descripcion}` }
-                  />  
+                  /> } 
                   <Divider sx={{color:'blue'}}/>
               </DialogTitle>
               
               <Box sx={{height:'100%', padding:'0% 2%'}}>
-                    <AddFollowReq onHandleSubmit={_handleClickSave} estadoRequerimiento={getEstado}/>
+                    {getEstado&&<AddFollowReq onHandleSubmit={_handleClickSave} estadoRequerimiento={getEstado}/>}
               </Box>              
             </DialogContent>
         </Dialog>

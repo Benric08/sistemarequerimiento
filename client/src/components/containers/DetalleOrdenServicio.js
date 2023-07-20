@@ -1,8 +1,6 @@
-import { Box, Button, Divider, List, ListItem, ListItemText, Tab, Tabs, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react'
-import AddEntregable from '../forms/AddEntregable'
-import { getEstadoEntregable } from '../../redux/acionsEntregable';
-import { useDispatch, useSelector } from 'react-redux';
+import { Box, Button, Divider, List, ListItem, ListItemText, Tab, Tabs} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import AddEntregable from '../forms/AddEntregable';
 import AddDetealleEntregable from '../forms/AddDetealleEntregable';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

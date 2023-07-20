@@ -71,7 +71,7 @@ routerRequerimiento.post('/detalle/estado',async (req,res)=>{
         const estado_requerimiento = await addEstadoRequerimiento(estadoRequerimiento);
         res.status(200).json(estado_requerimiento);
     } catch (error) {
-        res.status(404).json({error:error.message});
+        res.status(404).json({"error":error.message});
     } 
     
 }); 

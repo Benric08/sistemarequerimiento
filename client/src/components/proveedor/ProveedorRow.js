@@ -53,12 +53,9 @@ export default function ProveedorRow(props) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
-
-
-
               <Table size="small" aria-label="purchases">
-                <TableHead >
-                  <TableRow >
+                <TableHead>
+                  <TableRow>
                     <TableCell sx={{ fontWeight: 'bold' }}>Orden Servicio</TableCell>
                     <TableCell align="right" sx={{ fontWeight: 'bold' }}>Certificacion</TableCell>
                     <TableCell align="right" sx={{ fontWeight: 'bold' }}>Expediente Siaf</TableCell>

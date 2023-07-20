@@ -10,9 +10,7 @@ import { addReq, updateReq, deleteReque } from '../../redux/actions';
 import AddOrdenServicio from '../forms/AddOrdenServicio';
 import { addOrdenServicio } from '../../redux/actionsOrdenServicio';
 import { getAllRequirementsDetalle } from '../../redux/actionsRequerimientoDetalleOrden';
-
 import FollowReq from '../dialogs/FollowReq';
-
 import PdfViewer from '../dialogs/PdfViewer';
 export default function RequerimientoContainerMU() {
   const dispatch = useDispatch();
@@ -108,7 +106,7 @@ export default function RequerimientoContainerMU() {
     setIsLoading(false);
 
     console.log('me monte');
-  }, [isLoading])
+  }, [])
 
   return (
     <Grid container spacing={1}>
@@ -203,7 +201,7 @@ export default function RequerimientoContainerMU() {
           />
         </DialogContent>
       </Dialog>
-      <FollowReq open={isOpenDialogFollowReq} onClose={_handleCloseDialogFollowReq} requerimiento={requerimientoSelected} />
+      {requerimientoSelected&&<FollowReq open={isOpenDialogFollowReq} onClose={_handleCloseDialogFollowReq} requerimiento={requerimientoSelected} />}
       <PdfViewer openDialog={isOpenDialogPdfViewer} onClose={_handleCloseDialogPdfViewer} namefile={nameFile} />
     </Grid>
   );

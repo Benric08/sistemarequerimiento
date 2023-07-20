@@ -1,4 +1,4 @@
-import { Alert, Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar, TextField } from '@mui/material'
+import { Alert, Backdrop, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar } from '@mui/material'
 import axios from 'axios';
 import React, { useState } from 'react'
 
@@ -15,9 +15,6 @@ const ConfirmEjecucionPresupuestaria = ({ open, idDetalleOS, descripcion, estado
   const handleOpenShowProgres=()=>{
     setShowProgres(true)
   } 
-
-
-
 
   const handleConfirm = async () => {
     console.log('recibiendo el id del slider',estadoEntregable);

@@ -15,7 +15,7 @@ export const getAllRequirementsDetalle = () => {
                     })
                 })
         } catch (error) {
-
+            console.log('imprmiendo el error del redux',error.message);
         }
     }
 }
