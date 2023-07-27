@@ -116,12 +116,12 @@ export default function RequerimientoContainerMU() {
           {`El requerimiento se guardo correctamente.`}
         </Alert>
       </Snackbar>
-      {<Backdrop
+      {/* {requerimientos&&<Backdrop
         sx={{ color: '#FAFAFA', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={isLoading}
       >
         <CircularProgress color="inherit" />
-      </Backdrop>}
+      </Backdrop>} */}
       <Box display="flex" justifyContent="flex-end">
         <Button onClick={_handleClickOpenDialog} startIcon={<AddIcon />}>
           Agregar
