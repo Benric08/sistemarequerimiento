@@ -7,7 +7,6 @@ module.exports=(dbConnection)=>{
             allowNull:false,
             autoIncrement:true
         },
-        
         numero_informe_conformidad:{
             type:DataTypes.STRING,
             allowNull:false

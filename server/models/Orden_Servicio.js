@@ -10,13 +10,11 @@ module.exports=(dbConnection)=>{
         },
         meta:{
             type:DataTypes.STRING,
-            allowNull:false,
-            
+            allowNull:false,   
         },
         clasificador:{
             type:DataTypes.STRING,
-            allowNull:false,
-            
+            allowNull:false, 
         },
         numero_orden_servicio:{
             type:DataTypes.STRING,

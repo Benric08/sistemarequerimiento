@@ -74,13 +74,13 @@ export default function ProveedorSubRow({ ordenServicio, proveedorNombreCompleto
             <Divider sx={{ color: 'blue' }} />
           </DialogTitle>
 
-          <Box sx={{ height: '100%', padding: '0% 2%' }}>
-            <DetalleOrdenServicio
 
-              ordenServicio={ordenServicioSelected}
+          <DetalleOrdenServicio
 
-            />
-          </Box>
+            ordenServicio={ordenServicioSelected}
+
+          />
+
         </DialogContent>
       </Dialog>
     </>

@@ -1,8 +1,6 @@
 const {DataTypes}=require('sequelize');
-
 module.exports=(dbConnection)=>{
     dbConnection.define('proveedor',{
-    
         id_proveedor:{
             type: DataTypes.INTEGER,
             primaryKey:true,

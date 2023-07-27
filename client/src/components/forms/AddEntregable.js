@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs';
-import { TextField, Box, Divider, Fab, Grid } from '@mui/material';
+import { TextField, Box, Divider, Fab, Grid, Container } from '@mui/material';
 import { SaveOutlined as SaveIcon, AttachFile as AttachIcon } from '@mui/icons-material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -98,7 +98,7 @@ export default function AddEntregable({ detalleOrdenServicio }) {
 
     const _handleChangeFile = (event) => {
         setfile_entregable(event.target.files[0]);
-        setErrors(entregableValidation({ ...inputs, fecha_entregable, file_entregable:event.target.files[0] }));
+        setErrors(entregableValidation({ ...inputs, fecha_entregable, file_entregable: event.target.files[0] }));
     }
 
     const handleClose = () => {
@@ -123,108 +123,110 @@ export default function AddEntregable({ detalleOrdenServicio }) {
 
             <form onSubmit={_handleSubmit}>
 
-                <Grid container spacing={1}>
-                    <Grid item xs={4}>
-                        <Grid container spacing={1}>
-                            <Grid item xs={12}>
-                                <Divider>Registro del Entregable</Divider>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                    <DatePicker
-                                        label="Fecha Entregable"
-                                        value={fecha_entregable}
-                                        onChange={_handleFecha}
+                <Container>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12}  sm={4}>
+                            <Grid container spacing={1}>
+                                <Grid item xs={12}>
+                                    <Divider>Registro del Entregable</Divider>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DatePicker
+                                            label="Fecha Entregable"
+                                            value={fecha_entregable}
+                                            onChange={_handleFecha}
 
-                                        slotProps={{ textField: { variant: 'outlined' } }}
+                                            slotProps={{ textField: { variant: 'outlined' } }}
+                                        />
+                                    </LocalizationProvider>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        label='N° de Informe'
+                                        name='numero_informe'
+                                        onChange={_handleChange}
+                                        value={inputs.numero_informe}
+                                        error={errors?.numero_informe ? true : false}
+                                        helperText={errors?.numero_informe}
                                     />
-                                </LocalizationProvider>
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    label='N° de Informe'
-                                    name='numero_informe'
-                                    onChange={_handleChange}
-                                    value={inputs.numero_informe}
-                                    error={errors?.numero_informe ? true : false}
-                                    helperText={errors?.numero_informe}
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <TextField
-                                    label='Observacion'
-                                    name='observacion'
-                                    onChange={_handleChange}
-                                    value={inputs.observacion}
-                                    error={errors?.observacion ? true : false}
-                                    helperText={errors?.observacion}
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        label='Observacion'
+                                        name='observacion'
+                                        onChange={_handleChange}
+                                        value={inputs.observacion}
+                                        error={errors?.observacion ? true : false}
+                                        helperText={errors?.observacion}
 
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <label htmlFor='inputfile_entregable'>
-
-                                    <input
-                                        type='file'
-                                        id='inputfile_entregable'
-                                        style={{ display: "none" }}
-                                        onChange={_handleChangeFile}
                                     />
-                                    <Fab
-                                        color="secondary"
-                                        size="small"
-                                        component="span"
-                                        aria-label="add"
-                                        variant="extended"
-                                    >
-                                        <AttachIcon /> {file_entregable ? 'Infome Adjuntado' : 'Adjuntar Informe'}
-                                    </Fab>
-                                    {errors?.file_entregable ?
-                                        <p className='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained Mui-required css-1wc848c-MuiFormHelperText-root'>
-                                            {errors?.file_entregable}
-                                        </p> : ""}
-                                </label>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <label htmlFor='inputfile_entregable'>
+
+                                        <input
+                                            type='file'
+                                            id='inputfile_entregable'
+                                            style={{ display: "none" }}
+                                            onChange={_handleChangeFile}
+                                        />
+                                        <Fab
+                                            color="secondary"
+                                            size="small"
+                                            component="span"
+                                            aria-label="add"
+                                            variant="extended"
+                                        >
+                                            <AttachIcon /> {file_entregable ? 'Infome Adjuntado' : 'Adjuntar Informe'}
+                                        </Fab>
+                                        {errors?.file_entregable ?
+                                            <p className='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained Mui-required css-1wc848c-MuiFormHelperText-root'>
+                                                {errors?.file_entregable}
+                                            </p> : ""}
+                                    </label>
+                                </Grid>
                             </Grid>
                         </Grid>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Divider>{`Seleccionar 
+                        <Grid item xs={10} sm={6}>
+                            <Divider>{`Seleccionar 
                             Ubicación 
                             del Informe`} </Divider>
 
-                        <Box sx={{ height: 300 }}>
-                            <Slider
-                                sx={{
-                                    '& input[type="range"]': {
-                                        WebkitAppearance: "slider-vertical"
-                                    }
-                                }}
-                                orientation="vertical"
-                                value={sliderUbicacion}
-                                aria-label="Ubicacion"
-                                valueLabelDisplay="off"
-                                marks={marks}
-                                onChange={_handleSlider}
-                                step={null}
-                                onKeyDown={preventHorizontalKeyboardNavigation}
-                                disabled={activeSlider}
-                            />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={2}>
-                        <Fab
-                            color="primary"
-                            size="medium"
-                            component="button"
-                            aria-label="add"
-                            variant="circular"
-                            type='submit'
+                            <Box sx={{ height: 300 }}>
+                                <Slider
+                                    sx={{
+                                        '& input[type="range"]': {
+                                            WebkitAppearance: "slider-vertical"
+                                        }
+                                    }}
+                                    orientation="vertical"
+                                    value={sliderUbicacion}
+                                    aria-label="Ubicacion"
+                                    valueLabelDisplay="off"
+                                    marks={marks}
+                                    onChange={_handleSlider}
+                                    step={null}
+                                    onKeyDown={preventHorizontalKeyboardNavigation}
+                                    disabled={activeSlider}
+                                />
+                            </Box>
+                        </Grid>
+                        <Grid item xs={2} sm={2}>
+                            <Fab
+                                color="primary"
+                                size="medium"
+                                component="button"
+                                aria-label="add"
+                                variant="circular"
+                                type='submit'
 
-                        >
-                            <SaveIcon />
-                        </Fab>
+                            >
+                                <SaveIcon />
+                            </Fab>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Container>
 
 
 

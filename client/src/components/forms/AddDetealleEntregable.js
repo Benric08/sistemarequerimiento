@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Fab, Grid, TextField } from '@mui/material';
+import { Container, Fab, Grid, TextField } from '@mui/material';
 import { AttachFile as AttachIcon } from '@mui/icons-material';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -8,11 +8,11 @@ import entregableDocsValidation from '../../validation/entregableDocsValidation'
 import axios from 'axios';
 import { isCorrectForm } from '../../utils/validation';
 import { useSelector } from 'react-redux';
-function AddDetealleEntregable({detalleOrdenServicio}) {
+function AddDetealleEntregable({ detalleOrdenServicio }) {
   const obtenerEstado = useSelector((state) => state.estadoEntregableActual);
   const getEstado = obtenerEstado.find((estado) => estado.id_detalle_os === detalleOrdenServicio.id_detalle_os);
   //const ejecucionPresupuestal=getEstado?.ejecucion_presupuestaria[0].ejecucion_presupuestaria??"Comprometido";
-  const entregable = getEstado?.entregable?.estado_entregables[0];  
+  const entregable = getEstado?.entregable?.estado_entregables[0];
   const [inputsForm, setInputsForm] = useState({
     numero_informe_conformidad: "",
     fecha_informe_conformidad: null,
@@ -77,171 +77,173 @@ function AddDetealleEntregable({detalleOrdenServicio}) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={1}>
+        <Container>
+          <Grid container spacing={1}>
 
-          <Grid item xs={3}>
-            <TextField
-              required
-              label='N° Informe de conformidad'
-              name='numero_informe_conformidad'
-              onChange={handleChange}
-              value={inputsForm.numero_informe_conformidad}
-              error={errors?.numero_informe_conformidad ? true : false}
-              helperText={errors?.numero_informe_conformidad} />
-          </Grid>
-          <Grid item xs={3}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                label="Fecha del Documento"
-                value={inputsForm.fecha_informe_conformidad}
-                onChange={handleChangeDateIC}
+            <Grid item xs={12} sm={3}>
+              <TextField
+                required
+                label='N° Informe de conformidad'
+                name='numero_informe_conformidad'
+                onChange={handleChange}
+                value={inputsForm.numero_informe_conformidad}
+                error={errors?.numero_informe_conformidad ? true : false}
+                helperText={errors?.numero_informe_conformidad} />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label="Fecha del Documento"
+                  value={inputsForm.fecha_informe_conformidad}
+                  onChange={handleChangeDateIC}
 
-                slotProps={{
-                  textField: {
-                    variant: 'outlined',
-                    required: true,
-                    error: errors?.fecha_informe_conformidad ? true : false,
-                    helperText: errors?.fecha_informe_conformidad
-                  }
-                }}
-              />
-            </LocalizationProvider>
-          </Grid>
-          <Grid item xs={6}>
+                  slotProps={{
+                    textField: {
+                      variant: 'outlined',
+                      required: true,
+                      error: errors?.fecha_informe_conformidad ? true : false,
+                      helperText: errors?.fecha_informe_conformidad
+                    }
+                  }}
+                />
+              </LocalizationProvider>
+            </Grid>
+            <Grid item xs={12} sm={6}>
 
-            <label htmlFor='inputFileInformeConformidad'>
-              <input
-                type='file'
-                name='file_informe_conformidad'
-                id='inputFileInformeConformidad'
-                style={{ display: "none" }}
-                onChange={handleChangeFile}
-              />
+              <label htmlFor='inputFileInformeConformidad'>
+                <input
+                  type='file'
+                  name='file_informe_conformidad'
+                  id='inputFileInformeConformidad'
+                  style={{ display: "none" }}
+                  onChange={handleChangeFile}
+                />
 
-              <Fab
-                color="secondary"
-                size="small"
-                component="span"
-                aria-label="add"
-                variant="extended"
-              >
-                <AttachIcon /> {inputsForm.file_informe_conformidad ? 'Infome Adjuntado' : 'Adjuntar Informe'}
-              </Fab>
-              {errors?.file_informe_conformidad ?
-                <p className='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained Mui-required css-1wc848c-MuiFormHelperText-root'>
-                  {errors?.file_informe_conformidad}
-                </p> : ""}
-            </label>
-          </Grid>
-          <Grid item xs={3}>
-            <TextField
-              required
-              label='N° Recibo por Honorarios'
-              name='numero_recibo_honorarios'
-              onChange={handleChange}
-              value={inputsForm.numero_recibo_honorarios}
-              error={errors?.numero_recibo_honorarios ? true : false}
-              helperText={errors?.numero_recibo_honorarios} />
-          </Grid>
-          <Grid item xs={3}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                label="Fecha del Documento"
-                value={inputsForm.fecha_recibo_honorarios}
-                onChange={handleChangeDateRHE}
+                <Fab
+                  color="secondary"
+                  size="small"
+                  component="span"
+                  aria-label="add"
+                  variant="extended"
+                >
+                  <AttachIcon /> {inputsForm.file_informe_conformidad ? 'Infome Adjuntado' : 'Adjuntar Informe'}
+                </Fab>
+                {errors?.file_informe_conformidad ?
+                  <p className='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained Mui-required css-1wc848c-MuiFormHelperText-root'>
+                    {errors?.file_informe_conformidad}
+                  </p> : ""}
+              </label>
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <TextField
+                required
+                label='N° Recibo por Honorarios'
+                name='numero_recibo_honorarios'
+                onChange={handleChange}
+                value={inputsForm.numero_recibo_honorarios}
+                error={errors?.numero_recibo_honorarios ? true : false}
+                helperText={errors?.numero_recibo_honorarios} />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label="Fecha del Documento"
+                  value={inputsForm.fecha_recibo_honorarios}
+                  onChange={handleChangeDateRHE}
 
-                slotProps={{
-                  textField: {
-                    variant: 'outlined',
-                    required: true,
-                    error: errors?.fecha_recibo_honorarios ? true : false,
-                    helperText: errors?.fecha_recibo_honorarios
-                  }
-                }}
-              />
-            </LocalizationProvider>
-          </Grid>
-          <Grid item xs={6}>
-            <label htmlFor='inputFileReciboHonorario'>
-              <input
-                type='file'
-                name='file_recibo_honorarios'
-                id='inputFileReciboHonorario'
-                style={{ display: "none" }}
-                onChange={handleChangeFile}
-              />
-              <Fab
-                color="secondary"
-                size="small"
-                component="span"
-                aria-label="add"
-                variant="extended"
-              >
-                <AttachIcon /> {inputsForm.file_recibo_honorarios ? 'Recibo Adjuntado' : 'Adjuntar Recibo'}
-              </Fab>
-              {errors?.file_recibo_honorarios ?
-                <p className='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained Mui-required css-1wc848c-MuiFormHelperText-root'>
-                  {errors?.file_recibo_honorarios}
-                </p> : ""}
-            </label>
-          </Grid>
+                  slotProps={{
+                    textField: {
+                      variant: 'outlined',
+                      required: true,
+                      error: errors?.fecha_recibo_honorarios ? true : false,
+                      helperText: errors?.fecha_recibo_honorarios
+                    }
+                  }}
+                />
+              </LocalizationProvider>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <label htmlFor='inputFileReciboHonorario'>
+                <input
+                  type='file'
+                  name='file_recibo_honorarios'
+                  id='inputFileReciboHonorario'
+                  style={{ display: "none" }}
+                  onChange={handleChangeFile}
+                />
+                <Fab
+                  color="secondary"
+                  size="small"
+                  component="span"
+                  aria-label="add"
+                  variant="extended"
+                >
+                  <AttachIcon /> {inputsForm.file_recibo_honorarios ? 'Recibo Adjuntado' : 'Adjuntar Recibo'}
+                </Fab>
+                {errors?.file_recibo_honorarios ?
+                  <p className='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained Mui-required css-1wc848c-MuiFormHelperText-root'>
+                    {errors?.file_recibo_honorarios}
+                  </p> : ""}
+              </label>
+            </Grid>
 
-          <Grid item xs={3}>
-            <TextField
-              required
-              label='N° de CP'
-              name='numero_comprobante_pago'
-              onChange={handleChange}
-              value={inputsForm.numero_comprobante_pago}
-              error={errors?.numero_comprobante_pago ? true : false}
-              helperText={errors?.numero_comprobante_pago} />
-          </Grid>
-          <Grid item xs={3}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                label="Fecha del Documento"
-                value={inputsForm.fecha_comprobante_pago}
-                onChange={handleChangeDateCP}
+            <Grid item xs={12} sm={3}>
+              <TextField
+                required
+                label='N° de CP'
+                name='numero_comprobante_pago'
+                onChange={handleChange}
+                value={inputsForm.numero_comprobante_pago}
+                error={errors?.numero_comprobante_pago ? true : false}
+                helperText={errors?.numero_comprobante_pago} />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker
+                  label="Fecha del Documento"
+                  value={inputsForm.fecha_comprobante_pago}
+                  onChange={handleChangeDateCP}
 
-                slotProps={{
-                  textField: {
-                    variant: 'outlined',
-                    required: true,
-                    error: errors?.fecha_comprobante_pago ? true : false,
-                    helperText: errors?.fecha_comprobante_pago
-                  }
-                }}
-              />
-            </LocalizationProvider>
+                  slotProps={{
+                    textField: {
+                      variant: 'outlined',
+                      required: true,
+                      error: errors?.fecha_comprobante_pago ? true : false,
+                      helperText: errors?.fecha_comprobante_pago
+                    }
+                  }}
+                />
+              </LocalizationProvider>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <label htmlFor='inputFileComprobantePago'>
+                <input
+                  type='file'
+                  name='file_comprobante_pago'
+                  id="inputFileComprobantePago"
+                  style={{ display: "none" }}
+                  onChange={handleChangeFile}
+                />
+                <Fab
+                  color="secondary"
+                  size="small"
+                  component="span"
+                  aria-label="add"
+                  variant="extended"
+                >
+                  <AttachIcon /> {inputsForm.file_comprobante_pago ? 'Comprobante Adjuntado' : 'Adjuntar Comprobante'}
+                </Fab>
+                {errors?.file_comprobante_pago ?
+                  <p className='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained Mui-required css-1wc848c-MuiFormHelperText-root'>
+                    {errors?.file_comprobante_pago}
+                  </p> : ""}
+              </label>
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <Fab variant='extended' color='primary' type='submmit' >Guardar</Fab>
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-            <label htmlFor='inputFileComprobantePago'>
-              <input
-                type='file'
-                name='file_comprobante_pago'
-                id="inputFileComprobantePago"
-                style={{ display: "none" }}
-                onChange={handleChangeFile}
-              />
-              <Fab
-                color="secondary"
-                size="small"
-                component="span"
-                aria-label="add"
-                variant="extended"
-              >
-                <AttachIcon /> {inputsForm.file_comprobante_pago ? 'Comprobante Adjuntado' : 'Adjuntar Comprobante'}
-              </Fab>
-              {errors?.file_comprobante_pago ?
-                <p className='MuiFormHelperText-root Mui-error MuiFormHelperText-sizeMedium MuiFormHelperText-contained Mui-required css-1wc848c-MuiFormHelperText-root'>
-                  {errors?.file_comprobante_pago}
-                </p> : ""}
-            </label>
-          </Grid>
-          <Grid item xs={3}>
-            <Fab variant='extended' color='primary' type='submmit' >Guardar</Fab>
-          </Grid>
-        </Grid>
+        </Container>
       </form>
     </div>
   )

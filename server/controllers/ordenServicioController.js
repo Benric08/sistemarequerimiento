@@ -36,17 +36,12 @@ const uploadFileOrdenServicio = multer({
 const insertOrdenServicio = async(formordenServicio)=>{
   //insertar proveedor
   const {proveedorf} = formordenServicio;
-
   console.log('recueprando el provvedor en el controlador',proveedor);
-  
-  
   const [newProveedor,created]=await proveedor.findOrCreate({
     where: { dni: proveedorf.dni },
     defaults: proveedorf
   });
   console.log('proveedor insertado',newProveedor);
-  //return newProveedor;
-  //obteneridprovedor
   //instertar orden servicio
   const {numero_orden_servicio,
     id_requerimiento,
